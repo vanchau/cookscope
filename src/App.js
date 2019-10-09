@@ -8,12 +8,12 @@ import {
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Settings } from './components/settings'
+import { Settings } from './components/Settings'
 import { NavigationBar } from './components/NavigationBar';
 // import { Layout } from './components/Layout';
 import { CreateRecipe } from './components/CreateRecipe';
-import { CategoryList } from './components/CategoryList'
-
+import { CategoryList } from './components/CategoryList';
+import { Main } from './components/Main';
 
 const App = () => {
   return (
@@ -47,8 +47,9 @@ const App = () => {
 }
 
 const Home = () => (
-    <div>
+    <div style={{ display: 'flex' }}>
       <CategoryList />
+      <Main />
     </div>
   )
 

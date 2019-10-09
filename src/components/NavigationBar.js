@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/NavigationBar.css'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Modal } from 'react-bootstrap';
-import logo from './logo.png'
+import logo from '../assets/logo.png'
 
 export const NavigationBar = () => {
 	const [show, setShow] = useState(false);
@@ -57,7 +57,7 @@ export const NavigationBar = () => {
 					</Modal>
 
 					<NavDropdown title="Settings" id="basic-nav-dropdown">
-						<NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+						<NavDropdown.Item href="#action/3.1">User profile</NavDropdown.Item>
 						<NavDropdown.Item href="#action/3.2">Terms of Service</NavDropdown.Item>
 						<NavDropdown.Item href="#action/3.3">Privacy Policy</NavDropdown.Item>
 						<NavDropdown.Divider />

@@ -7,7 +7,7 @@ const alertClicked = () => {
 }
 
 export const CategoryList = () => (
-	<ListGroup variant="flush">
+	<ListGroup variant="flush" style={{ flex: '3' }}>
   	<ListGroup.Item active>All</ListGroup.Item>
 		<ListGroup.Item action onClick={alertClicked}> Appetizers</ListGroup.Item>
 		<ListGroup.Item>Beef</ListGroup.Item>
