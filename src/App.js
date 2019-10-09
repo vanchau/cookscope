@@ -10,8 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Settings } from './components/settings'
 import { NavigationBar } from './components/NavigationBar';
-import { Layout } from './components/Layout';
+// import { Layout } from './components/Layout';
 import { CreateRecipe } from './components/CreateRecipe';
+import { CategoryList } from './components/CategoryList'
 
 
 const App = () => {
@@ -21,10 +22,10 @@ const App = () => {
         <NavigationBar />
         <hr style={{
             borderColor: '#E75B00',
-            height: '30px',
+            height: '20px',
             marginTop: '0px'
         }}/>
-        <Layout>
+
           <Switch>
             <Route exact path="/">
               <Home />
@@ -39,7 +40,7 @@ const App = () => {
               <Settings />
             </Route>
           </Switch>
-        </Layout>
+
       </Router>
     </React.Fragment>
   );
@@ -47,7 +48,7 @@ const App = () => {
 
 const Home = () => (
     <div>
-      <h1>Home</h1>
+      <CategoryList />
     </div>
   )
 

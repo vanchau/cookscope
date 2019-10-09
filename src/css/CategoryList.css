@@ -1,0 +1,16 @@
+.list-group {
+	width: 20%;
+}
+
+.list-group-item {
+	border: 0;
+	padding: .2rem 1.25rem;
+	color: #3C3C3C;
+}
+
+.list-group-item.active {
+	font-weight: bold;
+	background-color: white;
+	border: white;
+	color: #3C3C3C;
+}
