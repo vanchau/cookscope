@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+// import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+import { Settings } from './components/settings'
+import { NavigationBar } from './components/NavigationBar';
+import { Layout } from './components/Layout';
+import { CreateRecipe } from './components/CreateRecipe';
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Router>
+        <NavigationBar />
+        <hr />
+        <Layout>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/createrecipe">
+              <CreateRecipe />
+            </Route>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+          </Switch>
+        </Layout>
+      </Router>
+    </React.Fragment>
   );
 }
+
+const Home = () => (
+    <div>
+      <h1>Home</h1>
+    </div>
+  )
+
+const About = () => (
+    <div>
+      <h2>About</h2>
+    </div>
+  )
 
 export default App;
