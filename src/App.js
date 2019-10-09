@@ -19,7 +19,11 @@ const App = () => {
     <React.Fragment>
       <Router>
         <NavigationBar />
-        <hr />
+        <hr style={{
+            borderColor: '#E75B00',
+            height: '30px',
+            marginTop: '0px'
+        }}/>
         <Layout>
           <Switch>
             <Route exact path="/">
