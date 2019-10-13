@@ -3,8 +3,18 @@
 	color: white;
 }
 
+.btn-create-recipe-button:hover {
+	background-color: #d65400;
+	color: white;
+}
+
 .btn-search-button {
 	background-color: #E75B00;
+	color: white;
+}
+
+.btn-search-button:hover {
+	background-color: #d65400;
 	color: white;
 }
 

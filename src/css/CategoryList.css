@@ -1,12 +1,12 @@
 .list-group-item {
 	border: 0;
-	padding: .2rem 1.25rem;
-	color: #3C3C3C;
+	padding: .3rem 1.25rem;
+	color: #584c4b;
 }
 
-.list-group-item.active {
+.list-group-item.active, .list-group-item:hover {
 	font-weight: bold;
 	background-color: white;
 	border: white;
-	color: #3C3C3C;
+	color: #413938;
 }
