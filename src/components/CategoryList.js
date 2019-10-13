@@ -7,25 +7,26 @@ const alertClicked = () => {
 }
 
 export const CategoryList = () => (
-	<ListGroup variant="flush" style={{ flex: '3' }}>
+	<ListGroup variant="flush" style={{ flex: '2', border: '1px solid #DFDFDF', padding: '20px', marginRight: '40px' }}>
+		<h5 style={{ color: '#3C3C3C' }} >Categories</h5>
   	<ListGroup.Item active>All</ListGroup.Item>
 		<ListGroup.Item action onClick={alertClicked}> Appetizers</ListGroup.Item>
-		<ListGroup.Item>Beef</ListGroup.Item>
-		<ListGroup.Item>Breads</ListGroup.Item>
-		<ListGroup.Item>Budget friendly</ListGroup.Item>
-		<ListGroup.Item>Casseroles</ListGroup.Item>
-		<ListGroup.Item>Chicken</ListGroup.Item>
-		<ListGroup.Item>Dinner</ListGroup.Item>
-		<ListGroup.Item>Desserts</ListGroup.Item>
-		<ListGroup.Item>Fish</ListGroup.Item>
-		<ListGroup.Item>Healthy</ListGroup.Item>
-		<ListGroup.Item>Kid friendly</ListGroup.Item>
-		<ListGroup.Item>Pasta</ListGroup.Item>
-		<ListGroup.Item>Pork</ListGroup.Item>
-		<ListGroup.Item>Salads</ListGroup.Item>
-		<ListGroup.Item>Slow cooker</ListGroup.Item>
-		<ListGroup.Item>Snacks</ListGroup.Item>
-		<ListGroup.Item>Soups</ListGroup.Item>
-		<ListGroup.Item>Vegetable</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Beef</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Breads</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Budget friendly</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Casseroles</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Chicken</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Dinner</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Desserts</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Fish</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Healthy</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Kid friendly</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Pasta</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Pork</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Salads</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Slow cooker</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Snacks</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Soups</ListGroup.Item>
+		<ListGroup.Item action onClick={alertClicked}>Vegetable</ListGroup.Item>
 	</ListGroup>
 )

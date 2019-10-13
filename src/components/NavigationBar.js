@@ -33,7 +33,7 @@ export const NavigationBar = () => {
 
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Header closeButton>
-							<Modal.Title>Log in</Modal.Title>
+							<Modal.Title>Oops, it seems that you're not logged in.</Modal.Title>
 						</Modal.Header>
 						
 						<Modal.Body>
@@ -58,8 +58,8 @@ export const NavigationBar = () => {
 
 					<NavDropdown title="Settings" id="basic-nav-dropdown">
 						<NavDropdown.Item href="#action/3.1">User profile</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.2">Terms of Service</NavDropdown.Item>
-						<NavDropdown.Item href="#action/3.3">Privacy Policy</NavDropdown.Item>
+						<NavDropdown.Item href="/terms">Terms of Service</NavDropdown.Item>
+						<NavDropdown.Item href="/privacy">Privacy Policy</NavDropdown.Item>
 						<NavDropdown.Divider />
 						<NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
 					</NavDropdown>
