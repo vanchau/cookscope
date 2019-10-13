@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../css/NavigationBar.css'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Modal } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 export const NavigationBar = () => {
@@ -12,9 +14,9 @@ export const NavigationBar = () => {
 	return (
 		<Navbar className="d-flex justify-content-between">
 			<div>
-				<a className="navbar-brand" href="/">
+				<Link className="navbar-brand" to="/">
 					<img className="logo-image" src={logo} alt="logo" />
-				</a>
+				</Link>
 			</div>
 
 			<div>
@@ -57,11 +59,19 @@ export const NavigationBar = () => {
 					</Modal>
 
 					<NavDropdown title="Settings" id="basic-nav-dropdown">
-						<NavDropdown.Item href="#action/3.1">User profile</NavDropdown.Item>
-						<NavDropdown.Item href="/terms">Terms of Service</NavDropdown.Item>
-						<NavDropdown.Item href="/privacy">Privacy Policy</NavDropdown.Item>
+						<LinkContainer to="/profile">
+							<NavDropdown.Item>User profile</NavDropdown.Item>
+						</LinkContainer>
+						<LinkContainer to="/terms">
+							<NavDropdown.Item>Terms of Service</NavDropdown.Item>
+						</LinkContainer>
+						<LinkContainer to="/privacy">
+							<NavDropdown.Item>Privacy Policy</NavDropdown.Item>
+						</LinkContainer>
 						<NavDropdown.Divider />
-						<NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
+						<LinkContainer to="/logout">
+							<NavDropdown.Item>Log out</NavDropdown.Item>
+						</LinkContainer>
 					</NavDropdown>
 				</Nav>
 			</div>

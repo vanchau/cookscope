@@ -28,26 +28,14 @@ const App = () => {
             height: '20px',
             marginTop: '0px'
         }}/>
-        <Container>
+        <Container style={{ maxWidth: '960px' }} >
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/createrecipe">
-              <CreateRecipe />
-            </Route>
-            <Route path="/settings">
-              <Settings />
-            </Route>
-            <Route path="/privacy">
-              <PrivacyPolicy />
-            </Route>
-            <Route path="/terms">
-              <TermsOfService />
-            </Route>
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/createrecipe" component={CreateRecipe} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/privacy" component={PrivacyPolicy} />
+            <Route path="/terms" component={TermsOfService} />
           </Switch>
         </Container>
 
