@@ -24,13 +24,7 @@ const App = () => {
     <React.Fragment>
       <Router>
         <NavigationBar />
-        <hr style={{
-            borderColor: '#E75B00',
-            height: '20px',
-            marginTop: '0px',
-            marginBottom: '-20px'
-        }}/>
-        <div style={{ backgroundColor: '#DFDFDF'}}>
+        <div style={{ backgroundColor: '#f7f5ef' }}>
           <Container style={{ maxWidth: '960px' }} >
             <Switch>
               <Route exact path="/" component={Home} />

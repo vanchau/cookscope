@@ -8,8 +8,8 @@ const alertClicked = () => {
 }
 
 export const CategoryList = () => (
-	<ListGroup variant="flush" style={{ flex: '2', border: '1px solid #DFDFDF', padding: '20px', marginRight: '40px' }}>
-		<h5 style={{ color: '#413938', marginLeft: '20px' }} >Categories</h5>
+	<ListGroup variant="flush" style={{ flex: '2', borderRight: '1px solid #DFDFDF', padding: '20px' }}>
+		<h5 style={{ color: '#413938', margin: '.3rem 1.25rem' }} >Categories</h5>
 		{Object.values(categories).map(category => (
 			<ListGroup.Item key={category} action onClick={alertClicked}>
 				{category}

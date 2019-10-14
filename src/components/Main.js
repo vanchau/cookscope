@@ -19,9 +19,13 @@ class Main extends Component {
 	
 	render() {
 		return (
-			<div style={{ marginTop: '10px', flex: '5' }} >
+			<div style={{ flex: '5' }} >
 			{dummyData.recipes.map(recipe => (
-			<Card onClick={() => this.routeChange(recipe.recipeID)} key={recipe.recipeID} style={{ width: '35rem', height: '18rem', alignItems: 'center', marginBottom: '40px' }}>
+			<Card
+				onClick={() => this.routeChange(recipe.recipeID)}
+				key={recipe.recipeID}
+				style={{ width: '35rem', height: '18rem', alignItems: 'center', margin: '30px 40px 30px 40px' }}
+			>
 				<Card.Img 
 					style={{ maxWidth: '100%', maxHeight: '100%', height: 'auto' }}
 					variant="top"

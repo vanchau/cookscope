@@ -12,7 +12,11 @@ export const NavigationBar = () => {
   const handleShow = () => setShow(true);
 
 	return (
-		<Navbar className="d-flex justify-content-between">
+		<Navbar
+			className="d-flex justify-content-between"
+			style={{ backgroundColor: 'white', borderBottom: '1px solid #E75B00' }}
+			sticky="top"
+		>
 			<div>
 				<Link className="navbar-brand" to="/">
 					<img className="logo-image" src={logo} alt="logo" />
