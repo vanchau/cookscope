@@ -9,7 +9,7 @@ export const NavigationBar = () => {
 	const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
 
 	return (
 		<Navbar
@@ -25,16 +25,18 @@ export const NavigationBar = () => {
 
 			<div>
 				<Form inline className="mx-auto">
-					<FormControl type="text" placeholder="Enter dish or ingredient(s)" className=" form-size" />
+					<FormControl type="text" placeholder="Enter dish or ingredient(s)" className="search-bar form-size" />
 					{/* <Button variant="search-button" type="submit">Search</Button> */}
 				</Form>
 			</div>
 
 			<div>
 				<Nav>
-					<Button variant="outline-create-recipe-button" onClick={handleShow}>
-						Create recipe
-					</Button>
+					<LinkContainer to="/create-recipe">
+						<Button variant="outline-create-recipe-button" >
+							Create recipe
+						</Button>
+					</LinkContainer>
 					
 
 					<Modal show={show} onHide={handleClose}>

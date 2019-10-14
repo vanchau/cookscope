@@ -25,11 +25,11 @@ const App = () => {
       <Router>
         <NavigationBar />
         <div style={{ backgroundColor: '#f7f5ef' }}>
-          <Container style={{ maxWidth: '960px' }} >
+          <Container style={{ maxWidth: '900px', backgroundColor: 'white' }} >
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
-              <Route path="/createrecipe" component={CreateRecipe} />
+              <Route path="/create-recipe" component={CreateRecipe} />
               <Route path="/settings" component={Settings} />
               <Route path="/privacy" component={PrivacyPolicy} />
               <Route path="/terms" component={TermsOfService} />
