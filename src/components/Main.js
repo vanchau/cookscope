@@ -18,7 +18,7 @@ class Main extends Component {
 	
 	render() {
 		return (
-			<div style={{ flex: '5' }} >
+			<div style={{ marginTop: '10px', flex: '5' }} >
 			{dummyData.recipes.map(recipe => (
 			<Card onClick={this.routeChange} key={recipe.recipeID} style={{ width: '35rem', height: '18rem', alignItems: 'center', marginBottom: '40px' }}>
 				<Card.Img 

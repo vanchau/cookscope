@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const TermsOfService = () => (
-  <div>
+  <div style= {{backgroundColor: 'white', padding: '40px'}}>
 		<h2>TERMS OF SERVICE</h2>
 		<h4 style={{ paddingBottom: '40px' }} >Last Updated: May 10, 2019</h4>
 		<h3>Contents</h3>

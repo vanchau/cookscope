@@ -26,27 +26,29 @@ const App = () => {
         <hr style={{
             borderColor: '#E75B00',
             height: '20px',
-            marginTop: '0px'
+            marginTop: '0px',
+            marginBottom: '-20px'
         }}/>
-        <Container style={{ maxWidth: '960px' }} >
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/createrecipe" component={CreateRecipe} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/privacy" component={PrivacyPolicy} />
-            <Route path="/terms" component={TermsOfService} />
-            <Route path="/recipe" />
-          </Switch>
-        </Container>
-
+        <div style={{ backgroundColor: '#DFDFDF'}}>
+          <Container style={{ maxWidth: '960px' }} >
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/createrecipe" component={CreateRecipe} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/privacy" component={PrivacyPolicy} />
+              <Route path="/terms" component={TermsOfService} />
+              <Route path="/recipe" />
+            </Switch>
+          </Container>
+        </div>
       </Router>
     </React.Fragment>
   );
 }
 
 const Home = () => (
-  <div style={{ display: 'flex' }}>
+  <div style={{ width: '930px',display: 'flex', backgroundColor: 'white'}}>
     <CategoryList />
     <Main />
   </div>

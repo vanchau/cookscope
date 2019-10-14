@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const PrivacyPolicy = () => (
-  <div>
+  <div style= {{backgroundColor: 'white', padding: '40px'}}>
 		<h2>PRIVACY POLICY</h2>
 		<h4 style={{ paddingBottom: '40px' }} >Last Updated: September 15, 2019</h4>
 		<h3>Contents</h3>
