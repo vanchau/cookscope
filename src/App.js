@@ -17,6 +17,7 @@ import { CategoryList } from './components/CategoryList';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import Main from './components/Main';
 import { TermsOfService } from './components/Terms';
+import Recipe from './components/Recipe'
 
 const App = () => {
   return (
@@ -38,7 +39,7 @@ const App = () => {
               <Route path="/settings" component={Settings} />
               <Route path="/privacy" component={PrivacyPolicy} />
               <Route path="/terms" component={TermsOfService} />
-              <Route path="/recipe" />
+              <Route path="/recipe/:recipeID" component={Recipe}/>
             </Switch>
           </Container>
         </div>

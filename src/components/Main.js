@@ -11,8 +11,9 @@ import garlicImg from '../assets/dummy/garlic_shrimp.jpg'
 
 class Main extends Component {
 	
-	routeChange = () => {
-    let path = '/recipe';
+	routeChange = (id) => {
+	console.log(id)
+    let path = '/recipe/'+id;
     this.props.history.push(path);
 	}
 	
@@ -20,7 +21,7 @@ class Main extends Component {
 		return (
 			<div style={{ marginTop: '10px', flex: '5' }} >
 			{dummyData.recipes.map(recipe => (
-			<Card onClick={this.routeChange} key={recipe.recipeID} style={{ width: '35rem', height: '18rem', alignItems: 'center', marginBottom: '40px' }}>
+			<Card onClick={() => this.routeChange(recipe.recipeID)} key={recipe.recipeID} style={{ width: '35rem', height: '18rem', alignItems: 'center', marginBottom: '40px' }}>
 				<Card.Img 
 					style={{ maxWidth: '100%', maxHeight: '100%', height: 'auto' }}
 					variant="top"
