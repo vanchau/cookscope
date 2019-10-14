@@ -4,11 +4,6 @@ import { withRouter } from 'react-router-dom';
 import '../css/Main.css'
 import dummyData from '../assets/dummy/recipes.json'
 
-// THIS IS A TEMPORARY SOLUTION...
-import cookieImg from '../assets/dummy/cookie.jpg'
-import pizzaImg from '../assets/dummy/pizza.jpg'
-import garlicImg from '../assets/dummy/garlic_shrimp.jpg'
-
 class Main extends Component {
 	
 	routeChange = (id) => {
@@ -29,11 +24,7 @@ class Main extends Component {
 				<Card.Img 
 					style={{ maxWidth: '100%', maxHeight: '100%', height: 'auto' }}
 					variant="top"
-					src={(recipe.imageUrl === 'cookieImg') 
-						? cookieImg 
-						: ((recipe.imageUrl === 'pizzaImg') 
-						? pizzaImg 
-						: garlicImg)} />
+					src={(recipe.imageUrl)} />
 				<Card.ImgOverlay>
 					<div>
 						<Card.Title style={{ color: '#3C3C3C' }}>{recipe.title}</Card.Title>

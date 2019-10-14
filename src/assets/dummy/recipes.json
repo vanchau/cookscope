@@ -10,7 +10,7 @@
 			],
 			"difficulty": "easy",
 			"portion": "4",
-			"imageUrl": "cookieImg",
+			"imageUrl": "./assets/dummy/cookie.jpg",
 			"direction": [
 				{
 					"id": 1,
@@ -45,7 +45,7 @@
 			],
 			"difficulty": "easy",
 			"portion": "4",
-			"imageUrl": "pizzaImg",
+			"imageUrl": "./assets/dummy/pizza.jpg",
 			"direction": [
 				{
 					"id": 1,
@@ -81,7 +81,7 @@
 			],
 			"difficulty": "medium",
 			"portion": "2",
-			"imageUrl": "shrimpImg",
+			"imageUrl": "./assets/dummy/garlic_shrimp.jpg",
 			"direction": [
 				{
 					"id": 1,
