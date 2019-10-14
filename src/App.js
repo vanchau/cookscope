@@ -15,7 +15,7 @@ import { NavigationBar } from './components/NavigationBar';
 import { CreateRecipe } from './components/CreateRecipe';
 import { CategoryList } from './components/CategoryList';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
-import { Main } from './components/Main';
+import Main from './components/Main';
 import { TermsOfService } from './components/Terms';
 
 const App = () => {
@@ -36,6 +36,7 @@ const App = () => {
             <Route path="/settings" component={Settings} />
             <Route path="/privacy" component={PrivacyPolicy} />
             <Route path="/terms" component={TermsOfService} />
+            <Route path="/recipe" />
           </Switch>
         </Container>
 

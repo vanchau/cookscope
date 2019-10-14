@@ -7,3 +7,15 @@
 	background-color: #d65400;
 	color: white;
 }
+
+.card:hover {
+	transform: scale(1.01);
+}
+
+.card-img-top:hover {
+	opacity: 0.5;
+}
+
+.card-img-top {
+	opacity: 0.4
+}
