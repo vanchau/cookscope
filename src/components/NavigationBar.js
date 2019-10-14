@@ -22,20 +22,20 @@ export const NavigationBar = () => {
 			<div>
 				<Form inline className="mx-auto">
 					<FormControl type="text" placeholder="Enter dish or ingredient(s)" className=" form-size" />
-					<Button variant="search-button" type="submit">Search</Button>
+					{/* <Button variant="search-button" type="submit">Search</Button> */}
 				</Form>
 			</div>
 
 			<div>
 				<Nav>
-					<Button variant="create-recipe-button" onClick={handleShow}>
+					<Button variant="outline-create-recipe-button" onClick={handleShow}>
 						Create recipe
 					</Button>
 					
 
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Header closeButton>
-							<Modal.Title>Oops, it seems that you're not logged in.</Modal.Title>
+							<Modal.Title>Oops, it seems like you're not logged in.</Modal.Title>
 						</Modal.Header>
 						
 						<Modal.Body>
@@ -58,7 +58,7 @@ export const NavigationBar = () => {
 						</Modal.Footer>
 					</Modal>
 
-					<NavDropdown title="Settings" id="basic-nav-dropdown">
+					<NavDropdown title="Settings" id="basic-nav-dropdown" style={{ marginRight: '20px', marginLeft: '20px' }} >
 						<LinkContainer to="/profile">
 							<NavDropdown.Item>User profile</NavDropdown.Item>
 						</LinkContainer>

@@ -1,0 +1,110 @@
+{
+	"recipes": [
+		{
+			"recipeID": 1,
+			"title": "Pecan Cookie Drops",
+			"instruction": "Yum yum",
+			"author": "cookie monster",
+			"ingredients": [
+				"pecan", "butter", "flour", "sugar", "water"
+			],
+			"difficulty": "easy",
+			"portion": "4",
+			"imageUrl": "cookieImg",
+			"direction": [
+				{
+					"id": 1,
+					"step": "1",
+					"text": "Prepare all the ingredients.",
+					"image1": "",
+					"image2": ""
+				},
+				{
+					"id": 2,
+					"step": "2",
+					"text": "Take butter out of the fridge.",
+					"image1": "",
+					"image2": ""
+				},
+				{
+					"id": 3,
+					"step": "3",
+					"text": "Mix flour with sugar.",
+					"image1": "",
+					"image2": ""
+				}
+			]
+		},
+		{
+			"recipeID": 2,
+			"title": "Basic Pepperoni Pizza",
+			"instruction": "Yum yum",
+			"author": "LiveForPizza",
+			"ingredients": [
+				"pecan", "butter", "flour", "sugar", "water"
+			],
+			"difficulty": "easy",
+			"portion": "4",
+			"imageUrl": "pizzaImg",
+			"direction": [
+				{
+					"id": 1,
+					"step": "1",
+					"text": "Prepare all the ingredients.",
+					"image1": "",
+					"image2": ""
+				},
+				{
+					"id": 2,
+					"step": "2",
+					"text": "Take butter out of the fridge.",
+					"image1": "",
+					"image2": ""
+				},
+				{
+					"id": 3,
+					"step": "3",
+					"text": "Mix flour with sugar.",
+					"image1": "",
+					"image2": ""
+				}
+			]
+		},
+		{
+
+			"recipeID": 3,
+			"title": "Easy Garlic Shrimp",
+			"instruction": "Yum yum",
+			"author": "Bobba",
+			"ingredients": [
+				"garlic", "shrimp", "red pepper", "salt", "olive oil"
+			],
+			"difficulty": "medium",
+			"portion": "2",
+			"imageUrl": "shrimpImg",
+			"direction": [
+				{
+					"id": 1,
+					"step": "1",
+					"text": "Prepare all the ingredients.",
+					"image1": "",
+					"image2": ""
+				},
+				{
+					"id": 2,
+					"step": "2",
+					"text": "Take butter out of the fridge.",
+					"image1": "",
+					"image2": ""
+				},
+				{
+					"id": 3,
+					"step": "3",
+					"text": "Mix flour with sugar.",
+					"image1": "",
+					"image2": ""
+				}
+			]
+		}
+	]
+}

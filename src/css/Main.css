@@ -2,3 +2,8 @@
 	background-color: #E75B00;
 	color: white;
 }
+
+.btn-recipe-button:hover {
+	background-color: #d65400;
+	color: white;
+}
