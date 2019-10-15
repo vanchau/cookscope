@@ -1,0 +1,47 @@
+
+.main-image {
+	padding: 40px;
+	max-width: 100%; 
+	max-height: 100%; 
+	height: auto;
+	border-radius: 45px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.recipe-container {
+	background-color: white;
+	height: 900px;
+}
+
+.title {
+	padding-left: 40px;
+	padding-top: 20px;
+}
+
+.recipe-background {
+	padding-left: 100px;
+	padding-right: 100px;
+	height: 900px;
+}
+
+.indent {
+	padding-left: 40px;
+}
+
+.author {
+	color:#aa8f54;
+}
+
+.author:hover {
+	color:#7d6226;
+}
+
+.inline {
+	display: inline;
+}
+
+.description {
+	margin-top: -20px;
+}

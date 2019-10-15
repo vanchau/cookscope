@@ -19,7 +19,7 @@ class RecipeList extends Component {
 			<Card
 				onClick={() => this.routeChange(recipe.recipeID)}
 				key={recipe.recipeID}
-				style={{ width: '35rem', height: '18rem', alignItems: 'center', margin: '30px 40px 30px 40px' }}
+				style={{ left:'18rem', width: '35rem', height: '18rem', alignItems: 'center', margin: '30px 40px 30px 40px' }}
 			>
 				<Card.Img 
 					style={{ maxWidth: '100%', maxHeight: '100%', height: 'auto' }}
@@ -29,7 +29,7 @@ class RecipeList extends Component {
 					<div>
 						<Card.Title style={{ color: '#3C3C3C' }}>{recipe.title}</Card.Title>
 						<Card.Text style={{ color: '#3C3C3C' }}>
-							by <a href="#action" >{recipe.author}</a>
+							<h6>by <a href="#action" >{recipe.author}</a></h6>
 						</Card.Text>
 					</div>
 					<Button variant="recipe-button" style={{ marginLeft: '75%', marginTop: '140px' }} >View recipe</Button>

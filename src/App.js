@@ -25,7 +25,7 @@ const App = () => {
       <Router>
         <NavigationBar />
         <div style={{ backgroundColor: '#f7f5ef' }}>
-          <Container style={{ maxWidth: '900px', minHeight: '900px', backgroundColor: 'white' }} >
+          <Container style={{ maxWidth: '900px', minHeight: '900px', backgroundColor: 'white', paddingLeft: '0px', paddingRight: '0px'}} >
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
