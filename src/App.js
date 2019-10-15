@@ -15,7 +15,7 @@ import { NavigationBar } from './components/NavigationBar';
 import CreateRecipe from './components/CreateRecipe';
 import { CategoryList } from './components/CategoryList';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
-import Main from './components/Main';
+import RecipeList from './components/RecipeList';
 import { TermsOfService } from './components/Terms';
 import Recipe from './components/Recipe'
 
@@ -45,7 +45,7 @@ const App = () => {
 const Home = () => (
   <div style={{ width: '930px',display: 'flex', backgroundColor: 'white'}}>
     <CategoryList />
-    <Main />
+    <RecipeList />
   </div>
 )
 

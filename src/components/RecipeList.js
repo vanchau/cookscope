@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import '../css/Main.css'
+import '../css/RecipeList.css'
 import dummyData from '../assets/dummy/recipes.json'
 
-class Main extends Component {
+class RecipeList extends Component {
 	
 	routeChange = (id) => {
 		console.log(id)
@@ -40,4 +40,4 @@ class Main extends Component {
 		)
 	}
 }
-export default withRouter(Main)
+export default withRouter(RecipeList)
