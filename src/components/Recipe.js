@@ -16,7 +16,7 @@ const Recipe = (props) => {
                 <img className="main-image"
                         src={"." + recipe.imageUrl} 
                         alt=""/>
-                <h5 className="indent">{'"'+recipe.instruction+'"'}</h5>
+                <h5 className="indent description">{'"'+recipe.instruction+'"'}</h5>
                 <br/>        
                 <h4 className="indent">Ingredients</h4>    
                 <div>
