@@ -6,9 +6,13 @@
 	color: #A39594;
 }
 
-h5 {
-	color: #3C3C3C;
+.recipe-subtitles {
+	color: #A39594;
 	margin-top: 30px;
+}
+
+.steps {
+	color: #A39594;
 }
 
 .add-ingredient {

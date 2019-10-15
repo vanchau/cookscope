@@ -7,8 +7,8 @@ import dummyData from '../assets/dummy/recipes.json'
 class Main extends Component {
 	
 	routeChange = (id) => {
-	console.log(id)
-    let path = '/recipe/'+id;
+		console.log(id)
+    let path = '/recipe/' + id;
     this.props.history.push(path);
 	}
 	

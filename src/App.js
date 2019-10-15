@@ -12,7 +12,7 @@ import { Container } from 'react-bootstrap';
 import { Settings } from './components/Settings'
 import { NavigationBar } from './components/NavigationBar';
 // import { Layout } from './components/Layout';
-import { CreateRecipe } from './components/CreateRecipe';
+import CreateRecipe from './components/CreateRecipe';
 import { CategoryList } from './components/CategoryList';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import Main from './components/Main';
@@ -25,7 +25,7 @@ const App = () => {
       <Router>
         <NavigationBar />
         <div style={{ backgroundColor: '#f7f5ef' }}>
-          <Container style={{ maxWidth: '900px', backgroundColor: 'white' }} >
+          <Container style={{ maxWidth: '900px', minHeight: '900px', backgroundColor: 'white' }} >
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
