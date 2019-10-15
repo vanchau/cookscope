@@ -19,3 +19,12 @@
 .card-img-top {
 	opacity: 0.5;
 }
+
+.card-author {
+	color: #3C3C3C;
+
+}
+
+.card-author:hover {
+	color:#3C3C3C;
+}
