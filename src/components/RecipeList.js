@@ -19,7 +19,7 @@ class RecipeList extends Component {
 			<Card
 				onClick={() => this.routeChange(recipe.recipeID)}
 				key={recipe.recipeID}
-				style={{ width: '35rem', height: '18rem', alignItems: 'center', margin: '30px 40px 30px 40px' }}
+				style={{ left:'18rem', width: '35rem', height: '18rem', alignItems: 'center', margin: '30px 40px 30px 40px' }}
 			>
 				<Card.Img 
 					style={{ maxWidth: '100%', maxHeight: '100%', height: 'auto' }}

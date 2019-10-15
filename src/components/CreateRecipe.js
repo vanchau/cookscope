@@ -52,12 +52,12 @@ class CreateRecipe extends Component {
 
 				<Button className="add-ingredient" onClick={this.addIngredient} >+</Button>
 
-				<h5 className="recipe-subtitles" >Directions</h5>
+				<h5 className="recipe-subtitles" >Instructions</h5>
 				<hr style={{ marginTop: '0' }} />
 
 				{this.state.steps.map((step, index) => (
 					<Form.Group key={step.id} controlId={step.id} className="steps">
-						<Form.Label>step {index + 1}</Form.Label>
+						<Form.Label>Step {index + 1}</Form.Label>
 						<Form.Control placeholder="Write instructions here" />
 					</Form.Group>
 				))}
