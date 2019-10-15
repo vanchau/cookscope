@@ -14,25 +14,26 @@ const Recipe = (props) => {
                 <h2 className="title">{recipe.title}</h2>
                 <h6 className="indent">by <a className="author" href="#action">{recipe.author}</a></h6>
                 <img className="main-image"
-                        variant="top"
                         src={"." + recipe.imageUrl} 
                         alt=""/>
                 <h5 className="indent">{'"'+recipe.instruction+'"'}</h5>
                 <br/>        
                 <h4 className="indent">Ingredients</h4>    
-                <br/>    
-                <ul className="indent">
-                {recipe.ingredients.map(ingredient =><li key={ingredient} className="indent">{ingredient}</li>)}
-                </ul>
+                <div>
+                {recipe.ingredients.map(ingredient =>
+                    <div key={ingredient} className="indent">{ingredient}</div>)}
+                </div>  
                 <br/>
                 <h4 className="indent">Instructions</h4>          
-                <br/>
-                <ListGroup style={{marginLeft: '20px'}} >
+                <div>
                     {recipe.direction.map(instruction => (
-                        <ListGroup.Item key={instruction.id}>{instruction.step+ '. ' +instruction.text}</ListGroup.Item>
-                    ))
+                        <div key={instruction.id} className="indent">
+                            <h6 className="inline">{instruction.step}</h6>
+                            {'. ' + instruction.text}
+                        </div>
+                        ))
                     }
-                </ListGroup>    
+                </div>    
             </div>
         </div>
     );
