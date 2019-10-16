@@ -7,7 +7,6 @@ const Recipe = (props) => {
     const id = props.match.params.recipeID
     const [recipe, setRecipe] = useState({ingredients: [], direction:[]})
     const baseUrl = '/api/recipes/'+id
-    console.log(baseUrl)
     useEffect(() => {
         axios
           .get(baseUrl)
@@ -15,7 +14,7 @@ const Recipe = (props) => {
             console.log(response.data)
             setRecipe(response.data)
           })
-      }, [id])
+      }, [id, baseUrl])
       
     console.log(recipe)
     return (
