@@ -10,8 +10,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build:ui": "rm -rf build && cd ./frontend && npm run build --prod && cp -r build ../",
+    "build:ui": "rm -rf build && cd ./frontend && yarn run build --prod && cp -r build ../",
     "deploy": "git push -f heroku setup-backend:master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy"
+    "deploy:full": "yarn run build:ui && git add . && git commit -m uibuild && git push && yarn run deploy"
   }
 }
