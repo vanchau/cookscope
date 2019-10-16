@@ -29,7 +29,7 @@ class RecipeList extends Component {
 					<div>
 						<Card.Title style={{ color: '#3C3C3C' }}>{recipe.title}</Card.Title>
 						<Card.Text style={{ color: '#3C3C3C' }}>
-							<h6>by <a className="card-author" href="#action" >{recipe.author}</a></h6>
+							by <a className="card-author" href="#action" >{recipe.author}</a>
 						</Card.Text>
 					</div>
 					{/*<Button variant="recipe-button" style={{ marginLeft: '75%', marginTop: '140px' }} >View recipe</Button>*/}
