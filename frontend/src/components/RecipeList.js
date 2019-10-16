@@ -16,7 +16,8 @@ class RecipeList extends Component {
 	}
 
 	componentDidMount() {
-    axios.get('http://localhost:3001/api/recipes/')
+		const baseUrl = '/api/recipes'
+    axios.get(baseUrl)
       .then(res => {
         const recipes = res.data;
         this.setState({ recipes });

@@ -6,11 +6,13 @@ import '../css/Recipe.css'
 const Recipe = (props) => {
     const id = props.match.params.recipeID
     const [recipe, setRecipe] = useState({ingredients: [], direction:[]})
-    
+    const baseUrl = '/api/recipes/'+id
+    console.log(baseUrl)
     useEffect(() => {
         axios
-          .get('http://localhost:3001/api/recipes/'+id)
+          .get(baseUrl)
           .then(response => {
+            console.log(response.data)
             setRecipe(response.data)
           })
       }, [id])
