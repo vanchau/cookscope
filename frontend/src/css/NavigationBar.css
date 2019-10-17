@@ -1,11 +1,10 @@
 .btn-outline-create-recipe-button {
-	background-color:  rgb(200, 202, 53);
-	border-color: rgb(200, 202, 53);
-	color: white;
+	color:rgb(83, 75, 69);
+	border-color: rgb(83, 75, 69);
 }
 
 .btn-outline-create-recipe-button:hover {
-	background-color: rgb(184, 187, 29);
+	background-color: rgb(97, 86, 78);
 	color: white;
 }
 
@@ -26,7 +25,6 @@
 
 .logo-image{
 	height: 46px;
-	margin-left: 40px;
 }
 
 .form-inline {
@@ -39,6 +37,6 @@
 	
 .navbar {
 	padding: 8px 15px;
-	background-color: white;
-	border-bottom: solid rgb(214, 214, 214) 1px;
+	background-image: url('../assets/patterns/subtle_white_feathers.png');
+	border-bottom: solid #E75B00 0px;
 }

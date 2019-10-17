@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export const PrivacyPolicy = () => (
   <div style= {{backgroundColor: 'white', padding: '40px'}}>
 		<h2>PRIVACY POLICY</h2>
@@ -8,43 +9,43 @@ export const PrivacyPolicy = () => (
 
 		<ul>
 			<li>
-				<a href="#s1">1. Overview</a>
+				<a className='link' href="#s1">1. Overview</a>
 			</li>
 			<li>
-				<a href="#s2">2. What does this Privacy Policy cover?</a>
+				<a className='link' href="#s2">2. What does this Privacy Policy cover?</a>
 			</li>
 			<li>
-				<a href="#s3">3. What Personal Information do we collect from you?</a>
+				<a className='link' href="#s3">3. What Personal Information do we collect from you?</a>
 			</li>
 			<li>
-				<a href="#s4">4. Cookies</a>
+				<a className='link' href="#s4">4. Cookies</a>
 			</li>
 			<li>
-				<a href="#s5">5. How do we use Personal Information collected from you?</a>
+				<a className='link' href="#s5">5. How do we use Personal Information collected from you?</a>
 			</li>
 			<li>
-				<a href="#s6">6. Who do we share your Personal Information with?</a>
+				<a className='link' href="#s6">6. Who do we share your Personal Information with?</a>
 			</li>
 			<li>
-				<a href="#s7">7. Our legal grounds for processing Personal Information</a>
+				<a className='link' href="#s7">7. Our legal grounds for processing Personal Information</a>
 			</li>
 			<li>
-				<a href="#s8">8. Where is your Personal Information stored and processed?</a>
+				<a className='link' href="#s8">8. Where is your Personal Information stored and processed?</a>
 			</li>
 			<li>
-				<a href="#s9">9. How long do we keep your Personal Information?</a>
+				<a className='link' href="#s9">9. How long do we keep your Personal Information?</a>
 			</li>
 			<li>
-				<a href="#s10">10. How do we secure your Personal Information?</a>
+				<a className='link' href="#s10">10. How do we secure your Personal Information?</a>
 			</li>
 			<li>
-				<a href="#s11">11. Changes to this Privacy Policy</a>
+				<a className='link' href="#s11">11. Changes to this Privacy Policy</a>
 			</li>
 			<li>
-				<a href="#s12">12. Your rights</a>
+				<a className='link' href="#s12">12. Your rights</a>
 			</li>
 			<li>
-				<a href="#s13">13. Contacting us, further questions and how to make a complaint</a>
+				<a className='link' href="#s13">13. Contacting us, further questions and how to make a complaint</a>
 			</li>
 		</ul>
 
