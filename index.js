@@ -334,8 +334,9 @@ app.get('/api/recipes/:id', (req, res) => {
     }
 })
 
-app.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
-
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
