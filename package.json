@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node server.js",
     "build:ui": "rm -rf build && cd frontend && yarn run build --prod && cp -r build ../",
-    "deploy": "git push -f heroku setup-backend:master",
+    "deploy": "git push heroku master",
     "deploy:full": "yarn run build:ui && git add . && git commit -m uibuild && git push && yarn run deploy",
     "logs:prod": "heroku logs --tail"
   }
