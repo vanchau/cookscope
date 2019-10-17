@@ -1,12 +1,21 @@
-import React from 'react';
-import dummyData from '../assets/dummy/recipes.json'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+//import dummyData from '../assets/dummy/recipes.json'
 import '../css/Recipe.css'
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 const Recipe = (props) => {
-
     const id = props.match.params.recipeID
-    const recipe = dummyData.recipes.find(recipe => recipe.recipeID === parseInt(id))
+    const [recipe, setRecipe] = useState({ingredients: [], direction:[]})
+    const baseUrl = '/api/recipes/'+id
+    useEffect(() => {
+        axios
+          .get(baseUrl)
+          .then(response => {
+            console.log(response.data)
+            setRecipe(response.data)
+          })
+      }, [id, baseUrl])
+      
     console.log(recipe)
     return (
         <div className="recipe-background">
@@ -26,7 +35,7 @@ const Recipe = (props) => {
                 <br/>
                 <h4 className="indent">Instructions</h4>          
                 <div>
-                    {recipe.direction.map(instruction => (
+                    {recipe && recipe.direction.map(instruction => (
                         <div key={instruction.id} className="indent">
                             <h6 className="inline">{instruction.step}</h6>
                             {'. ' + instruction.text}

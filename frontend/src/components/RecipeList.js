@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import axios from 'axios';
+import { Card } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import '../css/RecipeList.css'
-import dummyData from '../assets/dummy/recipes.json'
+//import dummyData from '../assets/dummy/recipes.json'
 
 class RecipeList extends Component {
 	
+	state = {recipes: []}
+
 	routeChange = (id) => {
 		console.log(id)
     let path = '/recipe/' + id;
     this.props.history.push(path);
 	}
+
+	componentDidMount() {
+		const baseUrl = '/api/recipes'
+    axios.get(baseUrl)
+      .then(res => {
+        const recipes = res.data;
+        this.setState({ recipes });
+      })
+  }
 	
 	render() {
 		return (
 			<div style={{ flex: '5' }} >
-			{dummyData.recipes.map(recipe => (
+			{this.state.recipes.map(recipe => (
 			<Card
-				onClick={() => this.routeChange(recipe.recipeID)}
-				key={recipe.recipeID}
+				onClick={() => this.routeChange(recipe.id)}
+				key={recipe.id}
 				style={{ left:'18rem', width: '35rem', height: '18rem', alignItems: 'center', margin: '30px 40px 30px 40px' }}
 			>
 				<Card.Img 
