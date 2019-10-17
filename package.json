@@ -10,6 +10,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "cd frontend && yarn install --only=dev && yarn install && yarn run build"
+    "build:ui": "rm -rf build && cd frontend && yarn run build --prod && cp -r build ../",
+    "deploy": "git push heroku master",
+    "deploy:full": "yarn run build:ui && git add . && git commit -m uibuild && git push && yarn run deploy",
+    "logs:prod": "heroku logs --tail"
   }
 }
