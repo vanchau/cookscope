@@ -3,7 +3,7 @@ import '../css/NavigationBar.css'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Modal } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo2.png'
 
 export const NavigationBar = () => {
 	const [show, setShow] = useState(false);
@@ -14,7 +14,6 @@ export const NavigationBar = () => {
 	return (
 		<Navbar
 			className="d-flex justify-content-between sticky-top"
-			style={{ backgroundColor: 'white', borderBottom: '1px solid #E75B00' }}
 		>
 			<div>
 				<Link className="navbar-brand" to="/">
