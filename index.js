@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
-app.use(express.static('build'))
+var path = require('path')
+app.use(express.static(path.join(__dirname, 'frontend/build')))
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -334,9 +335,10 @@ app.get('/api/recipes/:id', (req, res) => {
     }
 })
 
-app.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/frontend/build/index.html'));
 });
+
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
