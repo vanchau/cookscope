@@ -26,8 +26,8 @@
 }
 	
 .navigation-bar {
-	height: 5em;
+	height: 5.4em;
 	padding: 8px 15px;
 	background-image: url('../assets/patterns/subtle_white_feathers.png');
-	border-bottom: solid #E75B00 0px;
+	border-bottom: solid rgb(20, 20, 20) 6px;
 }
