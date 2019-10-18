@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 //import dummyData from '../assets/dummy/recipes.json'
+import { Card } from 'react-bootstrap';
 import '../css/Recipe.css'
 
 const Recipe = (props) => {
@@ -18,35 +19,29 @@ const Recipe = (props) => {
       
     console.log(recipe)
     return (
-        <div className="recipe-background">
-            <div className="recipe-container">
-                <h2 className="title">{recipe.title}</h2>
-                <h6 className="indent">by <a className="author" href="#action">{recipe.author}</a></h6>
-                <img className="main-image"
-                        src={"." + recipe.imageUrl} 
-                        alt=""/>
-                <h5 className="indent description">{'"'+recipe.instruction+'"'}</h5>
-                <br/>        
-                <h4 className="indent">Ingredients</h4>    
-                <div>
-                {recipe.ingredients.map(ingredient =>
-                    <div key={ingredient} className="indent">{ingredient}</div>)}
-                </div>  
-                <br/>
-                <h4 className="indent">Instructions</h4>          
-                <div>
-                    {recipe && recipe.direction.map(instruction => (
-                        <div key={instruction.id} className="indent">
-                            <h6 className="inline">{instruction.step}</h6>
-                            {'. ' + instruction.text}
-                        </div>
-                        ))
-                    }
-                </div>    
-            </div>
-        </div>
+        <React.Fragment>
+            <div style={{height:'1em', background:'transparent'}}></div>
+            <Card className='recipe-card'>
+                <Card.Body>
+                    <Card.Title>{recipe.title}</Card.Title>
+                    <Card.Text>
+                        by <a className="card-author" href="#action" >{recipe.author}</a>
+                    </Card.Text>
+                    <Card.Img className="recipe-card-img" src={"." + recipe.imageUrl} />
+                    <Card.Text>{'"'+recipe.instruction+'"'}</Card.Text>
+                    <Card.Title><br/>Ingredients<br/></Card.Title> 
+                    {recipe.ingredients.map(ingredient =>
+                        <Card.Text key={ingredient}>{ingredient}</Card.Text>)}
+                    <Card.Title><br/>Instructions<br/></Card.Title>          
+                    {recipe.direction.map(instruction => (
+                        <Card.Text key={instruction.id}>
+                            {instruction.step}{'. ' + instruction.text}<br/>
+                        </Card.Text>  
+                    ))}                         
+                </Card.Body>
+            </Card>  
+        </React.Fragment>
     );
 };
 
 export default Recipe;
-
