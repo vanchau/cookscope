@@ -24,8 +24,6 @@ const App = () => {
       <Router>
           <NavigationBar/>
           <div className='global-background'>
-          <FilterBar/>
-          <div style={{height:'5em', background:'transparent'}}></div>
             <Container>
               <Switch>
                 <Route exact path="/" component={Home} />
@@ -45,7 +43,10 @@ const App = () => {
 }
 
 const Home = () => (
-    <RecipeList />
+    <React.Fragment>
+      <FilterBar/>
+      <RecipeList />
+    </React.Fragment>
 )
 
 const About = () => (
