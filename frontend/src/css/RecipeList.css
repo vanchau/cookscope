@@ -16,7 +16,6 @@
 
 .card-author {
   color: #3C3C3C;
-
 }
 
 .card-author:hover {
@@ -32,5 +31,6 @@
 }
 
 .card-columns {
+	margin-top: 1.5em;
 	width: 65em;
 }

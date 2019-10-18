@@ -8,16 +8,6 @@
 	color: white;
 }
 
-/* .btn-search-button {
-	background-color: #E75B00;
-	color: white;
-}
-
-.btn-search-button:hover {
-	background-color: #d65400;
-	color: white;
-} */
-
 .dropdown-menu {
 	right: 0;
 	left: auto;
@@ -35,7 +25,8 @@
 	width: 400px !important;
 }
 	
-.navbar {
+.navigation-bar {
+	height: 5em;
 	padding: 8px 15px;
 	background-image: url('../assets/patterns/subtle_white_feathers.png');
 	border-bottom: solid #E75B00 0px;

@@ -16,6 +16,7 @@ import RecipeList from './components/RecipeList';
 import { TermsOfService } from './components/Terms';
 import Recipe from './components/Recipe'
 import DropdownBar from './components/DropdownBar'
+import FilterBar from './components/FilterBar'
 
 const App = () => {
   return (
@@ -23,7 +24,8 @@ const App = () => {
       <Router>
           <NavigationBar/>
           <div className='global-background'>
-          <DropdownBar />
+          <FilterBar/>
+          <div style={{height:'5em', background:'transparent'}}></div>
             <Container>
               <Switch>
                 <Route exact path="/" component={Home} />

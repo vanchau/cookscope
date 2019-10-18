@@ -280,6 +280,278 @@
 					"image2": ""
 				}
 			]
-		}
+		},
+    {
+        "id": 9,
+        "title": "Cherry Roulade",
+        "instruction": "Yums",
+        "author": "Sponchia",
+        "ingredients": [
+            "cherry",
+            "rice",
+            "salt",
+            "water",
+            "cayenne pepper"
+        ],
+        "difficulty": "difficult",
+        "portion": "15",
+        "imageUrl": "./assets/dummy/cherry-roulade.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "title": "Artesan Bread",
+        "instruction": "Yum yum",
+        "author": "fancyvrave1",
+        "ingredients": [
+            "flour",
+            "water",
+            "salt",
+            "yeast"
+        ],
+        "difficulty": "easy",
+        "portion": "6",
+        "imageUrl": "./assets/dummy/artesan-bread.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "title": "Pasta Pesto",
+        "instruction": "Yum yum",
+        "author": "fancycrave1",
+        "ingredients": [
+            "chicken",
+            "rice",
+            "salt",
+            "water",
+            "cayenne pepper"
+        ],
+        "difficulty": "easy",
+        "portion": "4",
+        "imageUrl": "./assets/dummy/pasta-pesto.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "title": "Goulash Soup",
+        "instruction": "Yum yum",
+        "author": "ivabalk",
+        "ingredients": [
+            "chicken",
+            "rice",
+            "salt",
+            "water",
+            "cayenne pepper"
+        ],
+        "difficulty": "easy",
+        "portion": "4",
+        "imageUrl": "./assets/dummy/goulash-soup.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "title": "Vanilla Buns",
+        "instruction": "Yum yum",
+        "author": "klickblick",
+        "ingredients": [
+            "chicken",
+            "rice",
+            "salt",
+            "water",
+            "cayenne pepper"
+        ],
+        "difficulty": "medium",
+        "portion": "8",
+        "imageUrl": "./assets/dummy/vanilla-bun.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "title": "Thai Fried Noodles",
+        "instruction": "Yum yum",
+        "author": "cattalin",
+        "ingredients": [
+            "chicken",
+            "rice",
+            "salt",
+            "water",
+            "cayenne pepper"
+        ],
+        "difficulty": "easy",
+        "portion": "2",
+        "imageUrl": "./assets/dummy/thai-noodle.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "title": "Éclair",
+        "instruction": "Yum yum",
+        "author": "karriezhu",
+        "ingredients": [
+            "chicken",
+            "rice",
+            "salt",
+            "water",
+            "cayenne pepper"
+        ],
+        "difficulty": "difficult",
+        "portion": "3",
+        "imageUrl": "./assets/dummy/eclair.jpg",
+        "direction": [
+            {
+                "id": 1,
+                "step": "1",
+                "text": "Prepare all the ingredients.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 2,
+                "step": "2",
+                "text": "Take butter out of the fridge.",
+                "image1": "",
+                "image2": ""
+            },
+            {
+                "id": 3,
+                "step": "3",
+                "text": "Mix flour with sugar.",
+                "image1": "",
+                "image2": ""
+            }
+        ]
+    }
 	]
 }

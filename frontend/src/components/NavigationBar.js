@@ -13,7 +13,7 @@ export const NavigationBar = () => {
 
 	return (
 		<Navbar
-			className="d-flex justify-content-between sticky-top"
+			className="navigation-bar d-flex justify-content-between sticky-top"
 		>
 			<div>
 				<Link className="navbar-brand" to="/">
