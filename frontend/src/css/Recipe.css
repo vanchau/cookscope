@@ -16,7 +16,7 @@
 
 .recipe-card {
 	background-color:white;
-	padding: 1em;
+	padding: 3em 4em;
 	margin: auto;
 	min-height:80em;
 	width: 50em;
@@ -25,6 +25,7 @@
 .recipe-card-img {
 	height: 30em;
 	margin-bottom: 1.5em;
+	object-fit: contain;
 }
 
 .card-author {
