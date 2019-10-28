@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/General.css';
 
 export const TermsOfService = () => (
   <div style= {{backgroundColor: 'white', padding: '40px'}}>
@@ -8,34 +9,34 @@ export const TermsOfService = () => (
 
 		<ul>
 			<li>
-				<a href="#s1">1. Your agreement</a>
+				<a className='link' href="#s1">1. Your agreement</a>
 			</li>
 			<li>
-				<a href="#s2">2. Privacy</a>
+				<a className='link' href="#s2">2. Privacy</a>
 			</li>
 			<li>
-				<a href="#s3">3. Content on the services</a>
+				<a className='link' href="#s3">3. Content on the services</a>
 			</li>
 			<li>
-				<a href="#s4">4. Your rights and grant of rights in the content</a>
+				<a className='link' href="#s4">4. Your rights and grant of rights in the content</a>
 			</li>
 			<li>
-				<a href="#s5">5. Using the services</a>
+				<a className='link' href="#s5">5. Using the services</a>
 			</li>
 			<li>
-				<a href="#s6">6. Your account</a>
+				<a className='link' href="#s6">6. Your account</a>
 			</li>
 			<li>
-				<a href="#s7">7. Your license to use the services</a>
+				<a className='link' href="#s7">7. Your license to use the services</a>
 			</li>
 			<li>
-				<a href="#s8">8. Ending these terms</a>
+				<a className='link' href="#s8">8. Ending these terms</a>
 			</li>
 			<li>
-				<a href="#s9">9. Disclaimers and limitations of liability</a>
+				<a className='link' href="#s9">9. Disclaimers and limitations of liability</a>
 			</li>
 			<li>
-				<a href="#s10">10. General</a>
+				<a className='link' href="#s10">10. General</a>
 			</li>
 		</ul>
 

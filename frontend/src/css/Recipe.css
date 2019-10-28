@@ -10,25 +10,32 @@
 	display: block;
 }
 
-.recipe-container {
-	background-color: white;
-	height: 900px;
+.recipe-card:hover {
+  cursor: default;
 }
 
-.title {
-	padding-left: 40px;
-	padding-top: 20px;
+.recipe-card {
+	background-color:white;
+	padding: 3em 4em;
+	margin: auto;
+	height: auto;
+	width: 50em;
 }
 
-.recipe-background {
-	padding-left: 100px;
-	padding-right: 100px;
-	height: 900px;
+.recipe-card-img {
+	height: 30em;
+	margin-bottom: 1.5em;
+	object-fit: contain;
 }
 
-.indent {
-	padding-left: 40px;
+.card-author {
+  color: #3C3C3C;
 }
+
+.card-author:hover {
+  color:#3C3C3C;
+}
+
 
 .author {
 	color:#aa8f54;

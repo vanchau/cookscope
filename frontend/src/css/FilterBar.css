@@ -1,0 +1,43 @@
+.filter-container {
+	top: 5em;
+	height:4.5em;
+	display: block;
+	align-content: center;
+	background-image: url('../assets/patterns/subtle_white_feathers.png');
+	border-top: solid 6px black;
+	border-bottom: solid 6px black;
+}
+
+.dropdown-item:focus {
+	box-shadow: none;
+	background-color: rgb(221, 221, 221);
+  border-color: white;
+}
+
+.dropdown-item:active {
+	box-shadow: none;
+	background-color: rgb(221, 221, 221);
+  border-color: white;
+}
+
+.dropdown-toggle {
+	margin-left:4em;
+	margin-right:4em;
+	background-image: url('../assets/patterns/subtle_white_feathers.png');
+	border: none;
+	color: black;
+}
+
+.navbar-light {
+	color:black;
+}
+
+
+.filterbar {
+	top: 5.5em;
+	color: black;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}

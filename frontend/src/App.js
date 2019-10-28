@@ -1,41 +1,41 @@
 import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import './css/App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-
+import { Container, Dropdown } from 'react-bootstrap';
 import { Settings } from './components/Settings'
 import { NavigationBar } from './components/NavigationBar';
-// import { Layout } from './components/Layout';
 import CreateRecipe from './components/CreateRecipe';
 import { CategoryList } from './components/CategoryList';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import RecipeList from './components/RecipeList';
 import { TermsOfService } from './components/Terms';
 import Recipe from './components/Recipe'
+import DropdownBar from './components/DropdownBar'
+import FilterBar from './components/FilterBar'
 
 const App = () => {
   return (
     <React.Fragment>
       <Router>
-        <NavigationBar />
-        <div style={{ backgroundColor: '#f7f5ef' }}>
-          <Container style={{ maxWidth: '900px', minHeight: '900px', backgroundColor: 'white', paddingLeft: '0px', paddingRight: '0px'}} >
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/create-recipe" component={CreateRecipe} />
-              <Route path="/settings" component={Settings} />
-              <Route path="/privacy" component={PrivacyPolicy} />
-              <Route path="/terms" component={TermsOfService} />
-              <Route path="/recipe/:recipeID" component={Recipe}/>
-            </Switch>
-          </Container>
+          <NavigationBar/>
+          <div className='global-background'>
+            <Container>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/create-recipe" component={CreateRecipe} />
+                <Route path="/settings" component={Settings} />
+                <Route path="/privacy" component={PrivacyPolicy} />
+                <Route path="/terms" component={TermsOfService} />
+                <Route path="/recipe/:recipeID" component={Recipe}/>
+              </Switch>
+            </Container>
+            <div style={{height:'5em', background:'transparent'}}></div>
         </div>
       </Router>
     </React.Fragment>
@@ -43,10 +43,10 @@ const App = () => {
 }
 
 const Home = () => (
-  <div style={{ width: '930px',display: 'flex', backgroundColor: 'white'}}>
-    <CategoryList />
-    <RecipeList />
-  </div>
+    <React.Fragment>
+      <FilterBar/>
+      <RecipeList />
+    </React.Fragment>
 )
 
 const About = () => (
