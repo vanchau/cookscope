@@ -1,23 +1,22 @@
 import React, {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-//import dummyData from '../assets/dummy/recipes.json'
 import { Card } from 'react-bootstrap';
 import '../css/Recipe.css'
 
-const Recipe = (props) => {
-    const id = props.match.params.recipeID
-    const [recipe, setRecipe] = useState({ingredients: [], direction:[]})
-    const baseUrl = '/api/recipes/'+id
+const Recipe = () => {
+    const  { recipeID } = useParams();
+    const [recipe, setRecipe] = useState({ ingredients: [], direction: [] })
+
     useEffect(() => {
-        axios
-          .get(baseUrl)
-          .then(response => {
-            console.log(response.data)
-            setRecipe(response.data)
-          })
-      }, [id, baseUrl])
+        const fetchData = async () => {
+            console.log(`/api/recipes/${recipeID}`)
+            const result = await axios(`/api/recipes/${recipeID}`);
+            setRecipe(result.data);
+        };
+        fetchData();
+    }, [recipeID])
       
-    console.log(recipe)
     return (
         <React.Fragment>
             <div style={{height:'1em', background:'transparent'}}></div>

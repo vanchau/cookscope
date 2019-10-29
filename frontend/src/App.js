@@ -6,16 +6,14 @@ import {
   Route
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Dropdown } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Settings } from './components/Settings'
 import { NavigationBar } from './components/NavigationBar';
 import CreateRecipe from './components/CreateRecipe';
-import { CategoryList } from './components/CategoryList';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import RecipeList from './components/RecipeList';
 import { TermsOfService } from './components/Terms';
 import Recipe from './components/Recipe'
-import DropdownBar from './components/DropdownBar'
 import FilterBar from './components/FilterBar'
 
 const App = () => {
