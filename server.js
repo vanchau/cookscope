@@ -2,9 +2,12 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const morgan = require('morgan');
 app.use(express.static('build'))
 app.use(bodyParser.json())
 app.use(cors())
+// HTTP request logger middleware
+app.use(morgan('dev'));
 
 let recipes = [
     {
