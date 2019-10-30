@@ -5,14 +5,14 @@ import '../css/CreateRecipe.css'
 
 const CreateRecipe = () => {
 
-  const [numberOfIngredients, updateIngredientNum] 	= useState(1)
-  const [ingredients, addIngredientObj] 			= useState([{ name: '', id: 1 }])
-  const [numberOfSteps, addStepCount] 				= useState(1)
-  const [steps, addInstruction] 							= useState([{ instruction: '', id: 1 }])
+  const [ingredientCount, addCount] 	= useState(1)
+  const [ingredients, addIngredient]	= useState([{ name: '', id: 1 }])
+  const [numberOfSteps, addStepCount]	= useState(1)
+  const [steps, addInstruction] 			= useState([{ instruction: '', id: 1 }])
 
-  const addIngredient = () => {
-    updateIngredientNum(numberOfIngredients + 1)
-    addIngredientObj([ ...ingredients, { name: '', id: numberOfIngredients + 1 } ])
+  const addNewIngredient = () => {
+    addCount(ingredientCount + 1)
+    addIngredient([ ...ingredients, { name: '', id: ingredientCount + 1 } ])
   }
 
   const addStep = () => {
@@ -39,7 +39,7 @@ const CreateRecipe = () => {
         </Form.Group>
       ))}
 
-      <Button className='add-ingredient' onClick={addIngredient} >+</Button>
+      <Button className='add-ingredient' onClick={addNewIngredient} >+</Button>
 
       <h5 className='recipe-subtitles' >Instructions</h5>
       <hr style={{ marginTop: '0' }} />

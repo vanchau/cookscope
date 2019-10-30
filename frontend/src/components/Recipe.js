@@ -26,15 +26,20 @@ const Recipe = () => {
           <Card.Text>
             by <a className='card-author' href='#action' >{recipe.author}</a>
           </Card.Text>
-          <Card.Img className='recipe-card-img' src={'.' + recipe.imageUrl} />
+          <Card.Img className='recipe-card-img' src={`.${recipe.imageUrl}`} />
           <Card.Text>{'"'+recipe.instruction+'"'}</Card.Text>
-          <Card.Title><br/>Ingredients<br/></Card.Title>
+          <Card.Title>
+            <br/>Ingredients<br/>
+          </Card.Title>
           {recipe.ingredients.map(ingredient =>
-            <Card.Text key={ingredient}>{ingredient}</Card.Text>)}
-          <Card.Title><br/>Instructions<br/></Card.Title>
+            <Card.Text key={ingredient}>{ingredient}</Card.Text>)
+          }
+          <Card.Title>
+            <br/>Instructions<br/>
+          </Card.Title>
           {recipe.direction.map(instruction => (
             <Card.Text key={instruction.id}>
-              {instruction.step}{'. ' + instruction.text}<br/>
+              {instruction.step}{`.${instruction.text}`}<br/>
             </Card.Text>
           ))}
         </Card.Body>

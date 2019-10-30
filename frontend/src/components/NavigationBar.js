@@ -37,7 +37,6 @@ const NavigationBar = () => {
             </Button>
           </LinkContainer>
 
-
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Oops, it seems like you&apos;re not logged in.</Modal.Title>
