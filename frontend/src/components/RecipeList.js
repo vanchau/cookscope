@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { withRouter, useHistory } from 'react-router-dom'
 import { Card, CardColumns } from 'react-bootstrap'
 import axios from 'axios'
-
 import '../css/RecipeList.css'
 
 const RecipeList = () => {

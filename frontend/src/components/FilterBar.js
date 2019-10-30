@@ -1,41 +1,66 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-
-import categories from '../assets/categories.json'
+import { Navbar, Nav } from 'react-bootstrap'
 import '../css/FilterBar.css'
+import FilterDropdown from './FilterDropdown'
 
-const FilterBar = () => {
+const FilterBar = (props) => {
+  const {
+    selectedCategories,
+    setSelectedCategories,
+    selectedDifficulties,
+    setSelectedDifficulties,
+    setSelectedTimes,
+    selectedTimes,
+    selectedDiets,
+    setSelectedDiets
+  } = props
+
+  const categories = [
+                      "Appetizers",
+                      "Beef",
+                      "Breads",
+                      "Budget friendly",
+                      "Casseroles",
+                      "Chicken",
+                      "Dinner",
+                      "Desserts",
+                      "Fish",
+                      "Healthy",
+                      "Kid friendly",
+                      "Pasta",
+                      "Pork",
+                      "Salads",
+                      "Slow cooker",
+                      "Snacks",
+                      "Soups",
+                      "Vegetable"
+                      ]
+  const difficulties = ['Easy', 'Medium', 'Challenging']
+  const times = [
+                'Under 15 minutes',
+                'Under 30 minutes',
+                'Under 45 minutes', 
+                'Under 1 hour', 
+                'Over 1 hour'
+                ]
+  const diets = [
+                'Vegetarian',
+                'Vegan',
+                'Dairy-free',
+                'Gluten-free'
+                ]
+
+
   return (
     <React.Fragment>
       <div style={{height:'5em', background:'transparent'}}></div>
       <div className='filter-container fixed-top'>
         <Navbar className='filterbar fixed-top'>
           <Nav>
-            <NavDropdown title='Categories' id='basic-nav-dropdown'>
-              {Object.values(categories).map(category => (
-                <NavDropdown.Item eventkey={category} key={category}>
-                  {category}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-            <NavDropdown title='Difficulty'>
-              <NavDropdown.Item eventkey='easy'>Easy</NavDropdown.Item>
-              <NavDropdown.Item eventkey='medium'>Medium</NavDropdown.Item>
-              <NavDropdown.Item eventkey='difficult'>Difficult</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title='Time'>
-              <NavDropdown.Item>Under 15 minutes</NavDropdown.Item>
-              <NavDropdown.Item>Under 30 minutes</NavDropdown.Item>
-              <NavDropdown.Item>Under 45 minutes</NavDropdown.Item>
-              <NavDropdown.Item>Under 1 hour</NavDropdown.Item>
-              <NavDropdown.Item>Over 1 hour</NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown title='Special Diet'>
-              <NavDropdown.Item>Vegetarian</NavDropdown.Item>
-              <NavDropdown.Item>Vegan</NavDropdown.Item>
-              <NavDropdown.Item>Dairy-free</NavDropdown.Item>
-              <NavDropdown.Item>Gluten-free</NavDropdown.Item>
-            </NavDropdown>
+          <FilterDropdown title='Categories' items={categories} selectedItems={selectedCategories} setSelectedItems={setSelectedCategories} />  
+          <FilterDropdown title='Difficulty' items={difficulties} selectedItems={selectedDifficulties} setSelectedItems={setSelectedDifficulties} />
+          <FilterDropdown title='Time' items={times} selectedItems={selectedTimes} setSelectedItems={setSelectedTimes} />
+          <FilterDropdown title='Special Diet' items={diets} selectedItems={selectedDiets} setSelectedItems={setSelectedDiets} />
           </Nav>
         </Navbar>
       </div>
