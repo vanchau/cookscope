@@ -13,9 +13,13 @@
 	left: auto;
 }
 
-.logo-image{
+.logo-image {
 	height: 46px;
 	margin-left: 3em;
+}
+
+.fixed-top {
+	z-index: 1000 !important
 }
 
 .form-inline {

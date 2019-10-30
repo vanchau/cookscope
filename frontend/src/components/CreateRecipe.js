@@ -1,76 +1,64 @@
-import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
+
 import '../css/CreateRecipe.css'
 
-class CreateRecipe extends Component {
+const CreateRecipe = () => {
 
-	constructor(props) {
-    super(props);
-    this.state = {
-			ingredients: [{ name: '', id: 1 }],
-			numberOfIngredients: 1,
-			steps: [{ instruction: '', id: 1 }],
-			numberOfSteps: 1
-		};
-	}
+  const [ingredientCount, addCount] 	= useState(1)
+  const [ingredients, addIngredient]	= useState([{ name: '', id: 1 }])
+  const [numberOfSteps, addStepCount]	= useState(1)
+  const [steps, addInstruction] 			= useState([{ instruction: '', id: 1 }])
 
-	addIngredient = () => {
-		const numOfIngredients = this.state.numberOfIngredients + 1
-		this.setState(prevState => ({
-			ingredients: [...prevState.ingredients, { name: '', id: numOfIngredients }],
-			numberOfIngredients: numOfIngredients
-		}))
-	}
+  const addNewIngredient = () => {
+    addCount(ingredientCount + 1)
+    addIngredient([ ...ingredients, { name: '', id: ingredientCount + 1 } ])
+  }
 
-	addStep = () => {
-		const numOfSteps = this.state.numberOfSteps + 1
-		this.setState(prevState => ({
-			steps: [...prevState.steps, { instruction: '', id: numOfSteps }],
-			numberOfSteps: numOfSteps
-		}))
-	}
+  const addStep = () => {
+    addStepCount(numberOfSteps + 1)
+    addInstruction([ ...steps, { instruction: '', id: numberOfSteps + 1 } ])
+  }
 
-	render() {
-		return (
-			<Form style={{ padding: '20px 120px' }} >
-				<Form.Group controlId="formGridAddress1">
-					<Form.Control style={{ height: '80px', fontSize: '2rem' }} type="text" placeholder="Enter recipe title" />
-				</Form.Group>
+  return (
+    <Form style={{ padding: '20px 120px' }} >
+      <Form.Group controlId='formGridAddress1'>
+        <Form.Control style={{ height: '80px', fontSize: '2rem' }} type='text' placeholder='Enter recipe title' />
+      </Form.Group>
 
-				<Form.Group controlId="formGridAddress1">
-					<Form.Control as="textarea" rows="1" placeholder="Tell a story about your recipe" />
-				</Form.Group>
+      <Form.Group controlId='formGridAddress1'>
+        <Form.Control as='textarea' rows='1' placeholder='Tell a story about your recipe' />
+      </Form.Group>
 
-				<h5 className="recipe-subtitles" >Ingredients</h5>
-				<hr style={{ marginTop: '0' }} />
+      <h5 className='recipe-subtitles' >Ingredients</h5>
+      <hr style={{ marginTop: '0' }} />
 
-				{this.state.ingredients.map(ingredient => (
-					<Form.Group key={ingredient.id} controlId={ingredient.id} className="ingredients">
-						<Form.Control placeholder="2 cloves of garlic" />
-					</Form.Group>
-				))}
+      {ingredients.map(ingredient => (
+        <Form.Group key={ingredient.id} controlId={ingredient.id} className='ingredients'>
+          <Form.Control placeholder='2 cloves of garlic' />
+        </Form.Group>
+      ))}
 
-				<Button className="add-ingredient" onClick={this.addIngredient} >+</Button>
+      <Button className='add-ingredient' onClick={addNewIngredient} >+</Button>
 
-				<h5 className="recipe-subtitles" >Instructions</h5>
-				<hr style={{ marginTop: '0' }} />
+      <h5 className='recipe-subtitles' >Instructions</h5>
+      <hr style={{ marginTop: '0' }} />
 
-				{this.state.steps.map((step, index) => (
-					<Form.Group key={step.id} controlId={step.id} className="steps">
-						<Form.Label>Step {index + 1}</Form.Label>
-						<Form.Control placeholder="Write instructions here" />
-					</Form.Group>
-				))}
+      {steps.map((step, index) => (
+        <Form.Group key={step.id} controlId={step.id} className='steps'>
+          <Form.Label>Step {index + 1}</Form.Label>
+          <Form.Control placeholder='Write instructions here' />
+        </Form.Group>
+      ))}
 
-				<Button className="add-ingredient" onClick={this.addStep} >+</Button>
-				<hr />
+      <Button className='add-ingredient' onClick={addStep} >+</Button>
+      <hr />
 
-				<Button variant="primary" type="submit" className="submit-button" >
-					I'm done!
-				</Button>
-			</Form>
-		)
-	}
+      <Button variant='primary' type='submit' className='submit-button' >
+				I`m done!
+      </Button>
+    </Form>
+  )
 }
 
 export default CreateRecipe
