@@ -8,7 +8,6 @@
 	display: block;
 }
 
-
 .profile-card {
 	background-color:white;
 	padding: 3em 4em;
@@ -21,4 +20,38 @@
 	text-align: center;
 	margin-top: 2em;
 	margin-bottom: 1em;
+	transition: none;
+}
+
+.profile-tabs {
+	justify-content: space-evenly;
+	border: 0px;
+	color: red;
+	outline: none;
+	transition: none;
+}
+
+.profile-tab {
+	border: 0;
+	border: none;
+	color: blueviolet;
+	border-color: white;
+	outline: none;
+}
+
+.nav-link:hover {
+	border: 0px;
+	color: red;
+	border-color: white;
+}
+
+.nav-link {
+	border: 0px;
+	color: red;
+	border-color: white;
+
+}
+
+.nav-tabs .nav-link.active {
+	border-color: white;
 }
