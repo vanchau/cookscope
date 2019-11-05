@@ -16,6 +16,7 @@ import RecipeList from './components/RecipeList'
 import TermsOfService from './components/Terms'
 import Recipe from './components/Recipe'
 import FilterBar from './components/FilterBar'
+import UserProfile from './components/UserProfile'
 
 const Home = () => (
   <>
@@ -43,6 +44,7 @@ const App = () => (
           <Route path='/privacy' component={PrivacyPolicy} />
           <Route path='/terms' component={TermsOfService} />
           <Route path='/recipe/:recipeID' component={Recipe}/>
+          <Route path='/recipe/:username' component={UserProfile}/>
         </Switch>
       </Container>
       <div style={{height:'5em', background:'transparent'}}></div>

@@ -1,0 +1,9 @@
+{
+	"users": [
+		{
+			"username": "bobster",
+			"name": "Bob Bobson",
+			"profilePicture": "./assets/dummy/bobster.jpg"
+		}
+	]
+}
