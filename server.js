@@ -1,3 +1,5 @@
+require('dotenv').config()
+const fs = require('fs')
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -9,7 +11,57 @@ app.use(cors())
 // HTTP request logger middleware
 app.use(morgan('dev'));
 
-let recipes = [
+const mongoose = require('mongoose')
+const url = process.env.MONGODB_URI
+
+console.log('connecting to', url)
+
+mongoose.connect(url, { useNewUrlParser: true })
+  .then(result => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
+
+const recipeSchema = new mongoose.Schema({
+  title: String,
+  instruction: String,
+  author: String,
+  ingredients: [String],
+  difficulty: String,
+  portion: String,
+  imageUrl: String,
+  direction: [{id: Number, step: String, text: String}]
+})
+
+recipeSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
+const Recipe = mongoose.model('Recipe', recipeSchema)
+
+app.get('/api/recipes', (request, response) => {
+    Recipe.find({}).then(recipes => {
+      response.json(recipes.map(recipe => recipe.toJSON()))
+    });
+});
+
+app.get('/api/recipes/:id', (request, response) => {
+    Recipe.findById(request.params.id).then(recipe => {
+      response.json(recipe.toJSON())
+    })
+})
+
+const PORT = process.env.PORT || 3001
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`)
+    })
+/* let recipes = [
     {
         "id": 1,
         "title": "Pecan Cookie Drops",
@@ -24,7 +76,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "4",
-        "imageUrl": "./assets/dummy/cookie.jpg",
+        "imageUrl": "/assets/dummy/cookie.jpg",
         "direction": [
             {
                 "id": 1,
@@ -63,7 +115,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "4",
-        "imageUrl": "./assets/dummy/pizza.jpg",
+        "imageUrl": "/assets/dummy/pizza.jpg",
         "direction": [
             {
                 "id": 1,
@@ -102,7 +154,7 @@ let recipes = [
         ],
         "difficulty": "medium",
         "portion": "2",
-        "imageUrl": "./assets/dummy/garlic_shrimp.jpg",
+        "imageUrl": "/assets/dummy/garlic_shrimp.jpg",
         "direction": [
             {
                 "id": 1,
@@ -141,7 +193,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "5",
-        "imageUrl": "./assets/dummy/salad.jpg",
+        "imageUrl": "/assets/dummy/salad.jpg",
         "direction": [
             {
                 "id": 1,
@@ -180,7 +232,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "2",
-        "imageUrl": "./assets/dummy/pancake.jpg",
+        "imageUrl": "/assets/dummy/pancake.jpg",
         "direction": [
             {
                 "id": 1,
@@ -217,7 +269,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "2",
-        "imageUrl": "./assets/dummy/salmon.jpg",
+        "imageUrl": "/assets/dummy/salmon.jpg",
         "direction": [
             {
                 "id": 1,
@@ -256,7 +308,7 @@ let recipes = [
         ],
         "difficulty": "medium",
         "portion": "3",
-        "imageUrl": "./assets/dummy/sandwich.jpg",
+        "imageUrl": "/assets/dummy/sandwich.jpg",
         "direction": [
             {
                 "id": 1,
@@ -295,7 +347,7 @@ let recipes = [
         ],
         "difficulty": "difficult",
         "portion": "6",
-        "imageUrl": "./assets/dummy/chicken-soup.jpg",
+        "imageUrl": "/assets/dummy/chicken-soup.jpg",
         "direction": [
             {
                 "id": 1,
@@ -334,7 +386,7 @@ let recipes = [
         ],
         "difficulty": "difficult",
         "portion": "15",
-        "imageUrl": "./assets/dummy/cherry-roulade.jpg",
+        "imageUrl": "/assets/dummy/cherry-roulade.jpg",
         "direction": [
             {
                 "id": 1,
@@ -372,7 +424,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "6",
-        "imageUrl": "./assets/dummy/artesan-bread.jpg",
+        "imageUrl": "/assets/dummy/artesan-bread.jpg",
         "direction": [
             {
                 "id": 1,
@@ -411,7 +463,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "4",
-        "imageUrl": "./assets/dummy/pasta-pesto.jpg",
+        "imageUrl": "/assets/dummy/pasta-pesto.jpg",
         "direction": [
             {
                 "id": 1,
@@ -450,7 +502,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "4",
-        "imageUrl": "./assets/dummy/goulash-soup.jpg",
+        "imageUrl": "/assets/dummy/goulash-soup.jpg",
         "direction": [
             {
                 "id": 1,
@@ -489,7 +541,7 @@ let recipes = [
         ],
         "difficulty": "medium",
         "portion": "8",
-        "imageUrl": "./assets/dummy/vanilla-bun.jpg",
+        "imageUrl": "/assets/dummy/vanilla-bun.jpg",
         "direction": [
             {
                 "id": 1,
@@ -528,7 +580,7 @@ let recipes = [
         ],
         "difficulty": "easy",
         "portion": "2",
-        "imageUrl": "./assets/dummy/thai-noodle.jpg",
+        "imageUrl": "/assets/dummy/thai-noodle.jpg",
         "direction": [
             {
                 "id": 1,
@@ -567,7 +619,7 @@ let recipes = [
         ],
         "difficulty": "difficult",
         "portion": "3",
-        "imageUrl": "./assets/dummy/eclair.jpg",
+        "imageUrl": "/assets/dummy/eclair.jpg",
         "direction": [
             {
                 "id": 1,
@@ -594,23 +646,27 @@ let recipes = [
     }
 
 ]
+*/
 
-app.get('/api/recipes', (req, res) => {
-    res.json(recipes)
+/*
+recipes.map(recipe => {
+    const r = new Recipe({
+        title: recipe.title,
+        instruction: recipe.instruction,
+        author: recipe.author,
+        ingredients: recipe.ingredients,
+        difficulty: recipe.difficulty,
+        portion: recipe.portion,
+        imageUrl: fs.readFileSync("./frontend/public"+recipe.imageUrl).toString("base64"),
+        direction: recipe.direction
+    })
+    r.save().then(res => {
+        console.log("recipe saved!")
+    })
 })
 
-app.get('/api/recipes/:id', (req, res) => {
-    const id = Number(req.params.id)
-    const recipe = recipes.find(recipe => recipe.id === id)
-    if (recipe) {
-        res.json(recipe)
-    }
-    else {
-        res.status(404).end()
-    }
+recipe.save().then(response => {
+    console.log('recipe saved!');
 })
+*/
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-})
