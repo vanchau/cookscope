@@ -1,0 +1,24 @@
+
+.profile-card-img {
+	height: 20em;
+	margin-bottom: 1.5em;
+	object-fit: contain;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+
+.profile-card {
+	background-color:white;
+	padding: 3em 4em;
+	margin: auto;
+	height: auto;
+	width: 50em;
+}
+
+.profile-title {
+	text-align: center;
+	margin-top: 2em;
+	margin-bottom: 1em;
+}

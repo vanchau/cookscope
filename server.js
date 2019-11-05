@@ -9,6 +9,14 @@ app.use(cors())
 // HTTP request logger middleware
 app.use(morgan('dev'));
 
+let users = [
+    {
+        "username": "bobster",
+        "name": "Bob Bobson",
+        "profilePicture": "./assets/dummy/bobster.PNG"
+    }
+]
+
 let recipes = [
     {
         "id": 1,
@@ -604,6 +612,17 @@ app.get('/api/recipes/:id', (req, res) => {
     const recipe = recipes.find(recipe => recipe.id === id)
     if (recipe) {
         res.json(recipe)
+    }
+    else {
+        res.status(404).end()
+    }
+})
+
+app.get('/api/users/:username', (req, res) => {
+    const username = req.params.username
+    const user = users.find(user => user.username === username)
+    if (user) {
+        res.json(user)
     }
     else {
         res.status(404).end()

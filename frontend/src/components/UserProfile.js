@@ -2,29 +2,32 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Card } from 'react-bootstrap'
-import '../css/userProfile.css'
-import { users } from '../assets/dummy/users.json'
+import '../css/UserProfile.css'
  
+
 const UserProfile = () => {
   const { username } = useParams()
-  const [profile, setProfile] = useState({ follows: [], ownRecipes: [], savedRecipes: [], settings: [] })
+  const [user, setUser] = useState({ username: '', name: '', profilePicture: ''})
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(`/api/users/${username}`)
-      setProfile(result.data)
+			setUser(result.data)
+			console.log(result.data)
     }
     fetchData()
-  }, [username])
+	}, [username])
+	
+	console.log(user)
 
+ 
   return (
     <React.Fragment>
       <div style={{height:'1em', background:'transparent'}}></div>
-      <Card>
+      <Card className='profile-card' >
         <Card.Body>
-          <Card.Img src={`.${user.profilePicture}`} />
-					<Card.Title>nimi</Card.Title>
-          ))}
+					<img className='profile-card-img rounded-circle' src={`.${user.profilePicture}`}></img>
+					<Card.Title className='profile-title'>{user.name}</Card.Title>
         </Card.Body>
       </Card>
     </React.Fragment>
