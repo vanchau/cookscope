@@ -16,5 +16,5 @@
 .profile-recipe-list-card-img {
 	height: 15em;
 	margin-bottom: 1em;
-	object-fit: contain;
+	object-fit: cover;
 }
