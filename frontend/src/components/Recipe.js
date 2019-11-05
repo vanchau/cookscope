@@ -15,8 +15,10 @@ const Recipe = () => {
     }
     fetchData()
   }, [recipeID])
+  console.log(recipe)
 
   return (
+    
     <React.Fragment>
       <div style={{height:'1em', background:'transparent'}}></div>
       <Card className='recipe-card'>
@@ -25,7 +27,7 @@ const Recipe = () => {
           <Card.Text>
             by <a className='card-author' href='#action' >{recipe.author}</a>
           </Card.Text>
-          <Card.Img className='recipe-card-img' src={`.${recipe.imageUrl}`} />
+          <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageUrl}`} />
           <Card.Text>{'"'+recipe.instruction+'"'}</Card.Text>
           <Card.Title>
             <br/>Ingredients<br/>

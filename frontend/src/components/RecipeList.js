@@ -17,7 +17,6 @@ const RecipeList = () => {
     }
     fetchData()
   }, [])
-
   return (
     <CardColumns>
       {recipes.map(recipe => (
@@ -29,7 +28,7 @@ const RecipeList = () => {
           <Card.Body>
             <Card.Img
               className="recipe-list-card-img"
-              src={(recipe.imageUrl)} />
+              src={`data:image/jpeg;base64,${recipe.imageUrl}`} />
             <Card.Title>{recipe.title}</Card.Title>
             <Card.Text>
 							by <a className='card-author' href='#action' >{recipe.author}</a>
