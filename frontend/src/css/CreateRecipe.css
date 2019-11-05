@@ -15,13 +15,12 @@
 	color: #A39594;
 }
 
-.add-ingredient {
-	width: 8rem;
+.add-ingredient-button {
 	background-color: #CEC4C2;
 	border: 0;
 }
 
-.add-ingredient:hover {
+.add-ingredient-button:hover {
 	background-color: #A39594
 }
 
