@@ -1,3 +1,8 @@
+.fields {
+	color: #A39594 !important;
+	margin: 30px 0px;
+}
+
 .form-control {
 	width: 100% !important;
 }
@@ -11,16 +16,26 @@
 	margin-top: 30px;
 }
 
-.steps {
-	color: #A39594;
+.add-button {
+	background-color: #CEC4C2;
+	border: 0;
+	margin-bottom: 10px;
 }
 
-.add-ingredient-button {
+.add-button:hover {
+	background-color: #A39594
+}
+
+.col {
+	padding-left: 0;
+}
+
+.remove-button {
 	background-color: #CEC4C2;
 	border: 0;
 }
 
-.add-ingredient-button:hover {
+.remove-button:hover {
 	background-color: #A39594
 }
 
@@ -29,6 +44,7 @@
 	border: 0;
 	width: 100%;
 	padding: 20px 30px;
+	margin-top: 30px;
 }
 
 .submit-button:hover {
