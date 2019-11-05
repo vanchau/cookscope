@@ -8,7 +8,6 @@ import '../css/UserProfile.css'
 const UserProfile = () => {
   const { username } = useParams()
 	const [user, setUser] = useState({ username: '', name: '', profilePicture: ''})
-	const [activeTab, setActiveTab] = useState('1')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,10 +16,6 @@ const UserProfile = () => {
     }
     fetchData()
 	}, [username])
-	
-	const handleClick = (tab) => {
-			setActiveTab(tab)
-	}
  
   return (
     <React.Fragment>
@@ -29,7 +24,7 @@ const UserProfile = () => {
         <Card.Body>
 					<img className='profile-card-img rounded-circle' src={`.${user.profilePicture}`}></img>
 					<Card.Title className='profile-title'>{user.name}</Card.Title>
-					<Tabs className='profile-tabs' activeTab={1} onClick={handleClick}>
+					<Tabs className='profile-tabs'>
 						<Tab className='profile-tab' eventKey={1} title="Own Recipes">
 							tab content1
 						</Tab>
