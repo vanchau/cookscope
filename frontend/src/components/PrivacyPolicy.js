@@ -61,7 +61,7 @@ const PrivacyPolicy = () => (
 			this Privacy Policy.
     </p>
     <p>You have various rights in respect of our use of your Personal Information as set out in t
-			he <a href='#s13'>&apos;Your Rights&apos;</a> section below.  Two of the fundamental rights to be aware
+			he <a className='link' href='#s13'>&apos;Your Rights&apos;</a> section below.  Two of the fundamental rights to be aware
 			of are that you may:
     </p>
     <ol type='1'>

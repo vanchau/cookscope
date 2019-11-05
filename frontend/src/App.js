@@ -11,7 +11,6 @@ import Settings from './components/Settings'
 import NavigationBar from './components/NavigationBar'
 import CreateRecipe from './components/CreateRecipe'
 import PrivacyPolicy from './components/PrivacyPolicy'
-import RecipeList from './components/RecipeList'
 import TermsOfService from './components/Terms'
 import Recipe from './components/Recipe'
 import Home from './components/Home'
@@ -37,7 +36,7 @@ const App = () => (
           <Route path='/recipe/:recipeID' component={Recipe}/>
         </Switch>
       </Container>
-      <div style={{height:'5em', background:'transparent'}}></div>
+      <div style={{height:'10em', background:'transparent'}}></div>
     </div>
   </Router>
 )

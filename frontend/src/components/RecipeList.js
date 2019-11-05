@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../css/RecipeList.css'
 
 const RecipeList = () => {
-
+ 
   const [recipes, setData] 	= useState([])
   let history = useHistory()
 
@@ -22,11 +22,13 @@ const RecipeList = () => {
     <CardColumns>
       {recipes.map(recipe => (
         <Card
+          className="recipe-list-card"
           key={recipe.id}
           onClick={() => history.push(`/recipe/${recipe.id}`)}
         >
           <Card.Body>
             <Card.Img
+              className="recipe-list-card-img"
               src={(recipe.imageUrl)} />
             <Card.Title>{recipe.title}</Card.Title>
             <Card.Text>

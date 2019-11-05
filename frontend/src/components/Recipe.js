@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 
-const Recipe = () => {
+const Recipe = () => { 
   const { recipeID } = useParams()
   const [recipe, setRecipe] = useState({ ingredients: [], direction: [] })
 
