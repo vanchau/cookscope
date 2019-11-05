@@ -14,13 +14,10 @@ const UserProfile = () => {
     const fetchData = async () => {
       const result = await axios(`/api/users/${username}`)
 			setUser(result.data)
-			console.log(result.data)
     }
     fetchData()
 	}, [username])
 	
-	console.log(user)
-
 	const handleClick = (tab) => {
 			setActiveTab(tab)
 	}
