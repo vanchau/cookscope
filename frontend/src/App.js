@@ -6,23 +6,14 @@ import {
 } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
-
 import './css/App.css'
 import Settings from './components/Settings'
 import NavigationBar from './components/NavigationBar'
 import CreateRecipe from './components/CreateRecipe'
 import PrivacyPolicy from './components/PrivacyPolicy'
-import RecipeList from './components/RecipeList'
 import TermsOfService from './components/Terms'
 import Recipe from './components/Recipe'
-import FilterBar from './components/FilterBar'
-
-const Home = () => (
-  <>
-    <FilterBar/>
-    <RecipeList />
-  </>
-)
+import Home from './components/Home'
 
 const About = () => (
   <div>
@@ -45,7 +36,7 @@ const App = () => (
           <Route path='/recipe/:recipeID' component={Recipe}/>
         </Switch>
       </Container>
-      <div style={{height:'5em', background:'transparent'}}></div>
+      <div style={{height:'10em', background:'transparent'}}></div>
     </div>
   </Router>
 )

@@ -1,0 +1,37 @@
+.dropdown-toggle {
+  box-shadow: none;
+  margin-left:4em;
+  margin-right:4em;
+  background-image: url('../assets/patterns/subtle_white_feathers.png');
+  border: none;
+  color: black;
+}
+
+.dropdown-menu label {
+  display: block;
+}
+
+.dropdown-item:focus {
+  box-shadow: none;
+  background-color: rgb(221, 221, 221);
+  border-color: white;
+}
+
+.dropdown-item:active {
+  box-shadow: none;
+  background-color: rgb(221, 221, 221);
+  border-color: white;
+}
+
+.navbar-light {
+  color:black;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.dropdown-checkbox {
+  margin-right: 0.5em;
+}

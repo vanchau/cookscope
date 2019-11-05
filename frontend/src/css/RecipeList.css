@@ -2,14 +2,14 @@
   cursor: pointer;
 }
 
-.card {
+.recipe-list-card {
 	background-color:white ;
 	height: 22em;
 	padding: 1em;
 	margin: 1em;
 }
 
-.card-img {
+.recipe-list-card-img {
 	height: 10em;
 	margin-bottom: 1em;
 }
@@ -29,7 +29,7 @@
 .card-text {
 	color: #3C3C3C;
 }
-
+ 
 .card-columns {
 	margin-top: 1.5em;
 	width: 65em;
