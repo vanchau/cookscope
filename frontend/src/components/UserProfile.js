@@ -22,7 +22,7 @@ const UserProfile = () => {
       <div style={{height:'1em', background:'transparent'}}></div>
       <Card className='profile-card' >
         <Card.Body>
-					<img className='profile-card-img rounded-circle' src={`.${user.profilePicture}`}></img>
+					<img className='profile-card-img rounded-circle' alt='' src={`.${user.profilePicture}`}></img>
 					<Card.Title className='profile-title'>{user.name}</Card.Title>
 					<Tabs className='profile-tabs'>
 						<Tab className='profile-tab' eventKey={1} title="Own Recipes">
