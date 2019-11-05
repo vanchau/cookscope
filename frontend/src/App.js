@@ -47,7 +47,7 @@ const App = () => (
           <Route path='/user/:username' component={UserProfile}/>
         </Switch>
       </Container>
-      <div style={{height:'5em', background:'transparent'}}></div>
+      <div style={{height:'10em', background:'transparent'}}></div>
     </div>
   </Router>
 )
