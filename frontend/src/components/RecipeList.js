@@ -19,7 +19,7 @@ const RecipeList = () => {
   }, [])
 
   return (
-    <CardColumns>
+    <CardColumns className="recipe-list-card-columns">
       {recipes.map(recipe => (
         <Card
           className="recipe-list-card"

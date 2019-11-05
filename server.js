@@ -14,6 +14,11 @@ let users = [
         "username": "bobster",
         "name": "Bob Bobson",
         "profilePicture": "./assets/dummy/bobster.PNG"
+    },
+    {
+        "username": "lobster",
+        "name": "Lob Lobson",
+        "profilePicture": "./assets/dummy/lobster.PNG"
     }
 ]
 
@@ -61,7 +66,7 @@ let recipes = [
         "id": 2,
         "title": "Basic Pepperoni Pizza",
         "instruction": "Yum yum",
-        "author": "LiveForPizza",
+        "author": "lobster",
         "ingredients": [
             "pecan",
             "butter",
@@ -100,7 +105,7 @@ let recipes = [
         "id": 3,
         "title": "Easy Garlic Shrimp",
         "instruction": "Yum yum",
-        "author": "Bobba",
+        "author": "bobster",
         "ingredients": [
             "garlic",
             "shrimp",
@@ -292,8 +297,8 @@ let recipes = [
     {
         "id": 8,
         "title": "Chicken Soup with Rice",
-        "instruction": "Yum yum",
-        "author": "Januaryboi",
+        "instruction": "Om nom",
+        "author": "bobster",
         "ingredients": [
             "chicken",
             "rice",
@@ -623,6 +628,18 @@ app.get('/api/users/:username', (req, res) => {
     const user = users.find(user => user.username === username)
     if (user) {
         res.json(user)
+    }
+    else {
+        res.status(404).end()
+    }
+})
+
+app.get('/api/users/:username/recipes', (req, res) => {
+    const username = req.params.username
+    const ownRecipes = recipes.filter(recipe => recipe.author === username)
+    console.log(ownRecipes)
+    if (ownRecipes) {
+        res.json(ownRecipes)
     }
     else {
         res.status(404).end()
