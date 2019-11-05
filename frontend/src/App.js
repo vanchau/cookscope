@@ -6,24 +6,15 @@ import {
 } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
-
 import './css/App.css'
 import Settings from './components/Settings'
 import NavigationBar from './components/NavigationBar'
 import CreateRecipe from './components/CreateRecipe'
 import PrivacyPolicy from './components/PrivacyPolicy'
-import RecipeList from './components/RecipeList'
 import TermsOfService from './components/Terms'
 import Recipe from './components/Recipe'
-import FilterBar from './components/FilterBar'
+import Home from './components/Home'
 import UserProfile from './components/UserProfile'
-
-const Home = () => (
-  <>
-    <FilterBar/>
-    <RecipeList />
-  </>
-)
 
 const About = () => (
   <div>
