@@ -16,37 +16,17 @@ const UserProfile = () => {
 
 	useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(`/api/users/${username}`)
-			setUser(result.data)
+			const result0 = await axios(`/api/users/${username}`)
+			const result1 = await axios(`/api/users/${username}/savedrecipes`)
+			const result2 = await axios(`/api/users/${username}/ownrecipes`)
+			const result3 = await axios(`/api/users/${username}/followed`)
+			setUser(result0.data)
+			setSavedRecipes(result1.data)
+			setOwnRecipes(result2.data)
+			setFollowed(result3.data)
     }
     fetchData()
 	}, [username])
-
-	useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`/api/users/${username}/followed`)
-			setFollowed(result.data)
-    }
-    fetchData()
-	}, [username])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`/api/users/${username}/ownrecipes`)
-			setOwnRecipes(result.data)
-    }
-    fetchData()
-	}, [username])
-
-	useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`/api/users/${username}/savedrecipes`)
-			setSavedRecipes(result.data)
-    }
-    fetchData()
-	}, [username])
-
-	console.log(followed)
  
   return (
     <React.Fragment>
