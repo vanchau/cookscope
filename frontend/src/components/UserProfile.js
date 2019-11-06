@@ -14,12 +14,20 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(`/api/users/${username}/recipes`)
+      const result = await axios(`/api/users/${username}/ownrecipes`)
 			setOwnRecipes(result.data)
     }
     fetchData()
 	}, [username])
 
+	useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(`/api/users/${username}/savedrecipes`)
+			setSavedRecipes(result.data)
+    }
+    fetchData()
+	}, [username])
+	
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(`/api/users/${username}`)

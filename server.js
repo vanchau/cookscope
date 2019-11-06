@@ -13,12 +13,20 @@ let users = [
     {
         "username": "bobster",
         "name": "Bob Bobson",
-        "profilePicture": "./assets/dummy/bobster.PNG"
+        "profilePicture": "./assets/dummy/bobster.PNG",
+        "saved": [1]
     },
     {
         "username": "lobster",
         "name": "Lob Lobson",
-        "profilePicture": "./assets/dummy/lobster.PNG"
+        "profilePicture": "./assets/dummy/lobster.PNG",
+        "saved": []
+    },
+    {
+        "username": "jd",
+        "name": "John Doe",
+        "profilePicture": "",
+        "saved": [3, 5]
     }
 ]
 
@@ -634,10 +642,9 @@ app.get('/api/users/:username', (req, res) => {
     }
 })
 
-app.get('/api/users/:username/recipes', (req, res) => {
+app.get('/api/users/:username/ownrecipes', (req, res) => {
     const username = req.params.username
     const ownRecipes = recipes.filter(recipe => recipe.author === username)
-    console.log(ownRecipes)
     if (ownRecipes) {
         res.json(ownRecipes)
     }
@@ -645,6 +652,20 @@ app.get('/api/users/:username/recipes', (req, res) => {
         res.status(404).end()
     }
 })
+
+app.get('/api/users/:username/savedrecipes', (req, res) => {
+    const username = req.params.username
+    const user = users.find(user => user.username === username)
+    const savedRecipes = recipes.filter(recipe => user.saved.includes(recipe.id))
+    console.log(savedRecipes)
+    if (savedRecipes) {
+        res.json(savedRecipes)
+    }
+    else {
+        res.status(404).end()
+    }
+})
+
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
