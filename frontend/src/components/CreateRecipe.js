@@ -9,6 +9,20 @@ const CreateRecipe = () => {
   const [ingredients, addIngredient]	= useState([{ name: '', id: 1 }])
   const [steps, addStep] = useState([{ instruction: '', id: 1 }])
   const [difficulty, switchDifficulty] = useState('beginner')
+  const [imageFile, setImageFile] = useState('')
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('')
+
+  const handleImageChange = (e) => {
+    let reader = new FileReader()
+    let file = e.target.files[0]
+
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result)
+      setImageFile(file)
+    }
+
+    reader.readAsDataURL(file)
+  }
 
   const addNewIngredient = () => {
     const newID = ingredients.length === 0 ? 1 : ingredients[ingredients.length - 1].id + 1
@@ -35,7 +49,7 @@ const CreateRecipe = () => {
       <div style={{ height: '1em', background:'transparent' }}></div>
       <Card className='recipe-card'>
         <Card.Body>
-          <Form>
+          <Form onSubmit={() => console.log('submitted')}>
 
             <Form.Group controlId='recipeTitle'>
               <Form.Control
@@ -48,6 +62,15 @@ const CreateRecipe = () => {
             <Form.Group className='fields' controlId='recipeStory'>
               <Form.Control as='textarea' rows='2' placeholder='Tell us about your recipe' />
             </Form.Group>
+
+            <div>
+              <label htmlFor='file-upload' className='custom-file-upload'>
+                Upload photo
+              </label>
+              <input id='file-upload' type='file' accept={'image/jpg, image/png'} onChange={handleImageChange}/>
+            </div>
+
+            {imagePreviewUrl ? <img style={{ marginTop: '20px', width: '80%' }} src={imagePreviewUrl} /> : <React.Fragment></React.Fragment>}
 
             <h5 className='recipe-subtitles' >Basic Information</h5>
             <hr style={{ marginTop: '0' }} />
@@ -163,7 +186,7 @@ const CreateRecipe = () => {
 
             <Button className='add-button' onClick={addNewStep} >add step</Button>
 
-            <Button variant='primary' type='submit' className='submit-button' >Done</Button>
+            <Button variant='primary' type='submit' className='submit-button' >Done!</Button>
 
           </Form>
         </Card.Body>
