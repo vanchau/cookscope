@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Card, Tab, Tabs } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 import ProfileRecipeList from './ProfileRecipeList'
+import FollowedList from './FollowedList'
 import '../css/UserProfile.css'
 
 const UserProfile = () => {
@@ -11,6 +12,23 @@ const UserProfile = () => {
 	const [user, setUser] = useState({ username: '', name: '', profilePicture: ''})
 	const [ownRecipes, setOwnRecipes] 	= useState([])
 	const [savedRecipes, setSavedRecipes] 	= useState([])
+	const [followed, setFollowed] 	= useState([])
+
+	useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(`/api/users/${username}`)
+			setUser(result.data)
+    }
+    fetchData()
+	}, [username])
+
+	useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(`/api/users/${username}/followed`)
+			setFollowed(result.data)
+    }
+    fetchData()
+	}, [username])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,14 +45,8 @@ const UserProfile = () => {
     }
     fetchData()
 	}, [username])
-	
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`/api/users/${username}`)
-			setUser(result.data)
-    }
-    fetchData()
-	}, [username])
+
+	console.log(followed)
  
   return (
     <React.Fragment>
@@ -52,7 +64,7 @@ const UserProfile = () => {
 						<ProfileRecipeList recipes={savedRecipes} />
 						</Tab>
 						<Tab className='profile-tab test' eventKey={3} title="Followed">
-							Gordon
+							<FollowedList followed={followed} />
 						</Tab>
 					</Tabs>
         </Card.Body>

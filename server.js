@@ -14,19 +14,22 @@ let users = [
         "username": "bobster",
         "name": "Bob Bobson",
         "profilePicture": "./assets/dummy/bobster.PNG",
-        "saved": [1]
+        "saved": [1],
+        "followed":[]
     },
     {
         "username": "lobster",
         "name": "Lob Lobson",
         "profilePicture": "./assets/dummy/lobster.PNG",
-        "saved": []
+        "saved": [],
+        "followed":["gobster"]
     },
     {
-        "username": "jd",
-        "name": "John Doe",
-        "profilePicture": "",
-        "saved": [3, 5]
+        "username": "gobster",
+        "name": "Gob Gobson",
+        "profilePicture": "./assets/dummy/gobster.PNG",
+        "saved": [3, 5],
+        "followed":["lobster", "bobster"]
     }
 ]
 
@@ -636,6 +639,18 @@ app.get('/api/users/:username', (req, res) => {
     const user = users.find(user => user.username === username)
     if (user) {
         res.json(user)
+    }
+    else {
+        res.status(404).end()
+    }
+})
+
+app.get('/api/users/:username/followed', (req, res) => {
+    const username = req.params.username
+    const user = users.find(user => user.username === username)
+    const followed = users.filter(u => user.followed.includes(u.username))
+    if (followed) {
+        res.json(followed)
     }
     else {
         res.status(404).end()
