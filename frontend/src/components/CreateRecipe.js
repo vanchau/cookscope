@@ -4,6 +4,7 @@ import { Form, Button, Card, Modal } from 'react-bootstrap'
 import '../css/CreateRecipe.css'
 import useFormValidation from '../utils/useRecipeFormValidation'
 import validateRecipeForm from '../utils/validateRecipeForm'
+import categories from '../assets/categories.json'
 
 // The structure of the recipe data set
 const INITIAL_STATE = {
@@ -165,25 +166,16 @@ const CreateRecipe = () => {
               <Form.Label style={{ fontWeight: 'bold' }}>Select categories: </Form.Label>
               <br></br>
               <div key={'inline-checkbox'}>
-                <Form.Check inline name='categories' onChange={handleChange} value='Beef' label='Beef' type={'checkbox'} id={'inline-checkbox-1'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Bread' label='Bread' type={'checkbox'} id={'inline-checkbox-2'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Breakfast' label='Breakfast' type={'checkbox'} id={'inline-checkbox-3'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Budget friendly' label='Budget friendly' type={'checkbox'} id={'inline-checkbox-4'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Casseroles' label='Casseroles' type={'checkbox'} id={'inline-checkbox-5'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Chicken' label='Chicken' type={'checkbox'} id={'inline-checkbox-6'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Dessert' label='Dessert' type={'checkbox'} id={'inline-checkbox-7'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Dinner' label='Dinner' type={'checkbox'} id={'inline-checkbox-8'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Fish' label='Fish' type={'checkbox'} id={'inline-checkbox-9'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Healthy' label='Healthy' type={'checkbox'} id={'inline-checkbox-10'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='High cuisine' label='High cuisine' type={'checkbox'} id={'inline-checkbox-11'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Pasta' label='Pasta' type={'checkbox'} id={'inline-checkbox-12'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Pork' label='Pork' type={'checkbox'} id={'inline-checkbox-13'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Salad' label='Salad' type={'checkbox'} id={'inline-checkbox-14'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Slow cooker' label='Slow cooker' type={'checkbox'} id={'inline-checkbox-15'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Snacks' label='Snacks' type={'checkbox'} id={'inline-checkbox-16'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Soup' label='Soup' type={'checkbox'} id={'inline-checkbox-17'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Vegan' label='Vegan' type={'checkbox'} id={'inline-checkbox-18'} />
-                <Form.Check inline name='categories' onChange={handleChange} value='Vegetarian' label='Vegetarian' type={'checkbox'} id={'inline-checkbox-19'} />
+                {Object.values(categories).map((category, i) => (
+                  <Form.Check
+                    inline name='categories'
+                    onChange={handleChange}
+                    value={category}
+                    label={category}
+                    type={'checkbox'}
+                    key={`inline-checkbox-${i}`}
+                  />
+                ))}
               </div>
             </Form.Group>
 
