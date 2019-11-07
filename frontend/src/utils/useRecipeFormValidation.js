@@ -1,8 +1,27 @@
-import React from "react"
+import { useState, useEffect } from 'react'
 
-const useFormValidation = (initialState) => {
-  const [values, setValues] = React.useState(initialState)
-  //const [errors, setErrors] = React.useState({})
+const useFormValidation = (initialState, validate) => {
+  const [values, setValues] = useState(initialState)
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setSubmitting] = useState(false)
+  const [completed, setToCompleted] = useState(false)
+
+  useEffect(() => {
+    if (isSubmitting) {
+      const noErrors = Object.keys(errors).length === 0
+      if (noErrors) {
+        // TODO http POST logic here
+        setToCompleted(true)
+        // eslint-disable-next-line no-console
+        console.log(values)
+        setSubmitting(false)
+      } else {
+        setSubmitting(false)
+      }
+    }
+  }, [errors])
+
+  const handleClose = () => setToCompleted(false)
 
   const handleChange = (event) => {
     const targetName = event.target.name
@@ -14,6 +33,12 @@ const useFormValidation = (initialState) => {
           const checked = event.target.checked
           if (checked) newValue = [...values.categories, targetValue]
           else newValue = values.categories.filter(category => category !== targetValue)
+          break
+        case 'timeToCook':
+          newValue = parseInt(targetValue, 10)
+          break
+        case 'servings':
+          newValue = parseInt(targetValue, 10)
           break
         case 'ingredients':
           const ingredientID = parseInt(event.target.id, 10)
@@ -77,21 +102,23 @@ const useFormValidation = (initialState) => {
   }
 
   const handleSubmit = (event) => {
-    // for now, this enables to see the console log output
     event.preventDefault()
-    // eslint-disable-next-line no-console
-    console.log(values)
+    const validationErrors = validate(values)
+    setErrors(validationErrors)
+    setSubmitting(true)
   }
-
 
   return {
     handleChange,
     handleSubmit,
+    handleClose,
     setImageFile,
     addIngredient,
     removeIngredient,
     addInstruction,
     removeInstruction,
+    errors,
+    completed,
     values
   }
 }

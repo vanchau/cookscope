@@ -2,6 +2,20 @@ input[type="file"] {
 	display: none;
 }
 
+.add-button {
+	background-color: #CEC4C2;
+	border: 0;
+	margin-bottom: 10px;
+}
+
+.add-button:hover {
+	background-color: #A39594
+}
+
+.col {
+	padding-left: 0;
+}
+
 .custom-file-upload {
 	border: 0;
 	background-color: #CEC4C2;
@@ -14,6 +28,12 @@ input[type="file"] {
 
 .custom-file-upload:hover {
 	background-color: #A39594
+}
+
+.error-text {
+	color: red;
+	text-align: center;
+	margin: 10px 0;
 }
 
 .fields {
@@ -32,20 +52,6 @@ input[type="file"] {
 .recipe-subtitles {
 	color: #A39594;
 	margin-top: 30px;
-}
-
-.add-button {
-	background-color: #CEC4C2;
-	border: 0;
-	margin-bottom: 10px;
-}
-
-.add-button:hover {
-	background-color: #A39594
-}
-
-.col {
-	padding-left: 0;
 }
 
 .remove-button {
@@ -67,4 +73,10 @@ input[type="file"] {
 
 .submit-button:hover {
 	background-color: #7d910e;
+}
+
+.recipe-title {
+	height: 80px;
+	font-size: 2rem;
+	font-weight: bold
 }
