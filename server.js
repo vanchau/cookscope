@@ -59,14 +59,14 @@ let users = [
         "username": "lobster",
         "name": "Lob Lobson",
         "profilePicture": "./assets/dummy/lobster.PNG",
-        "saved": ["5dc72284539a4025084615a1"],
+        "saved": ["5dc72284539a4025084615a1", "5dc7351b58d59d3f38b6442d", "5dc735d158d59d3f38b64435"],
         "followed":["gobster"]
     },
     {
         "username": "gobster",
         "name": "Gob Gobson",
         "profilePicture": "./assets/dummy/gobster.PNG",
-        "saved": ["5dc72284539a4025084615a1"],
+        "saved": ["5dc72284539a4025084615a1", "5dc7355e58d59d3f38b64430"],
         "followed":["lobster", "bobster"]
     }
 ]
