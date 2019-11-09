@@ -15,7 +15,6 @@ const Recipe = () => {
     }
     fetchData()
   }, [recipeID])
-  console.log(recipe)
 
   return (
     <React.Fragment>

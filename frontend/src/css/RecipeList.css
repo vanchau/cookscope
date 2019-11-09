@@ -1,4 +1,4 @@
-.card:hover {
+.recipe-list-card:hover {
   cursor: pointer;
 }
 
@@ -12,6 +12,7 @@
 .recipe-list-card-img {
 	height: 10em;
 	margin-bottom: 1em;
+	object-fit: cover;
 }
 
 .card-author {
@@ -30,7 +31,7 @@
 	color: #3C3C3C;
 }
  
-.card-columns {
+.recipe-list-card-columns {
 	margin-top: 1.5em;
 	width: 65em;
 }

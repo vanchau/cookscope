@@ -24,7 +24,7 @@ const useFormValidation = (initialState, validate) => {
         setSubmitting(false)
       }
     }
-  }, [errors])
+  }, [errors, isSubmitting, values])
 
   const handleClose = () => setToCompleted(false)
 

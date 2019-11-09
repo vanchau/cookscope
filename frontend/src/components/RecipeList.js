@@ -18,7 +18,7 @@ const RecipeList = () => {
     fetchData()
   }, [])
   return (
-    <CardColumns>
+    <CardColumns className="recipe-list-card-columns">
       {recipes.map(recipe => (
         <Card
           className="recipe-list-card"
