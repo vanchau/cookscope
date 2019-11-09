@@ -1,3 +1,46 @@
+input[type="file"] {
+	display: none;
+}
+
+.add-button {
+	background-color: #CEC4C2;
+	border: 0;
+	margin-bottom: 10px;
+}
+
+.add-button:hover {
+	background-color: #A39594
+}
+
+.col {
+	padding-left: 0;
+}
+
+.custom-file-upload {
+	border: 0;
+	background-color: #CEC4C2;
+	color: white;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
+	border-radius: 0.25rem;
+}
+
+.custom-file-upload:hover {
+	background-color: #A39594
+}
+
+.error-text {
+	color: red;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.fields {
+	color: #A39594 !important;
+	margin: 30px 0px;
+}
+
 .form-control {
 	width: 100% !important;
 }
@@ -11,27 +54,29 @@
 	margin-top: 30px;
 }
 
-.steps {
-	color: #A39594;
-}
-
-.add-ingredient {
-	width: 8rem;
+.remove-button {
 	background-color: #CEC4C2;
 	border: 0;
 }
 
-.add-ingredient:hover {
+.remove-button:hover {
 	background-color: #A39594
 }
 
 .submit-button {
-	background-color: #E75B00;
+	background-color: #a4be13;
 	border: 0;
 	width: 100%;
 	padding: 20px 30px;
+	margin-top: 30px;
 }
 
 .submit-button:hover {
-	background-color: #ca4f00;
+	background-color: #7d910e;
+}
+
+.recipe-title {
+	height: 80px;
+	font-size: 2rem;
+	font-weight: bold
 }
