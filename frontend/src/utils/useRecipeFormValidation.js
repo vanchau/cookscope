@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const useFormValidation = (initialState, validate) => {
   const [values, setValues] = useState(initialState)
@@ -11,6 +12,10 @@ const useFormValidation = (initialState, validate) => {
       const noErrors = Object.keys(errors).length === 0
       if (noErrors) {
         // TODO http POST logic here
+        const postRecipe = async () => {
+          await axios.post('/api/recipes/', values)
+        }
+        postRecipe()
         setToCompleted(true)
         // eslint-disable-next-line no-console
         console.log(values)

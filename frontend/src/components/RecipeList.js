@@ -28,7 +28,7 @@ const RecipeList = () => {
           <Card.Body>
             <Card.Img
               className="recipe-list-card-img"
-              src={`data:image/jpeg;base64,${recipe.imageUrl}`} />
+              src={`data:image/jpeg;base64,${recipe.imageFile}`} />
             <Card.Title>{recipe.title}</Card.Title>
             <Card.Text>
 							by <a className='card-author' href='#action' >{recipe.author}</a>

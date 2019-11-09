@@ -39,10 +39,11 @@ const CreateRecipe = () => {
   const handleImageChange = (e) => {
     const reader = new FileReader()
     const file = e.target.files[0]
-
     reader.onloadend = () => {
       setImagePreviewUrl(reader.result)
-      setImageFile(file)
+      setImageFile(reader.result.split(',')[1]) // base64
+      //setImageFile(file)
+
     }
 
     reader.readAsDataURL(file)
@@ -83,7 +84,7 @@ const CreateRecipe = () => {
                 id='file-upload'
                 name='imageUrl'
                 type='file'
-                accept={'image/jpg, image/png'}
+                accept={'image/*'}
                 onChange={handleImageChange}
               />
             </div>
