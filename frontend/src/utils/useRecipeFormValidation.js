@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+const parseRecipe = (recipe) => {
+  let parsedRecipe = recipe
+  parsedRecipe.ingredients = recipe.ingredients.filter(i => !/^\s*$/.test(i.ingredient))
+  parsedRecipe.instructions = recipe.instructions.filter(i => !/^\s*$/.test(i.instruction))
+  return parsedRecipe
+}
+
 const useFormValidation = (initialState, validate) => {
   const [values, setValues] = useState(initialState)
   const [errors, setErrors] = useState({})
@@ -13,12 +20,20 @@ const useFormValidation = (initialState, validate) => {
       if (noErrors) {
         // TODO http POST logic here
         const postRecipe = async () => {
-          await axios.post('/api/recipes/', values)
+          try {
+            const parsedRecipe = parseRecipe(values)
+            const result = await axios.post('/api/recipes/', parsedRecipe)
+            if (result.status === 200) {
+              setToCompleted(true)
+              // eslint-disable-next-line no-console
+              console.log(parsedRecipe)
+            }
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(e)
+          }
         }
         postRecipe()
-        setToCompleted(true)
-        // eslint-disable-next-line no-console
-        console.log(values)
         setSubmitting(false)
       } else {
         setSubmitting(false)
@@ -26,7 +41,12 @@ const useFormValidation = (initialState, validate) => {
     }
   }, [errors, isSubmitting, values])
 
-  const handleClose = () => setToCompleted(false)
+  const handleClose = () => {
+    setErrors({})
+    setSubmitting(false)
+    setToCompleted(false)
+    setValues(initialState)
+  }
 
   const handleChange = (event) => {
     const targetName = event.target.name

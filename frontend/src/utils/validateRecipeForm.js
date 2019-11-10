@@ -26,16 +26,16 @@ const validateRecipeForm = (values) => {
     errors.categories = 'Please select at least one category for your recipe.'
   }
   // ingregients error
-  if (values.ingredients === undefined || values.categories.length === 0) {
+  if (values.ingredients === undefined || values.ingredients.length === 0) {
     errors.ingredients = 'You should provide at least one ingredient!'
-  } else if (values.ingredients.length === 1 && /^\s*$/.test(values.ingredients[0].ingredient)) {
+  } else if (!values.ingredients.some(i => !/^\s*$/.test(i.ingredient))) {
     errors.ingredients = 'You should provide at least one ingredient!'
   }
   // instructions error
   if (values.instructions === undefined || values.instructions.length === 0) {
     errors.instructions = 'Please provide instructions!'
-  } else if (values.instructions.length === 1 && /^\s*$/.test(values.instructions[0].instruction)) {
-    errors.instructions = 'Please provide instructions!'
+  } else if (!values.instructions.some(i => !/^\s*$/.test(i.instruction))) {
+    errors.instructions = 'Please provide at least one instruction!'
   }
   return errors
 }

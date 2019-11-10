@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 
-const Recipe = () => { 
+const Recipe = () => {
   const { recipeID } = useParams()
   const [recipe, setRecipe] = useState({ ingredients: [], instructions: [] })
 
@@ -26,7 +26,7 @@ const Recipe = () => {
             by <a className='card-author' href='#action' >{recipe.author}</a>
           </Card.Text>
           <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
-          <Card.Text>{'"'+recipe.description+'"'}</Card.Text>
+          {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
           <Card.Title>
             <br/>Ingredients<br/>
           </Card.Title>
@@ -34,7 +34,7 @@ const Recipe = () => {
             <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)
           }
           <Card.Title>
-            <br/>Instructions<br/>
+            <br/>Steps<br/>
           </Card.Title>
           {recipe.instructions.map(instruction => (
             <Card.Text key={instruction.id}>

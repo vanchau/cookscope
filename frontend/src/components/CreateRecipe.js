@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Button, Card, Modal } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Prompt } from 'react-router'
 
 import '../css/CreateRecipe.css'
 import useFormValidation from '../utils/useRecipeFormValidation'
@@ -229,20 +231,26 @@ const CreateRecipe = () => {
         </Card.Body>
       </Card>
 
-      <Modal show={completed} onHide={handleClose}>
-        <Modal.Header closeButton>
+      <Modal show={completed}>
+        <Modal.Header>
           <Modal.Title>All set!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Your recipe has been successfully published.
+          Your recipe has been successfully created.
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-						Ok
-          </Button>
+          <LinkContainer to='/'>
+            <Button variant='secondary' onClick={handleClose}>
+              Go to home page
+            </Button>
+          </LinkContainer>
         </Modal.Footer>
       </Modal>
 
+      <Prompt
+        when={!completed}
+        message={'Are you sure you want to leave this page without saving?'}
+      />
     </React.Fragment>
   )
 }
