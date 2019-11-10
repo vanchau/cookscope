@@ -36,9 +36,9 @@ const Recipe = () => {
           <Card.Title>
             <br/>Steps<br/>
           </Card.Title>
-          {recipe.instructions.map(instruction => (
+          {recipe.instructions.map((instruction, i) => (
             <Card.Text key={instruction.id}>
-              {instruction.id}{`. ${instruction.instruction}`}<br/>
+              {i + 1}{`. ${instruction.instruction}`}<br/>
             </Card.Text>
           ))}
         </Card.Body>
