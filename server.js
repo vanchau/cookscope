@@ -1,5 +1,6 @@
 
 require('dotenv').config()
+const path = require('path')
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -108,6 +109,10 @@ app.get('/api/users/:username/followed', (req, res) => {
         res.status(404).end()
     }
 })
+
+app.use('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001
     app.listen(PORT, () => {
