@@ -1,7 +1,3 @@
-.recipe-list-card:hover {
-  cursor: pointer;
-}
-
 .recipe-list-card {
 	background-color:white ;
 	height: 22em;
@@ -9,10 +5,19 @@
 	margin: 1em;
 }
 
+.recipe-list-card:hover {
+	transform: scale(1.02);
+	cursor: default;
+}
+
 .recipe-list-card-img {
 	height: 10em;
 	margin-bottom: 1em;
 	object-fit: cover;
+}
+
+.recipe-list-card-img:hover {
+	cursor: pointer;
 }
 
 .card-author {
@@ -25,6 +30,11 @@
 
 .card-title {
 	color: #3C3C3C;
+}
+
+.card-title:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .card-text {
