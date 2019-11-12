@@ -10,16 +10,16 @@
 	display: block;
 }
 
-.recipe-card:hover {
-  cursor: default;
-}
- 
 .recipe-card {
 	background-color:white;
 	padding: 3em 4em;
 	margin: auto;
 	height: auto;
 	width: 50em;
+}
+
+.recipe-card:hover {
+  cursor: default;
 }
 
 .recipe-card-img {
@@ -35,7 +35,6 @@
 .card-author:hover {
   color:#3C3C3C;
 }
-
 
 .author {
 	color:#aa8f54;

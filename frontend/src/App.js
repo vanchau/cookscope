@@ -14,6 +14,7 @@ import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/Terms'
 import Recipe from './components/Recipe'
 import Home from './components/Home'
+import UserProfile from './components/UserProfile'
 
 const About = () => (
   <div>
@@ -34,6 +35,7 @@ const App = () => (
           <Route path='/privacy' component={PrivacyPolicy} />
           <Route path='/terms' component={TermsOfService} />
           <Route path='/recipe/:recipeID' component={Recipe}/>
+          <Route path='/user/:username' component={UserProfile}/>
         </Switch>
       </Container>
       <div style={{height:'10em', background:'transparent'}}></div>

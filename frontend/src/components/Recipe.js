@@ -4,9 +4,9 @@ import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 
-const Recipe = () => { 
+const Recipe = () => {
   const { recipeID } = useParams()
-  const [recipe, setRecipe] = useState({ ingredients: [], direction: [] })
+  const [recipe, setRecipe] = useState({ ingredients: [], instructions: [] })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,20 +25,20 @@ const Recipe = () => {
           <Card.Text>
             by <a className='card-author' href='#action' >{recipe.author}</a>
           </Card.Text>
-          <Card.Img className='recipe-card-img' src={`.${recipe.imageUrl}`} />
-          <Card.Text>{'"'+recipe.instruction+'"'}</Card.Text>
+          <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
+          {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
           <Card.Title>
             <br/>Ingredients<br/>
           </Card.Title>
           {recipe.ingredients.map(ingredient =>
-            <Card.Text key={ingredient}>{ingredient}</Card.Text>)
+            <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)
           }
           <Card.Title>
-            <br/>Instructions<br/>
+            <br/>Steps<br/>
           </Card.Title>
-          {recipe.direction.map(instruction => (
+          {recipe.instructions.map((instruction, i) => (
             <Card.Text key={instruction.id}>
-              {instruction.step}{`.${instruction.text}`}<br/>
+              {i + 1}{`. ${instruction.instruction}`}<br/>
             </Card.Text>
           ))}
         </Card.Body>
