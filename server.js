@@ -14,6 +14,8 @@ app.use(cors())
 app.use(morgan('dev'));
 
 const Recipe = require('./models/recipe')
+const User = require('./models/user')
+const auth = require('./middleware/auth')
 
 app.post('/api/recipes', (request, response) => {
     const body = request.body
@@ -73,7 +75,7 @@ let users = [
     }
 ]
 
-app.get('/api/users/:username', (req, res) => {
+/* app.get('/api/users/:username', (req, res) => {
     const username = req.params.username
     const user = users.find(user => user.username === username)
     if (user) {
@@ -81,6 +83,47 @@ app.get('/api/users/:username', (req, res) => {
     }
     else {
         res.status(404).end()
+    }
+}) */
+
+app.post('/api/users', async (req, res) => {
+    // Create a new user
+    try {
+        const user = new User(req.body)
+        await user.save()
+        const token = await user.generateAuthToken()
+        res.status(201).send({ user, token })
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+app.post('/api/users/login', async (req, res) => {
+    //Login a registered user
+    try {
+        const { email, password } = req.body
+        const user = await User.findByCredentials(email, password)
+        const token = await user.generateAuthToken()
+        res.send({ user, token })
+    } catch (error) {
+        res.status(401).send({error: 'Login failed! Check authentication credentials'})
+    }
+})
+
+app.get('/api/users/me', auth, async(req, res) => {
+    // View logged in user profile
+    res.send(req.user)
+})
+
+app.post('/api/users/me/logout', auth, async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token != req.token
+        })
+        await req.user.save()
+        res.send()
+    } catch (error) {
+        res.status(500).send(error)
     }
 })
 
