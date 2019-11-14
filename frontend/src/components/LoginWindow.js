@@ -1,6 +1,8 @@
 import React from 'react'
 import { Form, Button, Modal } from 'react-bootstrap'
 
+import '../css/LoginWindow.css'
+
 const LoginWindow = (props) => {
 
   // eslint-disable-next-line react/prop-types
@@ -24,15 +26,16 @@ const LoginWindow = (props) => {
           </Form.Group>
           {Object.keys(errors).length !== 0 && <p className='error-text'>{errors[Object.keys(errors)[0]]}</p>}
         </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant='secondary' onClick={handleSubmit}>
+        <div className='submit-area'>
+          <Button className='submit-btn' onClick={handleSubmit}>
 					Log in
-        </Button>
-        <Button variant='primary' onClick={goToSignUp}>
-					Sign up
-        </Button>
-      </Modal.Footer>
+          </Button>
+          <p className='no-account-info' >
+						Don&apos;t have an account?
+            <button className='signup-btn' onClick={goToSignUp}>Sign up</button>
+          </p>
+        </div>
+      </Modal.Body>
     </Modal>)
 }
 
