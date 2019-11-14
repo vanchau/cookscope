@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom'
 
 import '../css/NavigationBar.css'
 import logo from '../assets/logo2.png'
+import TagsInput from './TagsInput'
 
 const NavigationBar = () => {
   const [show, setShow] = useState(false)
+  const [tags, setTags] = useState([]);
 
   const handleClose = () => setShow(false)
   // const handleShow = () => setShow(true);
@@ -23,10 +25,13 @@ const NavigationBar = () => {
       </div>
 
       <div>
+        <TagsInput tags={tags} setTags={setTags} />
+        {/*
         <Form inline className='mx-auto'>
           <FormControl type='text' placeholder='Enter dish or ingredient(s)' className='search-bar form-size' />
-          {/* <Button variant="search-button" type="submit">Search</Button> */}
+          <Button variant="search-button" type="submit">Search</Button> 
         </Form>
+        */}
       </div>
 
       <div>

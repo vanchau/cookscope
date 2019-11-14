@@ -1,5 +1,5 @@
 .filter-container {
-  top: 5em;
+  top: 6.5em;
   height:4.5em;
   display: block;
   align-content: center;
@@ -9,7 +9,7 @@
 }
 
 .filterbar {
-  top: 5.5em;
+  top: 7em;
   color: black;
   display: flex;
   flex-direction: row;
