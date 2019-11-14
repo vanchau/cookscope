@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-timestamp')
 
 const url = process.env.MONGODB_URI
 
@@ -17,13 +18,16 @@ const recipeSchema = new mongoose.Schema({
   title: String,
   description: String,
   imageFile: String,
-  timeToCook: Number,
+  hours: Number,
+  minutes: Number,
   servings: Number,
   difficulty: String,
   categories: [String],
-  ingredients: [{ingredient: String, id: Number}],
+  ingredients: [{amount: String, ingredient: String, id: Number}],
   instructions: [{instruction: String, id: Number}]
 })
+
+recipeSchema.plugin(timestamps);
 
 recipeSchema.set('toJSON', {
   transform: (document, returnedObject) => {
