@@ -28,6 +28,18 @@ const SignUpWindow = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control type='password' name='password' placeholder='Enter password' onChange={handleChange} autoComplete='on' />
           </Form.Group>
+          <div key={'default-checkbox'} className='mb-3'>
+            <Form.Check
+              type={'checkbox'}
+              id={'default-checkbox'}
+              style={{ fontSize: '13px' }}
+              label={
+                <label>I have read and understood the
+                  <a href='/terms'>Terms of Service</a> and the <a href='/privacy'>Privacy Policy</a>
+                </label>
+              }
+            />
+          </div>
           {Object.keys(errors).length !== 0 && <p className='error-text'>{errors[Object.keys(errors)[0]]}</p>}
         </Form>
         <div className='submit-area'>

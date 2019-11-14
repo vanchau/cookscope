@@ -19,4 +19,5 @@
 
 .signup-btn:hover {
 	color: #1187ff;
+	text-decoration: underline;
 }

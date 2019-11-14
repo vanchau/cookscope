@@ -17,6 +17,7 @@
 	border: 0;
 }
 
-.signup-btn:hover {
+.login-btn:hover {
 	color: #1187ff;
+	text-decoration: underline;
 }
