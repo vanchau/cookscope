@@ -37,7 +37,10 @@ const userSchema = mongoose.Schema({
     bookmarks: [{
         type: String
     }],
-    followed: [{
+    following: [{
+        type: String
+    }],
+    followers: [{
         type: String
     }]
 })
@@ -62,7 +65,7 @@ userSchema.methods.generateAuthToken = async function() {
 
 userSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email} )
+    const user = await User.findOne({ email })
     if (!user) {
         throw new Error({ error: 'Invalid login credentials' })
     }
@@ -71,6 +74,11 @@ userSchema.statics.findByCredentials = async (email, password) => {
         throw new Error({ error: 'Invalid login credentials' })
     }
     return user
+}
+
+userSchema.statics.findProfilesByIds = async (ids) => {
+    const users = await User.find().where('_id').in(ids)
+    return users.map(u => { return { username: u.username, profilePicture: u.profilePicture } })
 }
 
 const User = mongoose.model('User', userSchema)

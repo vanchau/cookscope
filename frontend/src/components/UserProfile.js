@@ -6,14 +6,14 @@ import { withRouter } from 'react-router-dom'
 import ProfileRecipeList from './ProfileRecipeList'
 import FollowedList from './FollowedList'
 import '../css/UserProfile.css'
-import { getUserInfo, getOwnRecipes, getBookmarkedRecipes } from '../components/api'
+import { getUserInfo, getOwnRecipes, getBookmarkedRecipes, getFollowingUsers } from '../components/api'
 
 const UserProfile = () => {
   const { username } = useParams()
   const [user, setUser] = useState({ username: '', name: '', profilePicture: ''})
   const [ownRecipes, setOwnRecipes] 	= useState([])
   const [bookmarkedRecipes, setBookmarkedRecipes] 	= useState([])
-  const [followed, setFollowed] 	= useState([])
+  const [following, setFollowingUsers] 	= useState([])
 
   useEffect(() => {
     const fetchData = () => {
@@ -27,11 +27,9 @@ const UserProfile = () => {
       getBookmarkedRecipes(token).then(result => {
         setBookmarkedRecipes(result)
       })
-      //const followed = await axios(`/api/users/${username}/followed`)
-      //setUser(user.data)
-      //setSavedRecipes(savedRecipes.data)
-      //setOwnRecipes(ownRecipes.data)
-      //setFollowed(followed.data)
+      getFollowingUsers(token).then(result => {
+        setFollowingUsers(result)
+      })
     }
     fetchData()
   }, [username])
@@ -45,14 +43,14 @@ const UserProfile = () => {
           <Card.Title className='profile-title'>{user.username}</Card.Title>
           <Card.Text className='profile-username'>{'@'+user.username}</Card.Text>
           <Tabs className='profile-tabs'>
-            <Tab className='profile-tab' eventKey={1} title='Own Recipes'>
+            <Tab className='profile-tab' eventKey={1} title='My Recipes'>
               <ProfileRecipeList recipes={ownRecipes} />
             </Tab>
             <Tab className='profile-tab' eventKey={2} title='Bookmarked Recipes'>
               <ProfileRecipeList recipes={bookmarkedRecipes} />
             </Tab>
-            <Tab className='profile-tab test' eventKey={3} title='Followed'>
-              <FollowedList followed={followed} />
+            <Tab className='profile-tab test' eventKey={3} title='Following'>
+              <FollowedList following={following} />
             </Tab>
           </Tabs>
         </Card.Body>

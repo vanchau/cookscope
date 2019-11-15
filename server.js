@@ -51,41 +51,6 @@ app.get('/api/recipes/:id', (request, response) => {
     })
 })
 
-let users = [
-    {
-        "username": "bobster",
-        "name": "Bob Bobson",
-        "profilePicture": "./assets/dummy/bobster.PNG",
-        "saved": [],
-        "followed": []
-    },
-    {
-        "username": "lobster",
-        "name": "Lob Lobson",
-        "profilePicture": "./assets/dummy/lobster.PNG",
-        "saved": ["5dc72284539a4025084615a1", "5dc7351b58d59d3f38b6442d", "5dc735d158d59d3f38b64435"],
-        "followed":["gobster"]
-    },
-    {
-        "username": "gobster",
-        "name": "Gob Gobson",
-        "profilePicture": "./assets/dummy/gobster.PNG",
-        "saved": ["5dc72284539a4025084615a1", "5dc7355e58d59d3f38b64430"],
-        "followed":["lobster", "bobster"]
-    }
-]
-
-/* app.get('/api/users/:username', (req, res) => {
-    const username = req.params.username
-    const user = users.find(user => user.username === username)
-    if (user) {
-        res.json(user)
-    }
-    else {
-        res.status(404).end()
-    }
-}) */
-
 app.post('/api/users', async (req, res) => {
     // Create a new user
     try {
@@ -128,40 +93,23 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
 })
 
 app.get('/api/users/me/recipes', auth, async (req, res) => {
-    //const authorID = JSON.stringify(req.user._id)
     const username = req.user.username
     const recipes = await Recipe.find({ author: username })
     res.json(recipes.map(recipe => recipe.toJSON()))
 })
 
-/*
-app.get('/api/users/:username/ownrecipes', async (request, response) => {
-    const username = request.params.username
-    console.log('username', typeof username)
-    const recipes = await Recipe.find({author: username})
-    response.json(recipes.map(recipe => recipe.toJSON()))
-})
-*/
-
 app.get('/api/users/me/bookmarked-recipes', auth, async (req, res) => {
     const bookmarks = req.user.toObject().bookmarks
+    console.log('bookmarks', bookmarks)
     const recipes = await Recipe.find().where('_id').in(bookmarks)
     res.json(recipes.map(recipe => recipe.toJSON()))
 })
 
-/*
-app.get('/api/users/:username/followed', (req, res) => {
-    const username = req.params.username
-    const user = users.find(user => user.username === username)
-    const followed = users.filter(u => user.followed.includes(u.username))
-    if (followed) {
-        res.json(followed)
-    }
-    else {
-        res.status(404).end()
-    }
+app.get('/api/users/me/following', auth, async (req, res) => {
+    const following = req.user.toObject().following
+    const users = await User.findProfilesByIds(following)
+    res.json(users)
 })
-*/
 
 app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
