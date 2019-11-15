@@ -143,14 +143,11 @@ app.get('/api/users/:username/ownrecipes', async (request, response) => {
 })
 */
 
-/*
-app.get('/api/users/:username/savedrecipes', async (request, response) => {
-    const username = request.params.username
-    const user = users.find(user => user.username === username)
-    const recipes = await Recipe.find().where('_id').in(user.saved);
-    response.json(recipes.map(recipe => recipe.toJSON()))
+app.get('/api/users/me/bookmarked-recipes', auth, async (req, res) => {
+    const bookmarks = req.user.toObject().bookmarks
+    const recipes = await Recipe.find().where('_id').in(bookmarks)
+    res.json(recipes.map(recipe => recipe.toJSON()))
 })
-*/
 
 /*
 app.get('/api/users/:username/followed', (req, res) => {

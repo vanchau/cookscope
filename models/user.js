@@ -22,13 +22,23 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 7
+        minLength: 6
     },
     tokens: [{
         token: {
             type: String,
             required: true
         }
+    }],
+    profilePicture: {
+        type: String,
+        default: 'anonymous.jpg'
+    },
+    bookmarks: [{
+        type: String
+    }],
+    followed: [{
+        type: String
     }]
 })
 

@@ -106,9 +106,10 @@ const NavigationBar = () => {
           />
 
           <NavDropdown title='Settings' id='basic-nav-dropdown' style={{ marginRight: '20px', marginLeft: '20px' }} >
-            <LinkContainer to='/users/'>
+            {isLoggedIn &&
+            <LinkContainer to={`/user/${localStorage.getItem('username')}`}>
               <NavDropdown.Item>User profile</NavDropdown.Item>
-            </LinkContainer>
+            </LinkContainer>}
             <LinkContainer to='/terms'>
               <NavDropdown.Item>Terms of Service</NavDropdown.Item>
             </LinkContainer>
@@ -117,8 +118,12 @@ const NavigationBar = () => {
             </LinkContainer>
             <NavDropdown.Divider />
             {isLoggedIn
-              ? <NavDropdown.Item onClick={handleLogOut} >Log out</NavDropdown.Item>
-              : <NavDropdown.Item onClick={goToLogin} >Log in</NavDropdown.Item>
+              ?
+              <LinkContainer to='/' exact>
+                <NavDropdown.Item onClick={handleLogOut}>Log out</NavDropdown.Item>
+              </LinkContainer>
+              :
+              <NavDropdown.Item onClick={goToLogin} >Log in</NavDropdown.Item>
             }
 
           </NavDropdown>

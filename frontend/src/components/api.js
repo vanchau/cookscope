@@ -52,6 +52,18 @@ export const getOwnRecipes = async (token) => {
   }
 }
 
+export const getBookmarkedRecipes = async (token) => {
+  try {
+    const result = await axios.get('/api/users/me/bookmarked-recipes', {
+      headers: {
+        'Authorization': token}
+    })
+    return result.data
+  } catch(error) {
+    return error
+  }
+}
+
 export const logout = async (token) => {
   try {
     const result = await axios.post('/api/users/me/logout', {}, {
