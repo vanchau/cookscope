@@ -13,6 +13,15 @@
 	left: auto;
 }
 
+.dropdown-item.active {
+	background-color: white;
+	color: black;
+}
+
+.dropdown-item:hover {
+	background-color: #f8f9fa;
+}
+
 .logo-image {
 	height: 46px;
 	margin-left: 3em;
