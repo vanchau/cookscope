@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import { Card, Tab, Tabs } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
+
 import ProfileRecipeList from './ProfileRecipeList'
 import FollowedList from './FollowedList'
 import '../css/UserProfile.css'
+import { getUserInfo, getOwnRecipes } from '../components/api'
 
 const UserProfile = () => {
   const { username } = useParams()
@@ -15,15 +16,24 @@ const UserProfile = () => {
   const [followed, setFollowed] 	= useState([])
 
   useEffect(() => {
-    const fetchData = async () => {
-      const user = await axios(`/api/users/${username}`)
-      const savedRecipes = await axios(`/api/users/${username}/savedrecipes`)
-      const ownRecipes = await axios(`/api/users/${username}/ownrecipes`)
-      const followed = await axios(`/api/users/${username}/followed`)
-      setUser(user.data)
-      setSavedRecipes(savedRecipes.data)
-      setOwnRecipes(ownRecipes.data)
-      setFollowed(followed.data)
+    const fetchData = () => {
+      const token = localStorage.getItem('token')
+
+      //const user = await axios(`/api/users/${username}`)
+      getUserInfo(token).then(result => {
+        console.log('userinfo', result)
+        setUser(result)
+      })
+      //const savedRecipes = await axios(`/api/users/${username}/savedrecipes`)
+      getOwnRecipes(token).then(result => {
+        console.log('own recipes', result)
+        setOwnRecipes(result)
+      })
+      //const followed = await axios(`/api/users/${username}/followed`)
+      //setUser(user.data)
+      //setSavedRecipes(savedRecipes.data)
+      //setOwnRecipes(ownRecipes.data)
+      //setFollowed(followed.data)
     }
     fetchData()
   }, [username])

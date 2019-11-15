@@ -16,16 +16,18 @@ function useFormValidation(initialState, validate) {
       const noErrors = Object.keys(errors).length === 0
       if (noErrors && isSigningUp) {
         signup(values)
-          .then(token => {
-            localStorage.setItem('token', token)
+          .then(result => {
+            localStorage.setItem('token', result.token)
+            localStorage.setItem('username', result.user.username)
             setToLoggedIn(true)
             showSignUpWindow(false)
           })
           .catch(() => setErrors({ response: 'Something went wrong...' }))
       } else if (noErrors && !isSigningUp) {
         login(values)
-          .then(token => {
-            localStorage.setItem('token', token)
+          .then(result => {
+            localStorage.setItem('token', result.token)
+            localStorage.setItem('username', result.user.username)
             setToLoggedIn(true)
             showLoginWindow(false)
           })

@@ -57,7 +57,7 @@ let users = [
         "name": "Bob Bobson",
         "profilePicture": "./assets/dummy/bobster.PNG",
         "saved": [],
-        "followed":[]
+        "followed": []
     },
     {
         "username": "lobster",
@@ -127,21 +127,32 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
     }
 })
 
+app.get('/api/users/me/recipes', auth, async (req, res) => {
+    //const authorID = JSON.stringify(req.user._id)
+    const username = req.user.username
+    const recipes = await Recipe.find({ author: username })
+    res.json(recipes.map(recipe => recipe.toJSON()))
+})
+
+/*
 app.get('/api/users/:username/ownrecipes', async (request, response) => {
     const username = request.params.username
+    console.log('username', typeof username)
     const recipes = await Recipe.find({author: username})
     response.json(recipes.map(recipe => recipe.toJSON()))
 })
+*/
 
-
+/*
 app.get('/api/users/:username/savedrecipes', async (request, response) => {
     const username = request.params.username
     const user = users.find(user => user.username === username)
     const recipes = await Recipe.find().where('_id').in(user.saved);
     response.json(recipes.map(recipe => recipe.toJSON()))
 })
+*/
 
-
+/*
 app.get('/api/users/:username/followed', (req, res) => {
     const username = req.params.username
     const user = users.find(user => user.username === username)
@@ -153,6 +164,7 @@ app.get('/api/users/:username/followed', (req, res) => {
         res.status(404).end()
     }
 })
+*/
 
 app.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));

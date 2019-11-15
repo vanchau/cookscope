@@ -106,7 +106,7 @@ const NavigationBar = () => {
           />
 
           <NavDropdown title='Settings' id='basic-nav-dropdown' style={{ marginRight: '20px', marginLeft: '20px' }} >
-            <LinkContainer to='/profile'>
+            <LinkContainer to='/users/'>
               <NavDropdown.Item>User profile</NavDropdown.Item>
             </LinkContainer>
             <LinkContainer to='/terms'>
