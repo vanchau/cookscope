@@ -19,6 +19,7 @@ function useFormValidation(initialState, validate) {
           .then(result => {
             localStorage.setItem('token', result.token)
             localStorage.setItem('username', result.user.username)
+            localStorage.setItem('id', result.user._id)
             setToLoggedIn(true)
             showSignUpWindow(false)
           })
@@ -28,6 +29,7 @@ function useFormValidation(initialState, validate) {
           .then(result => {
             localStorage.setItem('token', result.token)
             localStorage.setItem('username', result.user.username)
+            localStorage.setItem('id', result.user._id)
             setToLoggedIn(true)
             showLoginWindow(false)
           })
@@ -51,6 +53,8 @@ function useFormValidation(initialState, validate) {
     logout(token)
       .then(() => {
         localStorage.removeItem('token')
+        localStorage.removeItem('username')
+        localStorage.removeItem('id')
         setToLoggedIn(false)
       })
       .catch(error =>alert(error))

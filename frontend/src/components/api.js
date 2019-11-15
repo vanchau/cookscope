@@ -54,7 +54,7 @@ export const getOwnRecipes = async (token) => {
 
 export const logout = async (token) => {
   try {
-    const result = await axios.post('/api/users/logout', {}, {
+    const result = await axios.post('/api/users/me/logout', {}, {
       headers: {
         'Authorization': token}
     })
