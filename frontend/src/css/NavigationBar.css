@@ -9,6 +9,10 @@
 	color: white;
 }
 
+.button-profile-settings {
+	align-items: center;
+}
+
 .dropdown-icon {
 	width: 2em;
 	height: 2em;
@@ -86,15 +90,6 @@
 
 .profile-icon:hover {
 	color: #232323;
-}
-
-.settings {
-	padding: 0;
-	margin: 0;
-}
-
-.button-profile-settings {
-	align-items: center;
 }
 
 .settings-dropdown > a {
