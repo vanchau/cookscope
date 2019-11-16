@@ -59,13 +59,9 @@ export const getBookmarkedRecipes = async (token, username) => {
   }
 }
 
-export const getFollowingUsers = async (token, username) => {
+export const getFollowingUsers = async (username) => {
   try {
-    const result = await axios.get(`/api/users/${username}/following`, {
-      headers: {
-        'Authorization': token
-      }
-    })
+    const result = await axios.get(`/api/users/${username}/following`)
     return result.data
   } catch(error) {
     return error

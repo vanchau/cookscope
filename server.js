@@ -114,7 +114,7 @@ app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
     res.json(recipes.map(recipe => recipe.toJSON()))
 })
 
-app.get('/api/users/:username/following', auth, async (req, res) => {
+app.get('/api/users/:username/following', async (req, res) => {
     //const following = req.user.toObject().following
     const username = req.params.username
     const userInfo = await User.findOne({ username: username })

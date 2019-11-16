@@ -23,15 +23,15 @@ const UserProfile = () => {
       getRecipes(username).then(result => {
         setOwnRecipes(result)
       })
+      getFollowingUsers(username).then(result => {
+        setFollowingUsers(result)
+      })
 
       const token = localStorage.getItem('token')
 
       if (token) {
         getBookmarkedRecipes(token, username).then(result => {
           setBookmarkedRecipes(result)
-        })
-        getFollowingUsers(token, username).then(result => {
-          setFollowingUsers(result)
         })
       }
     }
