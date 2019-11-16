@@ -108,7 +108,7 @@ const NavigationBar = () => {
           <NavDropdown title='Settings' id='basic-nav-dropdown' style={{ marginRight: '20px', marginLeft: '20px' }} >
             {isLoggedIn &&
             <LinkContainer to={`/user/${localStorage.getItem('username')}`}>
-              <NavDropdown.Item>User profile</NavDropdown.Item>
+              <NavDropdown.Item>My profile</NavDropdown.Item>
             </LinkContainer>}
             <LinkContainer to='/terms'>
               <NavDropdown.Item>Terms of Service</NavDropdown.Item>

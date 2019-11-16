@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
         trim: true
     },
     email: {
@@ -76,9 +77,32 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
+userSchema.statics.getProfileInfoByUsername = async (username) => {
+    const user = await User.findOne({ username: username })
+    if (!user) {
+        throw new Error({ error: 'No such user' })
+    }
+    return {
+        _id: user.id,
+        username: user.username,
+        profilePicture: user.profilePicture,
+        following: user.following,
+        followed: user.followed,
+        bookmarks: user.bookmarks
+    }
+}
+
 userSchema.statics.findProfilesByIds = async (ids) => {
     const users = await User.find().where('_id').in(ids)
-    return users.map(u => { return { username: u.username, profilePicture: u.profilePicture } })
+    return users.map(u => {
+        return {
+            _id: u.id,
+            username: u.username,
+            profilePicture: u.profilePicture,
+            following: u.following,
+            followed: u.followed
+        }
+    })
 }
 
 const User = mongoose.model('User', userSchema)

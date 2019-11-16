@@ -28,9 +28,9 @@ export const signup = async (input) => {
   }
 }
 
-export const getUserInfo = async (token) => {
+export const getUserInfo = async (token, username) => {
   try {
-    const result = await axios.get('/api/users/me', {
+    const result = await axios.get(`/api/users/${username}`, {
       headers: {
         'Authorization': token}
     })
@@ -40,9 +40,9 @@ export const getUserInfo = async (token) => {
   }
 }
 
-export const getOwnRecipes = async (token) => {
+export const getRecipes = async (token, username) => {
   try {
-    const result = await axios.get('/api/users/me/recipes', {
+    const result = await axios.get(`/api/users/${username}/recipes`, {
       headers: {
         'Authorization': token}
     })
@@ -52,9 +52,9 @@ export const getOwnRecipes = async (token) => {
   }
 }
 
-export const getBookmarkedRecipes = async (token) => {
+export const getBookmarkedRecipes = async (token, username) => {
   try {
-    const result = await axios.get('/api/users/me/bookmarked-recipes', {
+    const result = await axios.get(`/api/users/${username}/bookmarked-recipes`, {
       headers: {
         'Authorization': token}
     })
@@ -64,9 +64,9 @@ export const getBookmarkedRecipes = async (token) => {
   }
 }
 
-export const getFollowingUsers = async (token) => {
+export const getFollowingUsers = async (token, username) => {
   try {
-    const result = await axios.get('/api/users/me/following', {
+    const result = await axios.get(`/api/users/${username}/following`, {
       headers: {
         'Authorization': token}
     })

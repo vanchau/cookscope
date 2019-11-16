@@ -35,7 +35,7 @@ app.post('/api/recipes', (request, response) => {
 
     recipe.save().then(savedRecipe => {
         response.json(savedRecipe.toJSON())
-        console.log("Recipe saved to database! :)")
+        //console.log("Recipe saved to database! :)")
     }) 
 
 })
@@ -75,9 +75,15 @@ app.post('/api/users/login', async (req, res) => {
     }
 })
 
-app.get('/api/users/me', auth, async(req, res) => {
+app.get('/api/users/:username', auth, async (req, res) => {
     // View logged in user profile
-    res.send(req.user)
+    try {
+        const username = req.params.username
+        const user = await User.getProfileInfoByUsername(username)
+        res.send(user)
+    } catch (error) {
+        res.status(404).send(error)
+    }
 })
 
 app.post('/api/users/me/logout', auth, async (req, res) => {
@@ -92,22 +98,25 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
     }
 })
 
-app.get('/api/users/me/recipes', auth, async (req, res) => {
-    const username = req.user.username
+app.get('/api/users/:username/recipes', auth, async (req, res) => {
+    const username = req.params.username
     const recipes = await Recipe.find({ author: username })
     res.json(recipes.map(recipe => recipe.toJSON()))
 })
 
-app.get('/api/users/me/bookmarked-recipes', auth, async (req, res) => {
-    const bookmarks = req.user.toObject().bookmarks
-    console.log('bookmarks', bookmarks)
-    const recipes = await Recipe.find().where('_id').in(bookmarks)
+app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
+    //const bookmarks = req.user.toObject().bookmarks
+    const username = req.params.username
+    const userInfo = await User.findOne({ username: username })
+    const recipes = await Recipe.find().where('_id').in(userInfo.bookmarks)
     res.json(recipes.map(recipe => recipe.toJSON()))
 })
 
-app.get('/api/users/me/following', auth, async (req, res) => {
-    const following = req.user.toObject().following
-    const users = await User.findProfilesByIds(following)
+app.get('/api/users/:username/following', auth, async (req, res) => {
+    //const following = req.user.toObject().following
+    const username = req.params.username
+    const userInfo = await User.findOne({ username: username })
+    const users = await User.findProfilesByIds(userInfo.following)
     res.json(users)
 })
 

@@ -6,28 +6,28 @@ import { withRouter } from 'react-router-dom'
 import ProfileRecipeList from './ProfileRecipeList'
 import FollowedList from './FollowedList'
 import '../css/UserProfile.css'
-import { getUserInfo, getOwnRecipes, getBookmarkedRecipes, getFollowingUsers } from '../components/api'
+import { getUserInfo, getRecipes, getBookmarkedRecipes, getFollowingUsers } from '../components/api'
 
 const UserProfile = () => {
   const { username } = useParams()
-  const [user, setUser] = useState({ username: '', name: '', profilePicture: ''})
-  const [ownRecipes, setOwnRecipes] 	= useState([])
-  const [bookmarkedRecipes, setBookmarkedRecipes] 	= useState([])
-  const [following, setFollowingUsers] 	= useState([])
+  const [user, setUser] = useState({ username: '', profilePicture: '', followed: [], following: [], bookmarks: [] })
+  const [ownRecipes, setOwnRecipes] = useState([])
+  const [bookmarkedRecipes, setBookmarkedRecipes]	= useState([])
+  const [following, setFollowingUsers] = useState([])
 
   useEffect(() => {
     const fetchData = () => {
       const token = localStorage.getItem('token')
-      getUserInfo(token).then(result => {
+      getUserInfo(token, username).then(result => {
         setUser(result)
       })
-      getOwnRecipes(token).then(result => {
+      getRecipes(token, username).then(result => {
         setOwnRecipes(result)
       })
-      getBookmarkedRecipes(token).then(result => {
+      getBookmarkedRecipes(token, username).then(result => {
         setBookmarkedRecipes(result)
       })
-      getFollowingUsers(token).then(result => {
+      getFollowingUsers(token, username).then(result => {
         setFollowingUsers(result)
       })
     }
@@ -43,13 +43,13 @@ const UserProfile = () => {
           <Card.Title className='profile-title'>{user.username}</Card.Title>
           <Card.Text className='profile-username'>{'@'+user.username}</Card.Text>
           <Tabs className='profile-tabs'>
-            <Tab className='profile-tab' eventKey={1} title='My Recipes'>
+            <Tab className='profile-tab' eventKey={1} title={`Recipes (${ownRecipes.length})`}>
               <ProfileRecipeList recipes={ownRecipes} />
             </Tab>
-            <Tab className='profile-tab' eventKey={2} title='Bookmarked Recipes'>
+            <Tab className='profile-tab' eventKey={2} title={`Bookmarked (${bookmarkedRecipes.length})`}>
               <ProfileRecipeList recipes={bookmarkedRecipes} />
             </Tab>
-            <Tab className='profile-tab test' eventKey={3} title='Following'>
+            <Tab className='profile-tab test' eventKey={3} title={`Following (${following.length})`}>
               <FollowedList following={following} />
             </Tab>
           </Tabs>
