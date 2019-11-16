@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
     }],
     profilePicture: {
         type: String,
-        default: 'anonymous.jpg'
+        default: 'anonymous.png'
     },
     bookmarks: [{
         type: String

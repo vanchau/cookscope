@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button, Modal } from 'react-bootstrap'
 
 import '../css/SignUpWindow.css'
@@ -7,6 +7,11 @@ const SignUpWindow = (props) => {
 
   // eslint-disable-next-line react/prop-types
   const { show, handleChange, handleSubmit, handleClose, goToLogin, errors } = props
+  const [termsUnderstood, setToTermsUnderstood] = useState(false)
+
+  const check = () => {
+    setToTermsUnderstood(!termsUnderstood)
+  }
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -32,6 +37,7 @@ const SignUpWindow = (props) => {
             <Form.Check
               type={'checkbox'}
               id={'default-checkbox'}
+              onChange={check}
               style={{ fontSize: '13px' }}
               label={
                 <label>I have read and understood the
@@ -43,7 +49,7 @@ const SignUpWindow = (props) => {
           {Object.keys(errors).length !== 0 && <p className='error-text'>{errors[Object.keys(errors)[0]]}</p>}
         </Form>
         <div className='submit-area'>
-          <Button className='submit-btn' onClick={handleSubmit}>
+          <Button className='submit-btn' onClick={handleSubmit} disabled={!termsUnderstood}>
 						Sign up
           </Button>
           <p className='no-account-info' >
