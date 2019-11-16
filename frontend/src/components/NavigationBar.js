@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Nav, NavDropdown, Navbar, Form, FormControl, Button } from 'react-bootstrap'
+import { Nav, NavDropdown, Navbar, Form, FormControl, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -81,11 +81,28 @@ const NavigationBar = () => {
 
       <div>
         <Nav>
-          <LinkContainer to='/create-recipe'>
-            <Button variant='outline-create-recipe-button' >
-							Create recipe
-            </Button>
-          </LinkContainer>
+          {
+            isLoggedIn ?
+              <LinkContainer to='/create-recipe' disabled={!isLoggedIn}>
+                <Button variant='outline-create-recipe-button'>
+                Create recipe
+                </Button>
+              </LinkContainer>
+              :
+              <OverlayTrigger
+                key={'create-recipe-overlay'}
+                placement={'bottom'}
+                overlay={<Tooltip id={'tooltip-bottom'}>You must log in to create a recipe.</Tooltip>}
+              >
+                <span className='d-inline-block'>
+                  <LinkContainer to='/create-recipe' disabled={!isLoggedIn}>
+                    <Button variant='outline-create-recipe-button'>
+                  Create recipe
+                    </Button>
+                  </LinkContainer>
+                </span>
+              </OverlayTrigger>
+          }
 
           <SignUpWindow
             show={showSignUp}
