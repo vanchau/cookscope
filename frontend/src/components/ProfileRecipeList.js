@@ -5,6 +5,7 @@ import '../css/ProfileRecipeList.css'
 
 
 const ProfileRecipeList = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { recipes } = props
   let history = useHistory()
 

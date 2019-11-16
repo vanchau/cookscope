@@ -4,6 +4,7 @@ import { withRouter, useHistory } from 'react-router-dom'
 import '../css/FollowedList.css'
 
 const FollowedList = (props) => {
+  // eslint-disable-next-line react/prop-types
   const { following } = props
   let history = useHistory()
 
@@ -15,7 +16,7 @@ const FollowedList = (props) => {
           <Card.Body>
             <img className='followed-card-img rounded-circle' alt='' src={`/assets/profilePictures/${user.profilePicture}`}></img>
             <div className='followed-info'>
-              <Card.Title className='followed-title'>{user.name}</Card.Title>
+              <Card.Title className='followed-title'>{user.username}</Card.Title>
               <Card.Text className='followed-username'>{'@'+user.username}</Card.Text>
             </div>
           </Card.Body>

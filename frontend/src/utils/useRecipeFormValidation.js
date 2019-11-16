@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { postRecipe } from '../components/api'
 
 const parseRecipe = (recipe) => {
   let parsedRecipe = recipe
@@ -18,23 +18,11 @@ const useFormValidation = (initialState, validate) => {
     if (isSubmitting) {
       const noErrors = Object.keys(errors).length === 0
       if (noErrors) {
-        // TODO http POST logic here
-        const postRecipe = async () => {
-          try {
-            const parsedRecipe = parseRecipe(values)
-            console.log(parsedRecipe)
-            const result = await axios.post('/api/recipes/', parsedRecipe)
-            if (result.status === 200) {
-              setToCompleted(true)
-              // eslint-disable-next-line no-console
-              console.log(parsedRecipe)
-            }
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error(e)
-          }
-        }
-        postRecipe()
+        const token = localStorage.getItem('token')
+        const parsedRecipe = parseRecipe(values)
+        postRecipe(token, parsedRecipe).then(() => {
+          setToCompleted(true)
+        })
         setSubmitting(false)
       } else {
         setSubmitting(false)
@@ -55,7 +43,7 @@ const useFormValidation = (initialState, validate) => {
     let newValue = ''
     let temp = ''
     let ingredientID = ''
-    
+
     switch (targetName) {
         case 'categories':
           const checked = event.target.checked
@@ -80,7 +68,7 @@ const useFormValidation = (initialState, validate) => {
         case 'ingredients':
           newValue = values.ingredients
           ingredientID = parseInt(event.target.id, 10)
-          temp = newValue[newValue.findIndex(x => x.id === ingredientID)] 
+          temp = newValue[newValue.findIndex(x => x.id === ingredientID)]
           newValue[newValue.findIndex(x => x.id === ingredientID)] = { amount: temp.amount, ingredient: targetValue, id: ingredientID }
           break
         case 'instructions':
@@ -97,13 +85,12 @@ const useFormValidation = (initialState, validate) => {
         ...values,
         ingredients: newValue
       })
+    } else{
+      setValues({
+        ...values,
+        [event.target.name]: newValue
+      })
     }
-    else{
-    setValues({
-      ...values,
-      [event.target.name]: newValue
-    })
-  }
   }
 
   const setImageFile = (file) => {

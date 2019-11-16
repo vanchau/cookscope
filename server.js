@@ -17,10 +17,12 @@ const Recipe = require('./models/recipe')
 const User = require('./models/user')
 const auth = require('./middleware/auth')
 
-app.post('/api/recipes', (request, response) => {
-    const body = request.body
+app.post('/api/recipes', auth, (req, res) => {
+    const body = req.body
+    const user = req.user.toObject()
     const recipe = new Recipe({
-        author: "bobster", // temp
+        author: user.username,
+        authorID: user._id,
         title: body.title,
         description: body.description,
         imageFile: body.imageFile,
@@ -34,7 +36,7 @@ app.post('/api/recipes', (request, response) => {
     })
 
     recipe.save().then(savedRecipe => {
-        response.json(savedRecipe.toJSON())
+        res.json(savedRecipe.toJSON())
         //console.log("Recipe saved to database! :)")
     }) 
 
