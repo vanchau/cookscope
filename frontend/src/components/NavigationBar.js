@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
+import { FiUser } from 'react-icons/fi'
+import { IoMdSettings } from 'react-icons/io'
 
 import '../css/NavigationBar.css'
 import logo from '../assets/logo2.png'
@@ -80,12 +82,12 @@ const NavigationBar = () => {
       </div>
 
       <div>
-        <Nav>
+        <Nav className='button-profile-settings'>
           {
             isLoggedIn ?
               <LinkContainer to='/create-recipe' disabled={!isLoggedIn}>
                 <Button variant='outline-create-recipe-button'>
-                Create recipe
+                  Create recipe
                 </Button>
               </LinkContainer>
               :
@@ -97,7 +99,7 @@ const NavigationBar = () => {
                 <span className='d-inline-block'>
                   <LinkContainer to='/create-recipe' disabled={!isLoggedIn}>
                     <Button variant='outline-create-recipe-button'>
-                  Create recipe
+                      Create recipe
                     </Button>
                   </LinkContainer>
                 </span>
@@ -122,7 +124,14 @@ const NavigationBar = () => {
             handleClose={closeWindow}
           />
 
-          <NavDropdown title='Settings' id='basic-nav-dropdown' style={{ marginRight: '20px', marginLeft: '20px' }} >
+          {
+            isLoggedIn &&
+          <Link className='navbar-brand' to={`/user/${localStorage.getItem('username')}`}>
+            <FiUser className='profile-icon'/>
+          </Link>
+          }
+
+          <NavDropdown className='settings-dropdown' title={<IoMdSettings className='dropdown-icon' />} >
             {isLoggedIn &&
             <LinkContainer to={`/user/${localStorage.getItem('username')}`}>
               <NavDropdown.Item>My profile</NavDropdown.Item>
