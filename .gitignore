@@ -23,6 +23,9 @@ node_modules
 frontend/public/assets/profilePictures/*
 !frontend/public/assets/profilePictures/.gitkeep
 
+frontend/public/assets/recipeImages/*
+!frontend/public/assets/recipeImages/.gitkeep
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
