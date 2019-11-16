@@ -28,26 +28,18 @@ export const signup = async (input) => {
   }
 }
 
-export const getUserInfo = async (token, username) => {
+export const getUserInfo = async (username) => {
   try {
-    const result = await axios.get(`/api/users/${username}`, {
-      headers: {
-        'Authorization': token
-      }
-    })
+    const result = await axios.get(`/api/users/${username}`)
     return result.data
   } catch(error) {
     return error
   }
 }
 
-export const getRecipes = async (token, username) => {
+export const getRecipes = async (username) => {
   try {
-    const result = await axios.get(`/api/users/${username}/recipes`, {
-      headers: {
-        'Authorization': token
-      }
-    })
+    const result = await axios.get(`/api/users/${username}/recipes`)
     return result.data
   } catch(error) {
     return error

@@ -17,19 +17,23 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      const token = localStorage.getItem('token')
-      getUserInfo(token, username).then(result => {
+      getUserInfo(username).then(result => {
         setUser(result)
       })
-      getRecipes(token, username).then(result => {
+      getRecipes(username).then(result => {
         setOwnRecipes(result)
       })
-      getBookmarkedRecipes(token, username).then(result => {
-        setBookmarkedRecipes(result)
-      })
-      getFollowingUsers(token, username).then(result => {
-        setFollowingUsers(result)
-      })
+
+      const token = localStorage.getItem('token')
+
+      if (token) {
+        getBookmarkedRecipes(token, username).then(result => {
+          setBookmarkedRecipes(result)
+        })
+        getFollowingUsers(token, username).then(result => {
+          setFollowingUsers(result)
+        })
+      }
     }
     fetchData()
   }, [username])

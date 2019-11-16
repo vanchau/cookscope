@@ -77,8 +77,8 @@ app.post('/api/users/login', async (req, res) => {
     }
 })
 
-app.get('/api/users/:username', auth, async (req, res) => {
-    // View logged in user profile
+// Get user info. Can be accessed by anyone.
+app.get('/api/users/:username', async (req, res) => {
     try {
         const username = req.params.username
         const user = await User.getProfileInfoByUsername(username)
@@ -100,7 +100,7 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
     }
 })
 
-app.get('/api/users/:username/recipes', auth, async (req, res) => {
+app.get('/api/users/:username/recipes', async (req, res) => {
     const username = req.params.username
     const recipes = await Recipe.find({ author: username })
     res.json(recipes.map(recipe => recipe.toJSON()))
