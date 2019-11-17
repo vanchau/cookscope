@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,19 +16,23 @@ import Recipe from './components/Recipe'
 import Home from './components/Home'
 import UserProfile from './components/UserProfile'
 
-const About = () => (
+const About = () => ( 
   <div>
     <h2>About</h2>
   </div>
 )
 
-const App = () => (
+const App = () => {
+  
+  const [searchWords, setSearchWords] = useState('')
+
+  return(
   <Router>
-    <NavigationBar/>
+    <NavigationBar setSearchWords={setSearchWords}/>
     <div className='global-background'>
       <Container>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' render={(props) => <Home {...props} searchWords={searchWords} />} />
           <Route path='/about' component={About} />
           <Route path='/create-recipe' component={CreateRecipe} />
           <Route path='/settings' component={Settings} />
@@ -41,6 +45,7 @@ const App = () => (
       <div style={{height:'10em', background:'transparent'}}></div>
     </div>
   </Router>
-)
+  )
+}
 
 export default App

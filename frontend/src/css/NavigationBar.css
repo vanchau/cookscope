@@ -1,11 +1,13 @@
-.btn-outline-create-recipe-button {
+.btn-navbar-button {
 	background-color:rgb(164, 190, 19);
 	color: white;
+	margin:auto 1em;
 }
 
-.btn-outline-create-recipe-button:hover {
+.btn-navbar-button:hover {
 	background-color: rgb(175, 207, 30);
 	color: white;
+	margin:auto 1em;
 }
 
 .dropdown-menu {
@@ -33,7 +35,7 @@
 
 .form-control {
 	box-shadow: none;
-	width: 400px !important;
+	width: 800px !important;
 	border: solid rgb(233, 233, 233) 1px;
 }
 	
@@ -41,8 +43,20 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 7em;
+	height: 5.4em;
 	padding: 8px 15px;
 	background-image: url('../assets/patterns/subtle_white_feathers.png');
 	border-bottom: solid rgb(20, 20, 20) 6px;
+}
+
+.search-form {
+	display: inline-flex;
+	width: 30em;
+}
+
+.main-search {
+	height: 2.5em;
+	width: 100em !important;
+	padding: auto;
+	margin: auto 1em;
 }

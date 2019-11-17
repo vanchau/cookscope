@@ -34,12 +34,21 @@ app.post('/api/recipes', (request, response) => {
         response.json(savedRecipe.toJSON())
         console.log("Recipe saved to database! :)")
     }) 
-
 })
 
 app.get('/api/recipes', async (request, response) => {
-    const recipes = await Recipe.find({})
-    response.json(recipes.map(recipe => recipe.toJSON()))
+    const searchWords = request.query.searchWords
+    if (searchWords.length === 0) {
+        const recipes = await Recipe.find({})
+        response.json(recipes.map(recipe => recipe.toJSON()))
+    } 
+    else {
+        //let recipes = []
+        console.log(searchWords)
+        const recipes = await Recipe.find().all('title', ['Artesan bread'])
+        console.log(recipes)
+        response.json(recipes.map(recipe => recipe.toJSON()))
+    }  
 })
 
 app.get('/api/recipes/:id', (request, response) => {

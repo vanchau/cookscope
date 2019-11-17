@@ -1,18 +1,32 @@
 import React, { useState } from 'react'
-import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Modal } from 'react-bootstrap'
+import { Nav, NavDropdown, Navbar, Form, Button, Modal } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
-
 import '../css/NavigationBar.css'
 import logo from '../assets/logo2.png'
-import TagsInput from './TagsInput'
+//import TagsInput from './TagsInput'
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
+
+  const {setSearchWords} = props
+  const [currentSearchWords, setCurrentSearchWords] = useState('')
+
   const [show, setShow] = useState(false)
-  const [tags, setTags] = useState([]);
+  //const [tags, setTags] = useState([]);
 
   const handleClose = () => setShow(false)
   // const handleShow = () => setShow(true);
+
+  const handleChange = (event) => {
+    setCurrentSearchWords(event.target.value)
+    //setSearchWords(event.target.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const splittedSearchWords = currentSearchWords.split(" ")
+    setSearchWords(splittedSearchWords)
+  }
 
   return (
     <Navbar
@@ -23,21 +37,17 @@ const NavigationBar = () => {
           <img className='logo-image' src={logo} alt='logo' />
         </Link>
       </div>
-
       <div>
-        <TagsInput tags={tags} setTags={setTags} />
-        {/*
-        <Form inline className='mx-auto'>
-          <FormControl type='text' placeholder='Enter dish or ingredient(s)' className='search-bar form-size' />
-          <Button variant="search-button" type="submit">Search</Button> 
+        {/*<TagsInput tags={tags} setTags={setTags} />*/}        
+        <Form className="search-form" onSubmit={handleSubmit}>
+          <Form.Control onChange={handleChange} type='text' placeholder='Enter dish or ingredient(s)' className='search-bar form-size main-search'/>
+          <Button variant='navbar-button' className='search-button' type='submit' >Search</Button>
         </Form>
-        */}
       </div>
-
       <div>
         <Nav>
           <LinkContainer to='/create-recipe'>
-            <Button variant='outline-create-recipe-button' >
+            <Button variant='navbar-button' >
 							Create recipe
             </Button>
           </LinkContainer>
@@ -66,7 +76,6 @@ const NavigationBar = () => {
               </Button>
             </Modal.Footer>
           </Modal>
-
           <NavDropdown title='Settings' id='basic-nav-dropdown' style={{ marginRight: '20px', marginLeft: '20px' }} >
             <LinkContainer to='/profile'>
               <NavDropdown.Item>User profile</NavDropdown.Item>

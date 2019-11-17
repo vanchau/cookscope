@@ -1,15 +1,15 @@
 .filter-container {
-  top: 6.5em;
+  top: 5em;
   height:4.5em;
   display: block;
   align-content: center;
   background-image: url('../assets/patterns/subtle_white_feathers.png');
-  border-top: solid 6px black;
+  border-top: solid 0px black;
   border-bottom: solid 6px black;
 }
 
 .filterbar {
-  top: 7em;
+  top: 5.5em;
   color: black;
   display: flex;
   flex-direction: row;

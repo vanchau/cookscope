@@ -4,19 +4,21 @@ import { Card, CardColumns } from 'react-bootstrap'
 import axios from 'axios'
 import '../css/RecipeList.css'
 
-const RecipeList = () => {
- 
+const RecipeList = (props) => {
+
+  const {searchWords} = props
   const [recipes, setData] 	= useState([])
   let history = useHistory()
 
   useEffect(() => {
     const fetchData = async () => {
       const baseUrl = '/api/recipes'
-      const result = await axios(baseUrl)
+      const result = await axios(baseUrl, {params: { searchWords: searchWords }})
       setData(result.data)
     }
     fetchData()
-  }, [])
+  }, [searchWords])
+
   return (
     <CardColumns className="recipe-list-card-columns">
       {recipes.map(recipe => (
