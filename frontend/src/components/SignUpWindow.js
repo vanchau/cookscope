@@ -40,7 +40,7 @@ const SignUpWindow = (props) => {
               onChange={check}
               style={{ fontSize: '13px' }}
               label={
-                <label>I have read and understood the
+                <label>I have read and understood the&nbsp;
                   <a href='/terms'>Terms of Service</a> and the <a href='/privacy'>Privacy Policy</a>
                 </label>
               }
