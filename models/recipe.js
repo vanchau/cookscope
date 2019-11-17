@@ -15,6 +15,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const recipeSchema = new mongoose.Schema({
   author: String,
+  authorID: String,
   title: String,
   description: String,
   imageFile: String,

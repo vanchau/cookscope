@@ -1,16 +1,68 @@
-import React, { useState } from 'react'
-import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Modal } from 'react-bootstrap'
+import React, { useEffect } from 'react'
+import { Nav, NavDropdown, Navbar, Form, FormControl, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
+import { FiUser } from 'react-icons/fi'
+import { IoMdSettings } from 'react-icons/io'
 
 import '../css/NavigationBar.css'
 import logo from '../assets/logo2.png'
+import useFormValidation from '../utils/useFormValidation'
+import validateAuth from '../utils/validateAuth'
+import SignUpWindow from './SignUpWindow'
+import LoginWindow from './LoginWindow'
+
+const INITIAL_STATE = {
+  username: '',
+  email: '',
+  password: ''
+}
 
 const NavigationBar = () => {
-  const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false)
-  // const handleShow = () => setShow(true);
+  const {
+    handleSubmit,
+    handleChange,
+    handleClose,
+    handleLogOut,
+    isLoggedIn,
+    setToLoggedIn,
+    setToSigningUp,
+    showSignUpWindow,
+    showLoginWindow,
+    showSignUp,
+    showLogin,
+    errors
+  } = useFormValidation(INITIAL_STATE, validateAuth)
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setToLoggedIn(true)
+    } else {
+      localStorage.removeItem('token')
+      setToLoggedIn(false)
+    }
+  }, [setToLoggedIn])
+
+  const goToLogin = () => {
+    setToSigningUp(false)
+    showSignUpWindow(false)
+    showLoginWindow(true)
+    handleClose()
+  }
+
+  const goToSignUp = () => {
+    setToSigningUp(true)
+    showLoginWindow(false)
+    showSignUpWindow(true)
+    handleClose()
+  }
+
+  const closeWindow = () => {
+    showSignUpWindow(false)
+    showLoginWindow(false)
+    handleClose()
+  }
 
   return (
     <Navbar
@@ -30,42 +82,60 @@ const NavigationBar = () => {
       </div>
 
       <div>
-        <Nav>
-          <LinkContainer to='/create-recipe'>
-            <Button variant='outline-create-recipe-button' >
-							Create recipe
-            </Button>
-          </LinkContainer>
+        <Nav className='button-profile-settings'>
+          {
+            isLoggedIn ?
+              <LinkContainer to='/create-recipe' disabled={!isLoggedIn}>
+                <Button variant='outline-create-recipe-button'>
+                  Create recipe
+                </Button>
+              </LinkContainer>
+              :
+              <OverlayTrigger
+                key={'create-recipe-overlay'}
+                placement={'bottom'}
+                overlay={<Tooltip id={'tooltip-bottom'}>You must log in to create a recipe.</Tooltip>}
+              >
+                <span className='d-inline-block'>
+                  <LinkContainer to='/create-recipe' disabled={!isLoggedIn}>
+                    <Button variant='outline-create-recipe-button'>
+                      Create recipe
+                    </Button>
+                  </LinkContainer>
+                </span>
+              </OverlayTrigger>
+          }
 
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Oops, it seems like you&apos;re not logged in.</Modal.Title>
-            </Modal.Header>
+          <SignUpWindow
+            show={showSignUp}
+            handleChange={handleChange}
+            goToLogin={goToLogin}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            handleClose={closeWindow}
+          />
 
-            <Modal.Body>
-              <Form.Group>
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type='email' placeholder='Enter email' />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Password</Form.Label>
-                <Form.Control type='password' placeholder='Enter password' />
-              </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant='secondary' onClick={handleClose}>
-								Log in
-              </Button>
-              <Button variant='primary' onClick={handleClose}>
-								Sign up
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <LoginWindow
+            show={showLogin}
+            handleChange={handleChange}
+            goToSignUp={goToSignUp}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            handleClose={closeWindow}
+          />
 
-          <NavDropdown title='Settings' id='basic-nav-dropdown' style={{ marginRight: '20px', marginLeft: '20px' }} >
-            <LinkContainer to='/profile'>
-              <NavDropdown.Item>User profile</NavDropdown.Item>
-            </LinkContainer>
+          {
+            isLoggedIn &&
+          <Link className='navbar-brand' to={`/user/${localStorage.getItem('username')}`}>
+            <FiUser className='profile-icon'/>
+          </Link>
+          }
+
+          <NavDropdown className='settings-dropdown' title={<IoMdSettings className='dropdown-icon' />} >
+            {isLoggedIn &&
+            <LinkContainer to={`/user/${localStorage.getItem('username')}`}>
+              <NavDropdown.Item>My profile</NavDropdown.Item>
+            </LinkContainer>}
             <LinkContainer to='/terms'>
               <NavDropdown.Item>Terms of Service</NavDropdown.Item>
             </LinkContainer>
@@ -73,9 +143,15 @@ const NavigationBar = () => {
               <NavDropdown.Item>Privacy Policy</NavDropdown.Item>
             </LinkContainer>
             <NavDropdown.Divider />
-            <LinkContainer to='/logout'>
-              <NavDropdown.Item>Log out</NavDropdown.Item>
-            </LinkContainer>
+            {isLoggedIn
+              ?
+              <LinkContainer to='/' exact>
+                <NavDropdown.Item onClick={handleLogOut}>Log out</NavDropdown.Item>
+              </LinkContainer>
+              :
+              <NavDropdown.Item onClick={goToLogin} >Log in</NavDropdown.Item>
+            }
+
           </NavDropdown>
         </Nav>
       </div>

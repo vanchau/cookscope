@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
@@ -21,9 +21,9 @@ const Recipe = () => {
       <div style={{height:'1em', background:'transparent'}}></div>
       <Card className='recipe-card'>
         <Card.Body>
-          <Card.Title>{recipe.title}</Card.Title>
+          <Card.Title style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
           <Card.Text>
-            by <a className='card-author' href='#action' >{recipe.author}</a>
+						by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
           </Card.Text>
           <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
           {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}

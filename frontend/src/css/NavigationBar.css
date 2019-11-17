@@ -1,6 +1,7 @@
 .btn-outline-create-recipe-button {
 	background-color:rgb(164, 190, 19);
 	color: white;
+	margin-right: 6em;
 }
 
 .btn-outline-create-recipe-button:hover {
@@ -8,9 +9,37 @@
 	color: white;
 }
 
+.button-profile-settings {
+	align-items: center;
+}
+
+.dropdown-icon {
+	width: 2em;
+	height: 2em;
+	color: #606060;
+	margin-right: 2em;
+}
+
+.dropdown-icon:hover {
+	color: #232323;
+}
+
 .dropdown-menu {
 	right: 0;
 	left: auto;
+}
+
+.dropdown-toggle::after {
+	display: none;
+}
+
+.dropdown-item.active {
+	background-color: white;
+	color: black;
+}
+
+.dropdown-item:hover {
+	background-color: #f8f9fa;
 }
 
 .logo-image {
@@ -36,6 +65,11 @@
 	width: 400px !important;
 	border: solid rgb(233, 233, 233) 1px;
 }
+
+.navbar-brand {
+	margin: 0;
+	padding: 0;
+}
 	
 .navigation-bar {
 	display: flex;
@@ -45,4 +79,19 @@
 	padding: 8px 15px;
 	background-image: url('../assets/patterns/subtle_white_feathers.png');
 	border-bottom: solid rgb(20, 20, 20) 6px;
+}
+
+.profile-icon {
+	width: 1.6em;
+	height: 1.6em;
+	color: #606060;
+	margin-right: 1em;
+}
+
+.profile-icon:hover {
+	color: #232323;
+}
+
+.settings-dropdown > a {
+	margin: 0;
 }

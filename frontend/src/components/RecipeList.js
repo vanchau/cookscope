@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter, useHistory } from 'react-router-dom'
+import { withRouter, useHistory, Link } from 'react-router-dom'
 import { Card, CardColumns } from 'react-bootstrap'
 import axios from 'axios'
+
 import '../css/RecipeList.css'
 
 const RecipeList = () => {
- 
+
   const [recipes, setData] 	= useState([])
   let history = useHistory()
 
@@ -17,21 +18,23 @@ const RecipeList = () => {
     }
     fetchData()
   }, [])
+
   return (
-    <CardColumns className="recipe-list-card-columns">
+    <CardColumns className='recipe-list-card-columns'>
       {recipes.map(recipe => (
         <Card
-          className="recipe-list-card"
+          className='recipe-list-card'
           key={recipe.id}
-          onClick={() => history.push(`/recipe/${recipe.id}`)}
         >
           <Card.Body>
             <Card.Img
-              className="recipe-list-card-img"
-              src={`data:image/jpeg;base64,${recipe.imageFile}`} />
-            <Card.Title>{recipe.title}</Card.Title>
+              className='recipe-list-card-img'
+              src={`data:image/jpeg;base64,${recipe.imageFile}`}
+              onClick={() => history.push(`/recipe/${recipe.id}`)}
+            />
+            <Card.Title onClick={() => history.push(`/recipe/${recipe.id}`)}>{recipe.title}</Card.Title>
             <Card.Text>
-							by <a className='card-author' href='#action' >{recipe.author}</a>
+							by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
             </Card.Text>
           </Card.Body>
         </Card>
