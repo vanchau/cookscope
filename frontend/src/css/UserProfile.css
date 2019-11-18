@@ -1,6 +1,6 @@
 
 .profile-card-img {
-	height: 20em;
+	height: 8em;
 	margin-bottom: 1.5em;
 	object-fit: contain;
 	margin-left: auto;
@@ -31,7 +31,6 @@
 	border: 0px;
 	color: #3C3C3C;
 	outline: none;
-	margin-left: -2.5em;
 	margin-bottom: 3em;
 }
 

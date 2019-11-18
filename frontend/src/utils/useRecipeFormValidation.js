@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import { postRecipe } from '../components/api'
 
 const parseRecipe = (recipe) => {
   let parsedRecipe = recipe
@@ -18,22 +18,11 @@ const useFormValidation = (initialState, validate) => {
     if (isSubmitting) {
       const noErrors = Object.keys(errors).length === 0
       if (noErrors) {
-        // TODO http POST logic here
-        const postRecipe = async () => {
-          try {
-            const parsedRecipe = parseRecipe(values)
-            const result = await axios.post('/api/recipes/', parsedRecipe)
-            if (result.status === 200) {
-              setToCompleted(true)
-              // eslint-disable-next-line no-console
-              console.log(parsedRecipe)
-            }
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.error(e)
-          }
-        }
-        postRecipe()
+        const token = localStorage.getItem('token')
+        const parsedRecipe = parseRecipe(values)
+        postRecipe(token, parsedRecipe).then(() => {
+          setToCompleted(true)
+        })
         setSubmitting(false)
       } else {
         setSubmitting(false)
@@ -52,6 +41,8 @@ const useFormValidation = (initialState, validate) => {
     const targetName = event.target.name
     const targetValue = event.target.value
     let newValue = ''
+    let temp = ''
+    let ingredientID = ''
 
     switch (targetName) {
         case 'categories':
@@ -59,16 +50,26 @@ const useFormValidation = (initialState, validate) => {
           if (checked) newValue = [...values.categories, targetValue]
           else newValue = values.categories.filter(category => category !== targetValue)
           break
-        case 'timeToCook':
+        case 'hours':
+          newValue = parseInt(targetValue, 10)
+          break
+        case 'minutes':
           newValue = parseInt(targetValue, 10)
           break
         case 'servings':
           newValue = parseInt(targetValue, 10)
           break
-        case 'ingredients':
-          const ingredientID = parseInt(event.target.id, 10)
+        case 'ingredientAmounts':
           newValue = values.ingredients
-          newValue[newValue.findIndex(x => x.id === ingredientID)] = { ingredient: targetValue, id: ingredientID }
+          ingredientID = parseInt(event.target.id, 10)
+          temp = newValue[newValue.findIndex(x => x.id === ingredientID)]
+          newValue[newValue.findIndex(x => x.id === ingredientID)] = { amount: targetValue, ingredient: temp.ingredient, id: ingredientID }
+          break
+        case 'ingredients':
+          newValue = values.ingredients
+          ingredientID = parseInt(event.target.id, 10)
+          temp = newValue[newValue.findIndex(x => x.id === ingredientID)]
+          newValue[newValue.findIndex(x => x.id === ingredientID)] = { amount: temp.amount, ingredient: targetValue, id: ingredientID }
           break
         case 'instructions':
           const instructionID = parseInt(event.target.id, 10)
@@ -79,10 +80,17 @@ const useFormValidation = (initialState, validate) => {
           newValue = event.target.value
     }
 
-    setValues({
-      ...values,
-      [event.target.name]: newValue
-    })
+    if (targetName === 'ingredientAmounts') {
+      setValues({
+        ...values,
+        ingredients: newValue
+      })
+    } else{
+      setValues({
+        ...values,
+        [event.target.name]: newValue
+      })
+    }
   }
 
   const setImageFile = (file) => {
@@ -97,7 +105,7 @@ const useFormValidation = (initialState, validate) => {
     const newID = numOfIngredients === 0 ? 1 : values.ingredients[numOfIngredients - 1].id + 1
     setValues({
       ...values,
-      ingredients: [ ...values.ingredients, { ingredient: '', id: newID } ]
+      ingredients: [ ...values.ingredients, {amount: '', ingredient: '', id: newID } ]
     })
   }
 

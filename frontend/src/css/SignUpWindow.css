@@ -1,0 +1,23 @@
+.submit-btn {
+	margin: 0.5rem 0;
+	padding: 0.5rem 2rem;
+}
+
+.submit-area {
+	text-align: center;
+}
+
+.no-account-info {
+	font-size: 13px;
+}
+
+.login-btn {
+	color: #50a7ff;
+	background-color: white;
+	border: 0;
+}
+
+.login-btn:hover {
+	color: #1187ff;
+	text-decoration: underline;
+}

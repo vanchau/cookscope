@@ -14,15 +14,20 @@ app.use(cors())
 app.use(morgan('dev'));
 
 const Recipe = require('./models/recipe')
+const User = require('./models/user')
+const auth = require('./middleware/auth')
 
-app.post('/api/recipes', (request, response) => {
-    const body = request.body
+app.post('/api/recipes', auth, async (req, res) => {
+    const body = req.body
+    const user = req.user.toObject()
     const recipe = new Recipe({
-        author: "bobster", // temp
+        author: user.username,
+        authorID: user._id,
         title: body.title,
         description: body.description,
         imageFile: body.imageFile,
-        timeToCook: body.timeToCook,
+        hours: body.hours,
+        minutes: body.minutes,
         servings: body.servings,
         difficulty: body.difficulty,
         categories: body.categories,
@@ -30,14 +35,15 @@ app.post('/api/recipes', (request, response) => {
         instructions: body.instructions
     })
 
-    recipe.save().then(savedRecipe => {
-        response.json(savedRecipe.toJSON())
-        console.log("Recipe saved to database! :)")
-    }) 
+    const savedRecipe = await recipe.save()
+    res.json(savedRecipe.toJSON())
+     
+
 })
 
 app.get('/api/recipes', async (request, response) => {
     const searchWords = request.query.searchWords
+    console.log(searchWords)
     if (searchWords.length === 0) {
         const recipes = await Recipe.find({})
         response.json(recipes.map(recipe => recipe.toJSON()))
@@ -57,66 +63,73 @@ app.get('/api/recipes/:id', (request, response) => {
     })
 })
 
-let users = [
-    {
-        "username": "bobster",
-        "name": "Bob Bobson",
-        "profilePicture": "./assets/dummy/bobster.PNG",
-        "saved": [],
-        "followed":[]
-    },
-    {
-        "username": "lobster",
-        "name": "Lob Lobson",
-        "profilePicture": "./assets/dummy/lobster.PNG",
-        "saved": ["5dc72284539a4025084615a1", "5dc7351b58d59d3f38b6442d", "5dc735d158d59d3f38b64435"],
-        "followed":["gobster"]
-    },
-    {
-        "username": "gobster",
-        "name": "Gob Gobson",
-        "profilePicture": "./assets/dummy/gobster.PNG",
-        "saved": ["5dc72284539a4025084615a1", "5dc7355e58d59d3f38b64430"],
-        "followed":["lobster", "bobster"]
+app.post('/api/users', async (req, res) => {
+    // Create a new user
+    try {
+        const user = new User(req.body)
+        await user.save()
+        const token = await user.generateAuthToken()
+        res.status(201).send({ user, token })
+    } catch (error) {
+        res.status(400).send(error)
     }
-]
+})
 
-app.get('/api/users/:username', (req, res) => {
+app.post('/api/users/login', async (req, res) => {
+    //Login a registered user
+    try {
+        const { email, password } = req.body
+        const user = await User.findByCredentials(email, password)
+        const token = await user.generateAuthToken()
+        res.send({ user, token })
+    } catch (error) {
+        res.status(401).send({error: 'Login failed! Check authentication credentials'})
+    }
+})
+
+// Get user info. Can be accessed by anyone.
+app.get('/api/users/:username', async (req, res) => {
+    try {
+        const username = req.params.username
+        const user = await User.getProfileInfoByUsername(username)
+        res.send(user)
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
+
+app.post('/api/users/me/logout', auth, async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token != req.token
+        })
+        await req.user.save()
+        res.send()
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+
+app.get('/api/users/:username/recipes', async (req, res) => {
     const username = req.params.username
-    const user = users.find(user => user.username === username)
-    if (user) {
-        res.json(user)
-    }
-    else {
-        res.status(404).end()
-    }
+    const recipes = await Recipe.find({ author: username })
+    res.json(recipes.map(recipe => recipe.toJSON()))
 })
 
-app.get('/api/users/:username/ownrecipes', async (request, response) => {
-    const username = request.params.username
-    const recipes = await Recipe.find({author: username})
-    response.json(recipes.map(recipe => recipe.toJSON()))
-})
-
-
-app.get('/api/users/:username/savedrecipes', async (request, response) => {
-    const username = request.params.username
-    const user = users.find(user => user.username === username)
-    const recipes = await Recipe.find().where('_id').in(user.saved);
-    response.json(recipes.map(recipe => recipe.toJSON()))
-})
-
-
-app.get('/api/users/:username/followed', (req, res) => {
+app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
+    //const bookmarks = req.user.toObject().bookmarks
     const username = req.params.username
-    const user = users.find(user => user.username === username)
-    const followed = users.filter(u => user.followed.includes(u.username))
-    if (followed) {
-        res.json(followed)
-    }
-    else {
-        res.status(404).end()
-    }
+    const userInfo = await User.findOne({ username: username })
+    const recipes = await Recipe.find().where('_id').in(userInfo.bookmarks)
+    res.json(recipes.map(recipe => recipe.toJSON()))
+})
+
+app.get('/api/users/:username/following', async (req, res) => {
+    //const following = req.user.toObject().following
+    const username = req.params.username
+    const userInfo = await User.findOne({ username: username })
+    const users = await User.findProfilesByIds(userInfo.following)
+    res.json(users)
 })
 
 app.use('*', (req, res) => {

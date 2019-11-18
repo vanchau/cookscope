@@ -10,10 +10,12 @@ const validateRecipeForm = (values) => {
     errors.imageFile = 'No image selected for the recipe.'
   }
   // timeToCook errors
-  if (values.timeToCook === 0) {
+  if (values.hours === 0 && values.minutes === 0) {
     errors.timeToCook = 'Please provide an estimation of cooking time.'
-  } else if (values.timeToCook < 0 || values.timeToCook > 1000 || !Number.isInteger(values.timeToCook)) {
-    errors.timeToCook = 'The cooking time is not valid!'
+  } else if (values.hours < 0 || values.hours > 1000 || !Number.isInteger(values.hours)) {
+    errors.timeToCook = 'Invalid hours in cooking time!'
+  } else if (values.minutes < 0 || values.minutes > 59 || !Number.isInteger(values.minutes)) {
+    errors.timeToCook = 'Invalid minutes in cooking time!'
   }
   // servings errors
   if (values.servings <= 0) {

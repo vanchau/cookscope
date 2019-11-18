@@ -14,10 +14,11 @@ const INITIAL_STATE = {
   description: '',
   imageFile: {},
   difficulty: 'Beginner',
-  timeToCook: 0,
+  hours: 0,
+  minutes: 0,
   servings: 0,
   categories: [],
-  ingredients: [{ ingredient: '', id: 1 }],
+  ingredients: [{ amount: '', ingredient: '', id: 1 }],
   instructions: [{ instruction: '', id: 1 }]
 }
 
@@ -97,14 +98,24 @@ const CreateRecipe = () => {
             <hr style={{ marginTop: '0' }} />
 
             <Form.Group className='fields'>
-              <Form.Label style={{ fontWeight: 'bold' }}>Time to cook (in minutes): </Form.Label>
+              <Form.Label style={{ fontWeight: 'bold' }}>Time to cook: </Form.Label>
               <br></br>
               <div style={{ display: 'flex', marginBottom: '20px' }}>
                 <Form.Control
+                  className='no-spinner'
                   type='number'
-                  name='timeToCook'
+                  name='hours'
                   onChange={handleChange}
-                  placeholder={INITIAL_STATE.timeToCook}
+                  placeholder={INITIAL_STATE.hours}
+                  style={{ flex: 1, marginRight: '10px' }}
+                />
+                <Form.Label style={{ flex: 2, marginTop: '0.5rem' }}> hours</Form.Label>
+                <Form.Control
+                  className='no-spinner'
+                  type='number'
+                  name='minutes'
+                  onChange={handleChange}
+                  placeholder={INITIAL_STATE.minutes}
                   style={{ flex: 1, marginRight: '10px' }}
                 />
                 <Form.Label style={{ flex: 2, marginTop: '0.5rem' }}> minutes</Form.Label>
@@ -117,6 +128,7 @@ const CreateRecipe = () => {
               <br></br>
               <div style={{ display: 'flex', marginBottom: '20px' }}>
                 <Form.Control
+                  className='no-spinner'
                   type='number'
                   name='servings'
                   placeholder={INITIAL_STATE.servings}
@@ -190,7 +202,14 @@ const CreateRecipe = () => {
                 <div key={ingredient.id} style={{ display: 'flex', marginBottom: '20px' }}>
                   <Form.Control
                     id={ingredient.id}
-                    placeholder='e.g. 2 cloves of garlic'
+                    placeholder='e.g. 3 dl'
+                    onChange={handleChange}
+                    name='ingredientAmounts'
+                    style={{ flex: '2', marginRight: '10px'}}
+                  />
+                  <Form.Control
+                    id={ingredient.id}
+                    placeholder='e.g. water'
                     onChange={handleChange}
                     name='ingredients'
                     style={{ flex: '10'}}
