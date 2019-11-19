@@ -1,7 +1,7 @@
 .recipe-list-card {
 	background-color:white ;
 	height: 22em;
-	width: 22em;
+	width: 21em;
 	padding: 1em;
 	margin: 1em;
 }
@@ -43,9 +43,9 @@
 }
  
 .recipe-list-card-columns {
-	margin-top: 1.5em;
-	width: 85em;
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-}
+		margin-top: 1.5em;
+		width: 80em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
