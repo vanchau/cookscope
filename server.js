@@ -20,9 +20,7 @@ const auth = require('./middleware/auth')
 let recipes = []
 
 const fetchAll = async () => {
-    console.log("old recipes count", recipes.length)
     recipes = await Recipe.find({})
-    console.log("recipes updated! new count: ", recipes.length)
 }
 
 fetchAll()
@@ -60,10 +58,10 @@ app.get('/api/recipes', async (request, response) => {
         response.json(recipes.map(recipe => recipe.toJSON()))
     } 
     else {
-
         const some = recipes.filter(function(recipe){
             if (searchWords.some(word => recipe.title.toLowerCase().split(" ").includes(word))) return true
             if (searchWords.some(word => recipe.title.toLowerCase().includes(word))) return true
+            if (recipe.ingredients.some(ingredient => searchWords.includes(ingredient.ingredient))) return true
             return false
         })
         some.sort(function(a,b){
