@@ -3,8 +3,15 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
+import StarRating from './StarRating'
 
-const Recipe = () => {
+const Recipe = (props) => {
+
+  const {
+    setRating,
+    rating
+  } = props
+
   const { recipeID } = useParams()
   const [recipe, setRecipe] = useState({ ingredients: [], instructions: [] })
 
@@ -25,6 +32,7 @@ const Recipe = () => {
           <Card.Text>
 						by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
           </Card.Text>
+          <StarRating setEditing={true} rating={rating} setRating={setRating}/>
           <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
           {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
           <Card.Title>

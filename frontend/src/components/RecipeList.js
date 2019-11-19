@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter, useHistory, Link } from 'react-router-dom'
-import { Card, CardColumns } from 'react-bootstrap'
+import { Card, CardGroup } from 'react-bootstrap'
 import axios from 'axios'
-
+import StarRating from './StarRating'
 import '../css/RecipeList.css'
 
-const RecipeList = () => {
+const RecipeList = (props) => {
+
+  const {
+    rating,
+    setRating
+  } = props
 
   const [recipes, setData] 	= useState([])
   let history = useHistory()
@@ -20,7 +25,7 @@ const RecipeList = () => {
   }, [])
 
   return (
-    <CardColumns className='recipe-list-card-columns'>
+    <div className='recipe-list-card-columns'>
       {recipes.map(recipe => (
         <Card
           className='recipe-list-card'
@@ -36,10 +41,11 @@ const RecipeList = () => {
             <Card.Text>
 							by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
             </Card.Text>
+            <StarRating starEditing={false} rating={rating} setRating={setRating}></StarRating>
           </Card.Body>
         </Card>
       ))}
-    </CardColumns>
+    </div>
   )
 }
 export default withRouter(RecipeList)

@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import FilterBar from './FilterBar'
 import RecipeList from './RecipeList'
 
-const Home = () => {
+const Home = (props) => {
+
+  const {
+    rating,
+    setRating
+  } = props
 
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedDifficulties, setSelectedDifficulties] = useState([])
@@ -21,7 +26,7 @@ const Home = () => {
         selectedDiets={selectedDiets}
         setSelectedDiets={setSelectedDiets}
       />
-      <RecipeList/>
+      <RecipeList rating={rating} setRating={setRating}/>
     </>
   )
 }
