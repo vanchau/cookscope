@@ -20,7 +20,7 @@ const RecipeList = () => {
   }, [])
 
   return (
-    <CardColumns className='recipe-list-card-columns'>
+    <div className='recipe-list-card-columns'>
       {recipes.map(recipe => (
         <Card
           className='recipe-list-card'
@@ -39,7 +39,7 @@ const RecipeList = () => {
           </Card.Body>
         </Card>
       ))}
-    </CardColumns>
+    </div>
   )
 }
 export default withRouter(RecipeList)
