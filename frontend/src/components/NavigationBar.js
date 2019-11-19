@@ -73,7 +73,7 @@ const NavigationBar = (props) => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault()
-    const splittedSearchWords = currentSearchWords.split(" ")
+    const splittedSearchWords = currentSearchWords.toLowerCase().split(" ")
     setSearchWords(splittedSearchWords)
   }
 

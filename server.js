@@ -17,6 +17,20 @@ const Recipe = require('./models/recipe')
 const User = require('./models/user')
 const auth = require('./middleware/auth')
 
+let recipes = []
+
+const fetchAll = async () => {
+    console.log("old recipes count", recipes.length)
+    recipes = await Recipe.find({})
+    console.log("recipes updated! new count: ", recipes.length)
+}
+
+fetchAll()
+
+Recipe.watch().on('change', async data => {
+    fetchAll()
+})
+
 app.post('/api/recipes', auth, async (req, res) => {
     const body = req.body
     const user = req.user.toObject()
@@ -37,30 +51,51 @@ app.post('/api/recipes', auth, async (req, res) => {
 
     const savedRecipe = await recipe.save()
     res.json(savedRecipe.toJSON())
-     
-
 })
 
 app.get('/api/recipes', async (request, response) => {
     const searchWords = request.query.searchWords
-    console.log(searchWords)
+
     if (searchWords.length === 0) {
-        const recipes = await Recipe.find({})
         response.json(recipes.map(recipe => recipe.toJSON()))
     } 
     else {
-        //let recipes = []
-        console.log(searchWords)
-        const recipes = await Recipe.find().all('title', ['Artesan bread'])
-        console.log(recipes)
-        response.json(recipes.map(recipe => recipe.toJSON()))
+
+        const some = recipes.filter(function(recipe){
+            if (searchWords.some(word => recipe.title.toLowerCase().split(" ").includes(word))) return true
+            if (searchWords.some(word => recipe.title.toLowerCase().includes(word))) return true
+            return false
+        })
+        some.sort(function(a,b){
+            const titleA = a.title.toLowerCase()
+            const titleASplit = titleA.split(" ")
+            const titleB = b.title.toLowerCase()
+            const titleBSplit = titleB.split(" ")
+            const boolA = searchWords.map(word => titleASplit.includes(word))
+            const boolB = searchWords.map(word => titleBSplit.includes(word))
+            const matchesA = boolA.filter(x => x === true).length
+            const matchesB = boolB.filter(x => x === true).length
+            if (matchesA > matchesB) return -1
+            else if (matchesA < matchesB) return 1
+            else {
+                const subStringInA = searchWords.map(word => titleA.includes(word))
+                const subStringInB = searchWords.map(word => titleB.includes(word))
+                const subStringMatchesA = subStringInA.filter(x => x === true).length
+                const subStringMatchesB = subStringInB.filter(x => x === true).length
+                if (subStringMatchesA > subStringMatchesB) return -1
+                if (subStringMatchesA < subStringMatchesB) return 1
+                return 0
+            }
+        })
+        response.json(some.map(recipe => recipe.toJSON()))
     }  
 })
 
 app.get('/api/recipes/:id', (request, response) => {
-    Recipe.findById(request.params.id).then(recipe => {
-      response.json(recipe.toJSON())
-    })
+    //Recipe.findById(request.params.id).then(recipe => {
+    //  response.json(recipe.toJSON())
+    //})
+    response.json(recipes.find(recipe => recipe.id === request.params.id))
 })
 
 app.post('/api/users', async (req, res) => {
@@ -112,16 +147,20 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
 
 app.get('/api/users/:username/recipes', async (req, res) => {
     const username = req.params.username
-    const recipes = await Recipe.find({ author: username })
-    res.json(recipes.map(recipe => recipe.toJSON()))
+    // const recipes = await Recipe.find({ author: username })
+    //res.json(recipes.map(recipe => recipe.toJSON()))
+    const ownRecipes = recipes.filter(recipe => recipe.author === username)
+    res.json(ownRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
     //const bookmarks = req.user.toObject().bookmarks
     const username = req.params.username
     const userInfo = await User.findOne({ username: username })
-    const recipes = await Recipe.find().where('_id').in(userInfo.bookmarks)
-    res.json(recipes.map(recipe => recipe.toJSON()))
+    // const recipes = await Recipe.find().where('_id').in(userInfo.bookmarks)
+    // res.json(recipes.map(recipe => recipe.toJSON()))
+    const bookmarkedRecipes = recipes.filter(recipe => userInfo.bookmarks.includes(recipe.id))
+    res.json(bookmarkedRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.get('/api/users/:username/following', async (req, res) => {
