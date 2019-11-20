@@ -47,7 +47,7 @@ const RecipeList = (props) => {
               <Card.Text>
                 by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
               </Card.Text>
-              <StarRating starEditing={false} starHalves={true} rating={calculateRating(recipe)} setRating={setRating}></StarRating>
+              <StarRating starEditing={false} starHalves={true} rating={calculateRating(recipe)}></StarRating>
             </Card.Body>
           </Card>
         ))}

@@ -93,3 +93,12 @@ export const logout = async (token) => {
     return error
   }
 }
+
+export const postRating = async (rating, id) => {
+  try {
+    const result = await axios.put(`/api/recipes/${id}`, rating)
+    return result
+  } catch (error) {
+    return error
+  }
+}

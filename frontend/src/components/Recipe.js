@@ -4,22 +4,17 @@ import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
+import { postRating } from './api'
 
 const Recipe = (props) => {
 
   const loggedUser = localStorage.getItem('username')
-  const userToken = localStorage.getItem('token')
   const userId = localStorage.getItem('id')
 
-  const {
-    setRating,
-    rating
-  } = props
-
-  const voters = 123
 
   const { recipeID } = useParams()
-  const [recipe, setRecipe] = useState({ ingredients: [], instructions: [] })
+  const [recipe, setRecipe] = useState({ ingredients: [], instructions: [], ratings: [] })
+  const [rating, setRating] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +23,21 @@ const Recipe = (props) => {
     }
     fetchData()
   }, [recipeID])
+
+  const submitRating = (value) => {
+    const rating = {userId: userId, rating: value}
+    postRating(rating, recipeID)
+  }
+
+  const calculateRating = () => {
+    const a = recipe.ratings.map(rating => rating.rating).reduce((acc, curr) => acc + curr)
+    setRating(a)
+  }
+
+  const ownRating = () => {
+    console.log(recipe.ratings.find(rating => rating.userId === userId).rating)
+    return recipe.ratings.find(rating => rating.userId === userId).rating
+  }
 
   return (
     <React.Fragment>
@@ -40,13 +50,13 @@ const Recipe = (props) => {
           </Card.Text>
           <div className='row recipe-star-ratings'>
               <div className='single-rating'>
-                <StarRating starEditing={false} starHalves={true} rating={rating+0.5} setRating={setRating}/> 
-                <div className='rating-by'>{voters} ratings</div>
+                <StarRating starEditing={false} starHalves={true} rating={calculateRating} submitRating={submitRating}/> 
+                <div className='rating-by'>{recipe.ratings.length} ratings</div>
               </div>
               {
               (loggedUser !== null) ?
                 <div className='single-rating'>
-                  <StarRating starEditing={true} starHalves={false} rating={rating} setRating={setRating}/> 
+                  <StarRating starEditing={true} starHalves={false} rating={ownRating} submitRating={submitRating}/> 
                   <div className='rating-by'>You</div>
                 </div>
                 :
