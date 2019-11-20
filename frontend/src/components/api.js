@@ -102,3 +102,12 @@ export const postRating = async (rating, id) => {
     return error
   }
 }
+
+export const getRating = async (id) => {
+  try {
+    const result = await axios.get(`/api/recipes/${id}/rating`)
+    return result
+  } catch (error) {
+    return error
+  }
+}

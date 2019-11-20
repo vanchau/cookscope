@@ -14,7 +14,6 @@ const Recipe = (props) => {
 
   const { recipeID } = useParams()
   const [recipe, setRecipe] = useState({ ingredients: [], instructions: [], ratings: [] })
-  const [rating, setRating] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +30,7 @@ const Recipe = (props) => {
 
   const calculateRating = () => {
     const a = recipe.ratings.map(rating => rating.rating).reduce((acc, curr) => acc + curr)
-    setRating(a)
+    return a
   }
 
   const ownRating = () => {

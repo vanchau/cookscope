@@ -8,29 +8,41 @@ import '../css/RecipeList.css'
 const RecipeList = (props) => {
 
   const {
-    rating,
-    setRating
-  } = props
+    searchWords, 
+    selectedCategories, 
+    selectedDifficulties,
+    selectedTimes,
+    selectedDiets
+    } = props
 
   const [recipes, setData] 	= useState([])
+
   let history = useHistory()
 
   useEffect(() => {
     const fetchData = async () => {
       const baseUrl = '/api/recipes'
-      const result = await axios(baseUrl)
+      const result = await axios(baseUrl, {params: { 
+        searchWords: searchWords, 
+        selectedCategories: selectedCategories,
+        selectedDifficulties: selectedDifficulties,
+        selectedTimes: selectedTimes,
+        selectedDiets: selectedDiets 
+        }})
       setData(result.data)
     }
     fetchData()
-  }, [])
-
-  const calculateRating = (recipe) => {
-      return 3
-  }
+  }, [
+    searchWords,
+    selectedCategories,
+    selectedDifficulties,
+    selectedTimes,
+    selectedDiets
+   ])
 
   return (
     <div>
-      <div></div>
+      {searchWords.length > 0 ? <h2>"{searchWords.join(" ")}": {recipes.length} recipes found</h2> : <></>}
       <div className='recipe-list-card-columns'>
         {recipes.map(recipe => (
           <Card
@@ -47,7 +59,6 @@ const RecipeList = (props) => {
               <Card.Text>
                 by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
               </Card.Text>
-              <StarRating starEditing={false} starHalves={true} rating={calculateRating(recipe)}></StarRating>
             </Card.Body>
           </Card>
         ))}

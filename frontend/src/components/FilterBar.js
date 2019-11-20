@@ -41,8 +41,7 @@ const FilterBar = (props) => {
                 'Under 15 minutes',
                 'Under 30 minutes',
                 'Under 45 minutes', 
-                'Under 1 hour', 
-                'Over 1 hour'
+                'Under 1 hour'
                 ]
   const diets = [
                 'Vegetarian',
