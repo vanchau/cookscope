@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,21 +24,20 @@ const About = () => (
 
 const App = () => {
   
-  const [searchWords, setSearchWords] = useState('')
-
   return(
   <Router>
-    <NavigationBar setSearchWords={setSearchWords}/>
+    <NavigationBar/>
     <div className='global-background'>
       <Container>
         <Switch>
-          <Route exact path='/' render={(props) => <Home {...props} searchWords={searchWords} />} />
+          <Route exact path='/' component={Home} />} />
+          <Route path='/search=:searchWords' component={Home} />} />
           <Route path='/about' component={About} />
           <Route path='/create-recipe' component={CreateRecipe} />
           <Route path='/settings' component={Settings} />
           <Route path='/privacy' component={PrivacyPolicy} />
           <Route path='/terms' component={TermsOfService} />
-          <Route path='/recipe/:recipeID' component={Recipe}/>
+          <Route path='/recipe/:recipeID' component={Recipe} />
           <Route path='/user/:username' component={UserProfile}/>
         </Switch>
       </Container>

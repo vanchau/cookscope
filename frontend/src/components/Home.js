@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import FilterBar from './FilterBar'
 import RecipeList from './RecipeList'
 
-const Home = (props) => {
-
-  const {searchWords} = props
+const Home = () => {
 
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedDifficulties, setSelectedDifficulties] = useState([])
   const [selectedTimes, setSelectedTimes] = useState([])
   const [selectedDiets, setSelectedDiets] = useState([])
+
+  const { searchWords } = useParams()
+  let search = []
+  if (searchWords) {
+    search = searchWords.split("+")
+  }
 
   return (
     <>
@@ -23,7 +28,7 @@ const Home = (props) => {
         selectedDiets={selectedDiets}
         setSelectedDiets={setSelectedDiets}
       />
-      <RecipeList searchWords={searchWords}/>
+      <RecipeList searchWords={search}/>
     </>
   )
 }

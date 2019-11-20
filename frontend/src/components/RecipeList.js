@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { withRouter, useHistory, Link } from 'react-router-dom'
-import { Card, CardColumns } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import axios from 'axios'
 
 import '../css/RecipeList.css'
@@ -10,7 +10,6 @@ const RecipeList = (props) => {
   const {searchWords} = props
   const [recipes, setData] 	= useState([])
   let history = useHistory()
-
   useEffect(() => {
     const fetchData = async () => {
       const baseUrl = '/api/recipes'

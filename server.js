@@ -51,20 +51,21 @@ app.post('/api/recipes', auth, async (req, res) => {
     res.json(savedRecipe.toJSON())
 })
 
+
 app.get('/api/recipes', async (request, response) => {
     const searchWords = request.query.searchWords
-
-    if (searchWords.length === 0) {
+    console.log(typeof searchWords)
+    if (!searchWords) {
         response.json(recipes.map(recipe => recipe.toJSON()))
     } 
     else {
-        const some = recipes.filter(function(recipe){
+        const someMatch = recipes.filter(function(recipe){
             if (searchWords.some(word => recipe.title.toLowerCase().split(" ").includes(word))) return true
             if (searchWords.some(word => recipe.title.toLowerCase().includes(word))) return true
             if (recipe.ingredients.some(ingredient => searchWords.includes(ingredient.ingredient))) return true
             return false
         })
-        some.sort(function(a,b){
+        someMatch.sort(function(a,b){
             const titleA = a.title.toLowerCase()
             const titleASplit = titleA.split(" ")
             const titleB = b.title.toLowerCase()
@@ -85,7 +86,7 @@ app.get('/api/recipes', async (request, response) => {
                 return 0
             }
         })
-        response.json(some.map(recipe => recipe.toJSON()))
+        response.json(someMatch.map(recipe => recipe.toJSON()))
     }  
 })
 

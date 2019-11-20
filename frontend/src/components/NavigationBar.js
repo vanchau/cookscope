@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Nav, NavDropdown, Navbar, Form, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { FiUser } from 'react-icons/fi'
 import { IoMdSettings } from 'react-icons/io'
 
@@ -19,9 +19,13 @@ const INITIAL_STATE = {
 }
 
 const NavigationBar = (props) => {
-  
-  const {setSearchWords} = props
-  const [currentSearchWords, setCurrentSearchWords] = useState('')
+  const input = useRef(null)
+  let history = useHistory()
+  let currentSearch = ''
+  if (history.location.pathname.includes("/search=")) {
+    currentSearch = history.location.pathname.split("=")[1].split("+").join(" ")
+  }
+  const [currentSearchWords, setCurrentSearchWords] = useState(currentSearch)
 
   const {
     handleSubmit,
@@ -73,20 +77,25 @@ const NavigationBar = (props) => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault()
-    const splittedSearchWords = currentSearchWords.toLowerCase().split(" ")
-    setSearchWords(splittedSearchWords)
+    const splitSearchWords = currentSearchWords.toLowerCase().split(" ").join("+")
+    history.push(`/search=${splitSearchWords}`)
+  }
+
+  const clearSearch = () => {
+    setCurrentSearchWords('')
+
   }
 
   return (
     <Navbar className='navigation-bar d-flex justify-content-between sticky-top'>
       <div>
-        <Link className='navbar-brand' to='/'>
-          <img className='logo-image' src={logo} alt='logo' />
+        <Link className='navbar-brand' to='/' ref={input} onClick={clearSearch}>
+          <img className='logo-image' src={logo} alt='logo'/>
         </Link>
       </div>
       <div>
         <Form className="search-form" onSubmit={handleSearchSubmit}>
-          <Form.Control onChange={handleSearchChange} type='text' placeholder='Enter dish or ingredient(s)' className='search-bar form-size main-search'/>
+          <Form.Control value={currentSearchWords} onChange={handleSearchChange} type='text' placeholder='Enter dish or ingredient(s)' className='search-bar form-size main-search'/>
           <Button variant='navbar-button' className='search-button' type='submit' >Search</Button>
         </Form>
       </div>
