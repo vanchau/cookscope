@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Nav, NavDropdown, Navbar, Form, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { FiUser } from 'react-icons/fi'
 import { IoMdSettings } from 'react-icons/io'
 
@@ -22,9 +22,11 @@ const NavigationBar = (props) => {
   const input = useRef(null)
   let history = useHistory()
   let currentSearch = ''
+
   if (history.location.pathname.includes("/search=")) {
     currentSearch = history.location.pathname.split("=")[1].split("+").join(" ")
   }
+  
   const [currentSearchWords, setCurrentSearchWords] = useState(currentSearch)
 
   const {
@@ -79,11 +81,11 @@ const NavigationBar = (props) => {
     event.preventDefault()
     const splitSearchWords = currentSearchWords.toLowerCase().split(" ").join("+")
     history.push(`/search=${splitSearchWords}`)
+    setCurrentSearchWords('')
   }
 
   const clearSearch = () => {
     setCurrentSearchWords('')
-
   }
 
   return (
