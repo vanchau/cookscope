@@ -51,6 +51,12 @@ app.get('/api/recipes/:id', (request, response) => {
     })
 })
 
+app.put('/api/recipes/:id', async (req, res) => {
+    const body = req.body
+    const updated = await Recipe.findOneAndUpdate({_id: req.params.id}, {$push: {ratings: body}})
+})
+
+
 app.post('/api/users', async (req, res) => {
     // Create a new user
     try {

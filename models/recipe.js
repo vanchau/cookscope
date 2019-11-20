@@ -26,7 +26,7 @@ const recipeSchema = new mongoose.Schema({
   categories: [String],
   ingredients: [{amount: String, ingredient: String, id: Number}],
   instructions: [{instruction: String, id: Number}],
-  ratings: [{id: String, rating: Number}]
+  ratings: [{userId: String, rating: Number}]
 })
 
 recipeSchema.plugin(timestamps);
