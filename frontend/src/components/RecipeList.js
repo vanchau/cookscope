@@ -7,17 +7,38 @@ import '../css/RecipeList.css'
 
 const RecipeList = (props) => {
 
-  const {searchWords} = props
+  const {
+    searchWords, 
+    selectedCategories, 
+    selectedDifficulties,
+    selectedTimes,
+    selectedDiets
+    } = props
+
   const [recipes, setData] 	= useState([])
+
   let history = useHistory()
+
   useEffect(() => {
     const fetchData = async () => {
       const baseUrl = '/api/recipes'
-      const result = await axios(baseUrl, {params: { searchWords: searchWords }})
+      const result = await axios(baseUrl, {params: { 
+        searchWords: searchWords, 
+        selectedCategories: selectedCategories,
+        selectedDifficulties: selectedDifficulties,
+        selectedTimes: selectedTimes,
+        selectedDiets: selectedDiets 
+        }})
       setData(result.data)
     }
     fetchData()
-  }, [searchWords])
+  }, [
+    searchWords,
+    selectedCategories,
+    selectedDifficulties,
+    selectedTimes,
+    selectedDiets
+   ])
 
   return (
     <div>

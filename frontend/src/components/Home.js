@@ -28,7 +28,13 @@ const Home = () => {
         selectedDiets={selectedDiets}
         setSelectedDiets={setSelectedDiets}
       />
-      <RecipeList searchWords={search}/>
+      <RecipeList 
+      searchWords={search}
+      selectedCategories={selectedCategories} 
+      selectedDifficulties={selectedDifficulties}
+      selectedTimes={selectedTimes}
+      selectedDiets={selectedDiets}
+      />
     </>
   )
 }

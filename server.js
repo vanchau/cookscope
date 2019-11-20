@@ -53,10 +53,17 @@ app.post('/api/recipes', auth, async (req, res) => {
 
 
 app.get('/api/recipes', async (request, response) => {
+
     const searchWords = request.query.searchWords
-    console.log(typeof searchWords)
+    const selectedCategories = request.query.selectedCategories
+    const selectedDifficulties = request.query.selectedDifficulties
+    const selectedTimes = request.query.selectedTimes
+    const selectedDiets = request.query.selectedDiets
+
+    let filteredRecipes = []
+    
     if (!searchWords) {
-        response.json(recipes.map(recipe => recipe.toJSON()))
+        filteredRecipes = recipes
     } 
     else {
         const someMatch = recipes.filter(function(recipe){
@@ -86,8 +93,34 @@ app.get('/api/recipes', async (request, response) => {
                 return 0
             }
         })
-        response.json(someMatch.map(recipe => recipe.toJSON()))
-    }  
+        filteredRecipes = someMatch 
+    }
+    if (selectedCategories) {
+        filteredRecipes = filteredRecipes.filter(recipe => recipe.categories.includes(selectedCategories))
+    }
+    if (selectedDifficulties) {
+        filteredRecipes = filteredRecipes.filter(recipe => selectedDifficulties.includes(recipe.difficulty))
+    }
+    if (selectedTimes) {
+        if (selectedTimes.includes('Under 1 hour')) {
+            filteredRecipes = filteredRecipes.filter(recipe => recipe.hours === 0)
+        }
+        else if (selectedTimes.includes('Under 45 minutes')) {
+            filteredRecipes = filteredRecipes.filter(recipe => recipe.hours === 0 && recipe.minutes < 45)
+        }
+        else if (selectedTimes.includes('Under 30 minutes')) {
+            filteredRecipes = filteredRecipes.filter(recipe => recipe.hours === 0 && recipe.minutes < 30)
+        }
+        else if (selectedTimes.includes('Under 15 minutes')) {
+            filteredRecipes = filteredRecipes.filter(recipe => recipe.hours === 0 && recipe.minutes < 15)
+        }
+        else filteredRecipes = filteredRecipes
+    }
+    if (selectedDiets) {
+        filteredRecipes = filteredRecipes.filter(recipe => recipe.categories.includes(selectedDiets))
+    }
+
+    response.json(filteredRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.get('/api/recipes/:id', (request, response) => {
