@@ -131,9 +131,37 @@ app.get('/api/recipes/:id', (request, response) => {
     response.json(recipes.find(recipe => recipe.id === request.params.id))
 })
 
-app.put('/api/recipes/:id', async (req, res) => {
-    const body = req.body
-    const updated = await Recipe.findOneAndUpdate({_id: req.params.id}, {$push: {ratings: body}})
+app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
+    try {
+        const rating = req.body
+        let recipe = recipes.find(recipe => recipe.id === req.params.id)
+        recipe.ratings = recipe.ratings.filter(rating => rating.userId !== req.params.userId)
+        recipe.ratings.push(rating)
+        await Recipe.findByIdAndUpdate(req.params.id, recipe, {new: true})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/api/recipes/:id/rating', (req, res) => {
+    try {
+        const recipe = recipes.find(recipe => recipe.id === req.params.id)
+        const arr = recipe.ratings.map(rating => rating.rating)
+        const rating = Math.round(arr.reduce((acc, curr) => acc + curr, 0) / recipe.ratings.length * 10) / 10
+        res.json({rating})
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/api/recipes/:id/rating/:userId', (req, res) => {
+    try {
+        const recipe = recipes.find(recipe => recipe.id === req.params.id)
+        const rating = (recipe.ratings.find(rating => rating.userId === req.params.userId)).rating
+        res.json({rating})
+    } catch (error) {
+        res.status(400).send(error)
+    }
 })
 
 

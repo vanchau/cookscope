@@ -1,41 +1,41 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
-import { postRating } from './api'
+import { postRating, getRecipe, getRecipeRating, getOwnRating } from './api'
 
-const Recipe = (props) => {
+const Recipe = () => {
 
   const loggedUser = localStorage.getItem('username')
   const userId = localStorage.getItem('id')
 
-
   const { recipeID } = useParams()
   const [recipe, setRecipe] = useState({ ingredients: [], instructions: [], ratings: [] })
-
+  const [recipeRating, setRecipeRating] = useState(0)
+  const [ownRating, setOwnRating] = useState(0)
+  const [ratingCount, setRatingCount] = useState(0)
+  
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`/api/recipes/${recipeID}`)
-      setRecipe(result.data)
+    const fetchData = () => {
+      getRecipe(recipeID).then((result) => {
+        setRecipe(result)
+        setRatingCount(result.ratings.length)
+      })
+      getRecipeRating(recipeID).then((result) => {
+        setRecipeRating(result.rating)
+      })
+      getOwnRating(recipeID, userId).then((result) => {
+        setOwnRating(result.rating)
+      })
     }
     fetchData()
-  }, [recipeID])
-
+  }, [recipeID, ownRating])
+  
   const submitRating = (value) => {
     const rating = {userId: userId, rating: value}
-    postRating(rating, recipeID)
-  }
-
-  const calculateRating = () => {
-    const a = recipe.ratings.map(rating => rating.rating).reduce((acc, curr) => acc + curr)
-    return a
-  }
-
-  const ownRating = () => {
-    console.log(recipe.ratings.find(rating => rating.userId === userId).rating)
-    return recipe.ratings.find(rating => rating.userId === userId).rating
+    postRating(rating, recipeID, userId)
+    setOwnRating(value)
   }
 
   return (
@@ -49,8 +49,8 @@ const Recipe = (props) => {
           </Card.Text>
           <div className='row recipe-star-ratings'>
               <div className='single-rating'>
-                <StarRating starEditing={false} starHalves={true} rating={calculateRating} submitRating={submitRating}/> 
-                <div className='rating-by'>{recipe.ratings.length} ratings</div>
+                <StarRating starEditing={false} starHalves={true} rating={recipeRating} submitRating={submitRating}/> 
+                <div className='rating-by'>{ratingCount} ratings</div>
               </div>
               {
               (loggedUser !== null) ?

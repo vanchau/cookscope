@@ -3,6 +3,7 @@ import { withRouter, useHistory, Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import axios from 'axios'
 import StarRating from './StarRating'
+import { getRecipeRating } from './api'
 import '../css/RecipeList.css'
 
 const RecipeList = (props) => {
@@ -40,6 +41,7 @@ const RecipeList = (props) => {
     selectedDiets
    ])
 
+  
   return (
     <div>
       {searchWords.length > 0 ? <h2>"{searchWords.join(" ")}": {recipes.length} recipes found</h2> : <></>}
@@ -59,6 +61,7 @@ const RecipeList = (props) => {
               <Card.Text>
                 by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
               </Card.Text>
+              
             </Card.Body>
           </Card>
         ))}
