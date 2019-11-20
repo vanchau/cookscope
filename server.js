@@ -96,7 +96,7 @@ app.get('/api/recipes', async (request, response) => {
         filteredRecipes = someMatch 
     }
     if (selectedCategories) {
-        filteredRecipes = filteredRecipes.filter(recipe => recipe.categories.includes(selectedCategories))
+        filteredRecipes = filteredRecipes.filter(recipe => selectedCategories.every(category => recipe.categories.includes(category)))
     }
     if (selectedDifficulties) {
         filteredRecipes = filteredRecipes.filter(recipe => selectedDifficulties.includes(recipe.difficulty))
@@ -117,7 +117,7 @@ app.get('/api/recipes', async (request, response) => {
         else filteredRecipes = filteredRecipes
     }
     if (selectedDiets) {
-        filteredRecipes = filteredRecipes.filter(recipe => recipe.categories.includes(selectedDiets))
+        filteredRecipes = filteredRecipes.filter(recipe => selectedDiets.every(diet => recipe.categories.includes(diet)))
     }
 
     response.json(filteredRecipes.map(recipe => recipe.toJSON()))
