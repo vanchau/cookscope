@@ -32,13 +32,12 @@ app.post('/api/recipes', auth, async (req, res) => {
         difficulty: body.difficulty,
         categories: body.categories,
         ingredients: body.ingredients,
-        instructions: body.instructions
+        instructions: body.instructions,
+        ratings: []
     })
 
     const savedRecipe = await recipe.save()
     res.json(savedRecipe.toJSON())
-     
-
 })
 
 app.get('/api/recipes', async (request, response) => {

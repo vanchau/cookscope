@@ -7,10 +7,16 @@ import StarRating from './StarRating'
 
 const Recipe = (props) => {
 
+  const loggedUser = localStorage.getItem('username')
+  const userToken = localStorage.getItem('token')
+  const userId = localStorage.getItem('id')
+
   const {
     setRating,
     rating
   } = props
+
+  const voters = 123
 
   const { recipeID } = useParams()
   const [recipe, setRecipe] = useState({ ingredients: [], instructions: [] })
@@ -32,7 +38,21 @@ const Recipe = (props) => {
           <Card.Text>
 						by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
           </Card.Text>
-          <StarRating setEditing={true} rating={rating} setRating={setRating}/>
+          <div className='row recipe-star-ratings'>
+              <div className='single-rating'>
+                <StarRating starEditing={false} starHalves={true} rating={rating+0.5} setRating={setRating}/> 
+                <div className='rating-by'>{voters} ratings</div>
+              </div>
+              {
+              (loggedUser !== null) ?
+                <div className='single-rating'>
+                  <StarRating starEditing={true} starHalves={false} rating={rating} setRating={setRating}/> 
+                  <div className='rating-by'>You</div>
+                </div>
+                :
+                <></>
+              }
+          </div>
           <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
           {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
           <Card.Title>
@@ -56,3 +76,5 @@ const Recipe = (props) => {
 }
 
 export default Recipe
+
+

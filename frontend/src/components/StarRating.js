@@ -1,21 +1,24 @@
 import React from 'react'
-import StarRatingComponent from 'react-star-rating-component'
+import ReactStars from 'react-stars'
+import '../css/StarRating.css'
 
 const StarRating = (props) => {
 
   const {
     starEditing,
     rating,
-    setRating
+    setRating,
+    starHalves
   } = props
 
-  const handleStarClick = (nextValue, prevValue, name) => {
+  const handleStarClick = (nextValue) => {
     setRating(nextValue)
   }
 
   return (
-    <form >
-      <StarRatingComponent emptyStarColor='LightGrey' editing={starEditing} starCount={5} name='rate1' value={rating} onStarClick={handleStarClick}/>
+    <form className='row star-rating'>
+      <ReactStars className='stars' color2='#FBB117' color1='LightGrey' edit={starEditing} half={starHalves} count={5} value={rating} onChange={handleStarClick}/>
+      <div className='rating'>{rating}</div>
     </form>
   )
 }

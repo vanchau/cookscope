@@ -16,24 +16,25 @@ const FilterBar = (props) => {
   } = props
 
   const categories = [
-                      "Appetizers",
-                      "Beef",
-                      "Breads",
-                      "Budget friendly",
-                      "Casseroles",
-                      "Chicken",
                       "Dinner",
-                      "Desserts",
-                      "Fish",
-                      "Healthy",
-                      "Kid friendly",
-                      "Pasta",
+                      "Dessert",
+                      "Appetizer",
+                      "Breakfast",
+                      "Snack",
+                      "Baking",
                       "Pork",
-                      "Salads",
+                      "Chicken",
+                      "Fish",
+                      "Beef",
+                      "Bread",
+                      "Casserole",
+                      "Pasta",
+                      "Salad",
+                      "Soup",
                       "Slow cooker",
-                      "Snacks",
-                      "Soups",
-                      "Vegetable"
+                      "Budget friendly",
+                      "Healthy",
+                      "Kid friendly"
                       ]
   const difficulties = ['Easy', 'Medium', 'Challenging']
   const times = [
