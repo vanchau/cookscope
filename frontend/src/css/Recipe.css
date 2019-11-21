@@ -4,7 +4,6 @@
 }
 
 .comment-author {
-	color: #007bff;
 	font-size: 1rem;
 	vertical-align: middle;
 }
@@ -12,16 +11,6 @@
 .comment-body {
 	color: #898989 !important;
 	font-size: 0.8rem;
-}
-
-.comment-button {
-	color: #007bff;
-	border: 0;
-}
-
-.comment-button:hover {
-	color: #3C3C3C;
-	text-decoration: underline;
 }
 
 .comment-date {
@@ -33,13 +22,17 @@
 	margin-bottom: 0.4rem;
 }
 
+.comment-box {
+	display: flex;
+	justify-content: space-between;
+}
+
 .recipe-text {
 	cursor: text;
 }
 
 .recipe-card-title {
 	font-size:2em;
-	margin-top: -1.2em;
 }
 
 .recipe-lesser-title {
@@ -88,6 +81,7 @@
 }
 
 .menu {
+	margin-right: -0.6em;
 	float: right;
 }
 
@@ -106,7 +100,7 @@
 }
 
 .recipe-star-ratings {
-	margin-top: 1.5em;
+	margin-top: 1em;
 	margin-left: 0em;
 }
 
@@ -123,11 +117,8 @@
 }
 
 .bookmark {
+	margin-left: 0.8em;
 	color: lightgray;
-	margin-top:1em;
-	margin-bottom: 0em;
-	align-self: right;
-	margin-left:36.5em;
 	cursor: pointer;
 }
 
@@ -138,4 +129,26 @@
 .sub-title:hover {
 	text-decoration: none;
 	cursor: text;
+}
+
+.post-button {
+	height: 4em;
+	width: 4em;
+	margin-left: 1em;
+	background-color: #a4be13;
+	border: 0;
+	color: white;
+}
+
+.post-button:hover {
+	height: 4em;
+	width: 4em;
+	margin-left: 1em;
+	background-color: #afca15;
+	border: 0;
+	color: white;
+}
+
+.comment-container {
+	display: flex;
 }

@@ -9,7 +9,6 @@ import '../css/RecipeInfo.css'
 const RecipeInfo = (props) => {
 
   const { recipe } = props
-  // const recipeCreateDate = new Date(Date.parse('2011-10-05T14:48:00.000Z')).toDateString()
 
   const cookingTime = () => {
     if (recipe.hours && recipe.minutes) {

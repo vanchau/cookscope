@@ -107,24 +107,27 @@ const Recipe = () => {
         ?
         <Redirect to='/' />
         :
-        <div style={{height:'1em', background:'transparent'}}>
+        <div style={{background:'transparent', height:'auto'}}>
+          <div style={{height:'2em', background:'transparent'}}/>
           <Card className='recipe-card'>
             <Card.Body>
-              <NavDropdown className='menu' title={<FiMenu className='menu-icon'/>} >
+              <div className='menu'>
+              <NavDropdown title={<FiMenu className='menu-icon'/>} >
                 <NavDropdown.Item onClick={() => setShowReportWindow(true)} style={{ color: 'red' }} >Report</NavDropdown.Item>
                 {!isAuthor && <NavDropdown.Item>Follow {recipe.author}</NavDropdown.Item>}
                 {isAuthor && <NavDropdown.Item onClick={deleteRecipe}>Delete recipe</NavDropdown.Item>}
               </NavDropdown>
-              {(loggedUser && isBookmarked) && <FaBookmark size={35} className='bookmark' onClick={handleClick}/>}
-              {(loggedUser && !isBookmarked) && <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/>}
+              {(loggedUser && isBookmarked) && <FaBookmark size={28} className='bookmark' onClick={handleClick}/>}
+              {(loggedUser && !isBookmarked) && <FaRegBookmark size={28} className='bookmark' onClick={handleClick}/>}
               {!loggedUser && <OverlayTrigger
                 placement={'right'}
                 overlay={<Tooltip id={'tooltip'}>You must log in to bookmark recipe.</Tooltip>}>
                 <div>
-                  <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/>
+                  <FaRegBookmark size={28} className='bookmark' onClick={handleClick}/>
                 </div>
               </OverlayTrigger>
               }
+              </div>
               <Card.Title className='recipe-card-title' style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
               <Card.Text>
                 by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
@@ -142,10 +145,9 @@ const Recipe = () => {
                 </div>
                 }
               </div>
-              <br />{recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
               <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
+              <br/>{recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
               <br/>
-
               <RecipeInfo recipe={recipe}/>
               <Card.Title>
                 <br/>Ingredients<br/>
@@ -167,7 +169,7 @@ const Recipe = () => {
               </Card.Title>
 
               {isLoggedIn &&
-                <Form style={{ margin: '1rem 0' }} onSubmit={submitComment}>
+                <Form className='comment-container' style={{ margin: '1rem 0' }} onSubmit={submitComment}>
                   <Form.Control
                     as='textarea'
                     rows='2'
@@ -176,16 +178,15 @@ const Recipe = () => {
                     placeholder='Leave a comment'
                   />
                   <div className='text-right'>
-                    <Button variant='primary' type='submit' style={{ marginTop: '1em' }} >Post</Button>
+                    <Button className='post-button' variant='none' type='submit' >Post</Button>
                   </div>
                 </Form>
               }
-
               {comments.map((comment, i) => (
-                <Card key={`comment-${i}`} style={{ width: '80%', margin: '1rem 0' }}>
+                <Card key={`comment-${i}`} style={{ width: '100%', margin: '1em 0' }}>
                   <Card.Body className='comment'>
                     <p className='comment-header' >
-                      <Link className='comment-author' to={`/user/${comment.poster}`}>
+                      <Link className='card-author comment-author' to={`/user/${comment.poster}`}>
                         {comment.poster}
                       </Link>
                       <span className='comment-date' >{comment.date}</span></p>
@@ -193,7 +194,6 @@ const Recipe = () => {
                   </Card.Body>
                 </Card>
               ))}
-
               <ReportWindow
                 show={showReportWindow}
                 handleClose={() => setShowReportWindow(false)}
