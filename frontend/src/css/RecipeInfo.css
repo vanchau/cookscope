@@ -1,0 +1,13 @@
+.info-container {
+	padding: 1em;
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.8em;
+	color: gray;
+	border-top: solid 1px lightgray;
+	border-bottom: solid 1px lightgray;
+}
+
+.category-info {
+	max-width: 18em;
+}

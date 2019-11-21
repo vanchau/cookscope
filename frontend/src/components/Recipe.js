@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
+import RecipeInfo from './RecipeInfo'
 import { postRating, getRecipe, getRecipeRating, getOwnRating } from './api'
 
 const Recipe = () => {
@@ -64,6 +65,7 @@ const Recipe = () => {
           </div>
           <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
           {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
+          <RecipeInfo recipe={recipe}/>
           <Card.Title>
             <br/>Ingredients<br/>
           </Card.Title>
