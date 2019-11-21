@@ -53,9 +53,9 @@ const UserProfile = () => {
             <Tab className='profile-tab' eventKey={2} title={`Bookmarked (${bookmarkedRecipes.length})`}>
               <ProfileRecipeList recipes={bookmarkedRecipes} />
             </Tab>
-            <Tab className='profile-tab test' eventKey={3} title={`Following (${following.length})`}>
+            {/*<Tab className='profile-tab test' eventKey={3} title={`Following (${following.length})`}>
               <FollowedList following={following} />
-            </Tab>
+            </Tab>*/}
           </Tabs>
         </Card.Body>
       </Card>
