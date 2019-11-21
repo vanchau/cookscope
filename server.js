@@ -146,7 +146,7 @@ app.post('/api/recipes/:id/comment', auth, async (req, res) => {
 
 app.get('/api/recipes/:recipeID/remove', auth, async (req, res) => {
    try {
-    const deleteRecipe = await Recipe.deleteOne({ "_id" : mongoose.Types.ObjectId(req.params.recipeID)})
+    const deleteRecipe = await Recipe.deleteOne({ "_id" : mongoose.Types.ObjectId(req.params.recipeID) })
         res.status(201).send(deleteRecipe)
    } catch (error) {
         res.status(400).send(error)
@@ -157,8 +157,7 @@ app.get('/api/recipes/:recipeID/remove', auth, async (req, res) => {
 app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
     try {
         const rating = req.body
-        const recipes = await Recipe.find()
-        let recipe = recipes.find(recipe => recipe.id === req.params.id)
+        const recipe = await Recipe.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) })
         recipe.ratings = recipe.ratings.filter(rating => rating.userId !== req.params.userId)
         recipe.ratings.push(rating)
         await Recipe.findByIdAndUpdate(req.params.id, recipe, {new: true})
@@ -169,8 +168,7 @@ app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
 
 app.get('/api/recipes/:id/rating', async (req, res) => {
     try {
-        const recipes = await Recipe.find()
-        const recipe = recipes.find(recipe => recipe.id === req.params.id)
+        const recipe = await Recipe.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) })
         const arr = recipe.ratings.map(rating => rating.rating)
         const rating = Math.round(arr.reduce((acc, curr) => acc + curr, 0) / recipe.ratings.length * 10) / 10
         res.json({rating})
@@ -181,8 +179,7 @@ app.get('/api/recipes/:id/rating', async (req, res) => {
 
 app.get('/api/recipes/:id/rating/:userId', async (req, res) => {
     try {
-        const recipes = await Recipe.find()
-        const recipe = recipes.find(recipe => recipe.id === req.params.id)
+        const recipe = await Recipe.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) })
         const rating = (recipe.ratings.find(rating => rating.userId === req.params.userId)).rating
         res.json({rating})
     } catch (error) {
