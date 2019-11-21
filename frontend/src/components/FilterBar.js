@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import '../css/FilterBar.css'
 import FilterDropdown from './FilterDropdown'
+import categories from '../assets/categories.json'
 
 const FilterBar = (props) => {
   const {
@@ -15,27 +16,6 @@ const FilterBar = (props) => {
     setSelectedDiets
   } = props
 
-  const categories = [
-                      "Dinner",
-                      "Dessert",
-                      "Appetizer",
-                      "Breakfast",
-                      "Snack",
-                      "Baking",
-                      "Pork",
-                      "Chicken",
-                      "Fish",
-                      "Beef",
-                      "Bread",
-                      "Casserole",
-                      "Pasta",
-                      "Salad",
-                      "Soup",
-                      "Slow cooker",
-                      "Budget friendly",
-                      "Healthy",
-                      "Kid friendly"
-                      ]
   const difficulties = ['Easy', 'Medium', 'Challenging']
   const times = [
                 'Under 15 minutes',
@@ -57,7 +37,7 @@ const FilterBar = (props) => {
       <div className='filter-container fixed-top'>
         <Navbar className='filterbar fixed-top'>
           <Nav>
-          <FilterDropdown title='Categories' items={categories} selectedItems={selectedCategories} setSelectedItems={setSelectedCategories} />  
+          <FilterDropdown title='Categories' items={categories.categories} selectedItems={selectedCategories} setSelectedItems={setSelectedCategories} />  
           <FilterDropdown title='Difficulty' items={difficulties} selectedItems={selectedDifficulties} setSelectedItems={setSelectedDifficulties} />
           <FilterDropdown title='Time' items={times} selectedItems={selectedTimes} setSelectedItems={setSelectedTimes} />
           <FilterDropdown title='Special Diet' items={diets} selectedItems={selectedDiets} setSelectedItems={setSelectedDiets} />

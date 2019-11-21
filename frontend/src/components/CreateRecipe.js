@@ -8,7 +8,6 @@ import useFormValidation from '../utils/useRecipeFormValidation'
 import validateRecipeForm from '../utils/validateRecipeForm'
 import categories from '../assets/categories.json'
 
-// The structure of the recipe data set
 const INITIAL_STATE = {
   title: '',
   description: '',
@@ -181,7 +180,7 @@ const CreateRecipe = () => {
               <Form.Label style={{ fontWeight: 'bold' }}>Select categories: </Form.Label>
               <br></br>
               <div key={'inline-checkbox'}>
-                {Object.values(categories).map((category, i) => (
+                {categories.categories.map((category, i) => (
                   <Form.Check
                     inline name='categories'
                     onChange={handleChange}
