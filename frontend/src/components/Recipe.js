@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, {useState, useEffect} from 'react'
-import { useParams, Link, Redirect, useHistory } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import { Card, Form, Button, NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
@@ -27,7 +27,6 @@ const Recipe = () => {
   const [comments, setComments] = useState([])
   const [isAuthor, setIsAuthor] = useState(false)
   const [showReportWindow, setShowReportWindow] = useState(false)
-  const [isDeleted, setToDeleted] = useState(false)
 
   useEffect(() => {
     insertComment({ comment: '' })
@@ -86,8 +85,8 @@ const Recipe = () => {
     const token = localStorage.getItem('token')
     const result = await removeRecipe(token, recipeID)
     if (result.ok) {
-      setToDeleted(true)
-      history.push('/')
+      await history.push('/')
+      window.location.reload()
     } else {
       alert('There was a problem. Try again later.')
     }
