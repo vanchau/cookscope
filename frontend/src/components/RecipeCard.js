@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react'
-import { getRecipeRating } from './api'
+import { getRecipeRating } from '../api'
 import { withRouter, useHistory, Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import { FiClock } from 'react-icons/fi'
@@ -8,11 +9,11 @@ import StarRating from './StarRating'
 import '../css/RecipeCard.css'
 
 const RecipeCard = (props) => {
-	const { recipe } = props
-	const [rating, setRating] = useState(0)
-	let history = useHistory()
+  const { recipe } = props
+  const [rating, setRating] = useState(0)
+  let history = useHistory()
 
-	useEffect(() => {
+  useEffect(() => {
     const fetchData = () => {
       getRecipeRating(recipe.id).then((result) => {
         setRating(result.rating)
@@ -53,7 +54,7 @@ const RecipeCard = (props) => {
               </div>    
             </Card.Body>
     </Card>
-	)
+  )
 }
 
 export default withRouter(RecipeCard)

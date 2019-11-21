@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { withRouter, useHistory } from 'react-router-dom'
@@ -5,7 +6,6 @@ import '../css/ProfileRecipeList.css'
 
 
 const ProfileRecipeList = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { recipes } = props
   let history = useHistory()
 

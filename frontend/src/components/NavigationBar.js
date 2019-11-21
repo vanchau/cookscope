@@ -18,15 +18,15 @@ const INITIAL_STATE = {
   password: ''
 }
 
-const NavigationBar = (props) => {
+const NavigationBar = () => {
   const input = useRef(null)
   let history = useHistory()
   let currentSearch = ''
 
-  if (history.location.pathname.includes("/search=")) {
-    currentSearch = history.location.pathname.split("=")[1].split("+").join(" ")
+  if (history.location.pathname.includes('/search=')) {
+    currentSearch = history.location.pathname.split('=')[1].split('+').join(' ')
   }
-  
+
   const [currentSearchWords, setCurrentSearchWords] = useState(currentSearch)
 
   const {
@@ -79,7 +79,7 @@ const NavigationBar = (props) => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault()
-    const splitSearchWords = currentSearchWords.toLowerCase().split(" ").join("+")
+    const splitSearchWords = currentSearchWords.toLowerCase().split(' ').join('+')
     history.push(`/search=${splitSearchWords}`)
     setCurrentSearchWords('')
   }
@@ -96,7 +96,7 @@ const NavigationBar = (props) => {
         </Link>
       </div>
       <div>
-        <Form className="search-form" onSubmit={handleSearchSubmit}>
+        <Form className='search-form' onSubmit={handleSearchSubmit}>
           <Form.Control value={currentSearchWords} onChange={handleSearchChange} type='text' placeholder='Enter dish or ingredient(s)' className='search-bar form-size main-search'/>
           <Button variant='navbar-button' className='search-button' type='submit' >Search</Button>
         </Form>
@@ -152,10 +152,6 @@ const NavigationBar = (props) => {
           }
 
           <NavDropdown className='settings-dropdown' title={<IoMdSettings className='dropdown-icon' />} >
-            {isLoggedIn &&
-            <LinkContainer to={`/user/${localStorage.getItem('username')}`}>
-              <NavDropdown.Item>My profile</NavDropdown.Item>
-            </LinkContainer>}
             <LinkContainer to='/terms'>
               <NavDropdown.Item>Terms of Service</NavDropdown.Item>
             </LinkContainer>

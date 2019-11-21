@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import '../css/FilterDropdown.css'
 
@@ -19,7 +20,7 @@ const FilterDropdown = (props) => {
 
   return (
     <div className='dropdown'>
-      <button className='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+      <button className='btn dropdown-toggle-filter' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
         {title}
       </button>
       <form className='dropdown-menu' aria-labelledby='dropdownMenuButton'>

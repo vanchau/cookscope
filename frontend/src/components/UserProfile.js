@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom'
 import ProfileRecipeList from './ProfileRecipeList'
 import FollowedList from './FollowedList'
 import '../css/UserProfile.css'
-import { getUserInfo, getRecipes, getBookmarkedRecipes, getFollowingUsers } from '../components/api'
+import { getUserInfo, getRecipes, getBookmarkedRecipes, getFollowingUsers } from '../api'
 
 const UserProfile = () => {
   const { username } = useParams()

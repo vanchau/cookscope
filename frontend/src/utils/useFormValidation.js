@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { signup, login, logout } from '../components/api'
+import { signup, login, logout } from '../api'
 
 function useFormValidation(initialState, validate) {
   const [isSigningUp, setToSigningUp] = useState(false)

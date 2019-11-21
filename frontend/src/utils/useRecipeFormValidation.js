@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { postRecipe } from '../components/api'
+import { postRecipe } from '../api'
 
 const parseRecipe = (recipe) => {
   let parsedRecipe = recipe
