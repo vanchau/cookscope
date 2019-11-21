@@ -27,8 +27,8 @@ const RecipeInfo = (props) => {
 		<div className='info-container'>
 				{ recipe.categories && <div className='category-info' >{recipe.categories.join(", ")}</div>}	
 				<div>{recipe.difficulty}</div>
-				<div><MdRestaurant/> {recipe.servings}</div>
-				<div><FiClock/> {cookingTime()} </div>
+				<div><MdRestaurant className='info-logo' /> {recipe.servings}</div>
+				<div><FiClock className='info-logo'/> {cookingTime()} </div>
 		</div>
 	)
 }
