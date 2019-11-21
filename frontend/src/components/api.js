@@ -93,3 +93,39 @@ export const logout = async (token) => {
     return error
   }
 }
+
+export const postRating = async (rating, id, userId) => {
+  try {
+    const result = await axios.put(`/api/recipes/${id}/rating/${userId}`, rating)
+    return result
+  } catch (error) {
+    return error
+  }
+}
+
+export const getRecipe = async (recipeID) => {
+  try {
+    const result = await axios.get(`/api/recipes/${recipeID}`)
+    return result.data
+  } catch(error) {
+    return error
+  }
+}
+
+export const getRecipeRating = async (recipeID) => {
+  try {
+    const result = await axios.get(`/api/recipes/${recipeID}/rating`)
+    return result.data
+  } catch(error) {
+    return error
+  }
+}
+
+export const getOwnRating = async (recipeID, userID) => {
+  try {
+    const result = await axios.get(`/api/recipes/${recipeID}/rating/${userID}`)
+    return result.data
+  } catch(error) {
+    return error
+  }
+}

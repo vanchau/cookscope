@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import FilterBar from './FilterBar'
 import RecipeList from './RecipeList'
 
-const Home = () => {
+const Home = (props) => {
 
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedDifficulties, setSelectedDifficulties] = useState([])
