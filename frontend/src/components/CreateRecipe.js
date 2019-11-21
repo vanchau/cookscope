@@ -51,6 +51,8 @@ const CreateRecipe = () => {
     reader.readAsDataURL(file)
   }
 
+  const diets = ['Vegetarian', 'Vegan', 'Dairy-free', 'Gluten-free']
+
   return (
     <React.Fragment>
       <div style={{ height: '1em', background:'transparent' }}></div>
@@ -180,7 +182,7 @@ const CreateRecipe = () => {
               <Form.Label style={{ fontWeight: 'bold' }}>Select categories: </Form.Label>
               <br></br>
               <div key={'inline-checkbox'}>
-                {categories.categories.map((category, i) => (
+                {categories.categories.concat(diets).map((category, i) => (
                   <Form.Check
                     inline name='categories'
                     onChange={handleChange}
