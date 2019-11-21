@@ -152,7 +152,11 @@ const Recipe = () => {
             <Card.Title>
               <br/>Ingredients<br/>
             </Card.Title>
-            {recipe.ingredients.map(ingredient => <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)}
+            {recipe.ingredients.map(ingredient => 
+              <div className='row' key={ingredient.ingredient}>
+                <Card.Text style={{marginLeft:'1em', marginRight:'2em', width: '5em'}}>{ingredient.amount}</Card.Text>
+                <Card.Text> {ingredient.ingredient}</Card.Text>
+              </div>)}  
             <Card.Title className='recipe-lesser-title'>
               <br/>Steps<br/>
             </Card.Title>
