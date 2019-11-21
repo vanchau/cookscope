@@ -231,6 +231,27 @@ app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
     res.json(bookmarkedRecipes.map(recipe => recipe.toJSON()))
 })
 
+app.put('/api/users/:username/:isBookmarked/:recipeID', async (req, res) => {
+    const user = await User.findOne({username: req.params.username})
+    //console.log("user before", user)
+    let bookmarks = recipes.filter(recipe => user.bookmarks.includes(recipe.id)).map(recipe => recipe.id)
+    if (req.params.isBookmarked === 'true') {
+        bookmarks = bookmarks.filter(bookmark => bookmark !== req.params.recipeID)
+    }
+    else {
+        bookmarks.push(req.params.recipeID)
+    }
+    await User.findOneAndUpdate({username: req.params.username}, {bookmarks: bookmarks}, {new: true})
+
+})
+
+app.get('/api/users/:username/bookmarked/:recipeID', async (req, res) => {
+    const user = await User.findOne({username: req.params.username})
+    let bookmarks = recipes.filter(recipe => user.bookmarks.includes(recipe.id)).map(recipe => recipe.id)
+    const isBookmarked = bookmarks.includes(req.params.recipeID)
+    res.json({isBookmarked})
+})
+
 app.get('/api/users/:username/following', async (req, res) => {
     //const following = req.user.toObject().following
     const username = req.params.username

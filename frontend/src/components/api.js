@@ -129,3 +129,21 @@ export const getOwnRating = async (recipeID, userID) => {
     return error
   }
 }
+
+export const getIsBookmarked = async (recipeID, username) => {
+  try {
+    const result = await axios.get(`/api/users/${username}/bookmarked/${recipeID}`)
+    return result.data
+  } catch(error) {
+    return error
+  }
+}
+
+export const postBookmark = async (recipeID, username, isBookmarked) => {
+  try {
+    const result = await axios.put(`/api/users/${username}/${isBookmarked}/${recipeID}`)
+    return result
+  } catch (error) {
+    return error
+  }
+}
