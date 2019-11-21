@@ -4,8 +4,8 @@ import { useParams, Link, useHistory } from 'react-router-dom'
 import { Card, Form, Button, NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
-
 import ReportWindow from './ReportWindow'
+import Spinner from './Spinner'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
 import { postComment, fetchComments, postRating, getRecipe, removeRecipe, getRecipeRating, getOwnRating, getIsBookmarked, postBookmark } from '../api'
@@ -27,6 +27,7 @@ const Recipe = () => {
   const [comments, setComments] = useState([])
   const [isAuthor, setIsAuthor] = useState(false)
   const [showReportWindow, setShowReportWindow] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     insertComment({ comment: '' })
@@ -40,7 +41,7 @@ const Recipe = () => {
         setRatingCount(recipeData.ratings.length)
         setRecipeRating(ratingData.rating)
         setComments(commentData)
-
+        setIsLoading(false)
         if (userId === recipeData.authorID) {
           setIsAuthor(true)
         }
@@ -57,7 +58,6 @@ const Recipe = () => {
         console.log(error)
       }
     }
-
     fetchData()
   }, [recipeID, ownRating, userId])
 
@@ -103,11 +103,16 @@ const Recipe = () => {
 
   return (
     <React.Fragment>
-      <div style={{height:'auto', background:'transparent'}}>
-        <div style={{height:'2em', background:'transparent'}} />
-        <Card className='recipe-card'>
-          <Card.Body>
-            <div className='menu'>
+        {isLoading ? 
+        (
+          <Spinner/>
+        ) :
+        (
+          <div style={{height:'auto', background:'transparent'}}> 
+          <div style={{height:'2em', background:'transparent'}} />
+          <Card className='recipe-card'>
+            <Card.Body>
+              <div className='menu'>
               <NavDropdown title={<FiMenu className='menu-icon'/>} >
                 <NavDropdown.Item onClick={() => setShowReportWindow(true)} style={{ color: 'red' }} >Report</NavDropdown.Item>
                 {isAuthor && <NavDropdown.Item onClick={deleteRecipe}>Delete recipe</NavDropdown.Item>}
@@ -176,28 +181,29 @@ const Recipe = () => {
                     <Button className='post-button' variant='none' type='submit' >Post</Button>
                   </div>
                 </Form>
-            }
-            {comments.map((comment, i) => (
-              <Card key={`comment-${i}`} style={{ width: '100%', margin: '1em 0' }}>
-                <Card.Body className='comment'>
-                  <p className='comment-header' >
-                    <Link className='card-author comment-author' to={`/user/${comment.poster}`}>
-                      {comment.poster}
-                    </Link>
-                    <span className='comment-date' >{comment.date}</span></p>
-                  <Card.Text className='comment-body recipe-text' >{comment.comment}</Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
-            <ReportWindow
-              show={showReportWindow}
-              handleClose={() => setShowReportWindow(false)}
-              recipeID={recipeID}
-              reporterID={localStorage.getItem('id')}
-            />
-          </Card.Body>
-        </Card>
-      </div>
+              }
+              {comments.map((comment, i) => (
+                <Card key={`comment-${i}`} style={{ width: '100%', margin: '1em 0' }}>
+                  <Card.Body className='comment'>
+                    <p className='comment-header' >
+                      <Link className='card-author comment-author' to={`/user/${comment.poster}`}>
+                        {comment.poster}
+                      </Link>
+                      <span className='comment-date' >{comment.date}</span></p>
+                    <Card.Text className='comment-body recipe-text' >{comment.comment}</Card.Text>
+                  </Card.Body>
+                </Card>
+              ))}
+              <ReportWindow
+                show={showReportWindow}
+                handleClose={() => setShowReportWindow(false)}
+                recipeID={recipeID}
+                reporterID={localStorage.getItem('id')}
+              />
+            </Card.Body>
+          </Card>
+        </div>
+          )}
     </React.Fragment>
   )
 }
