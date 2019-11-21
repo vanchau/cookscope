@@ -1,4 +1,3 @@
-
 .main-image {
 	padding: 40px;
 	max-width: 100%; 
@@ -61,10 +60,12 @@
 	margin-left: 0em;
 	margin-top: -0.5em;
 	margin-bottom: 1em;
-	color:rgb(94, 94, 94);
+	color:gray;
 	font-size: 0.6em;
 }
+
 
 .single-rating {
 	margin-right: 6em;
 }
+
