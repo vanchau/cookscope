@@ -45,7 +45,6 @@ const UserProfile = () => {
         <Card.Body>
           <img className='profile-card-img rounded-circle' alt='' src={`data:image/jpeg;base64,${user.profilePicture}`}></img>
           <Card.Title className='profile-title'>{user.username}</Card.Title>
-          <Card.Text className='profile-username'>{'@'+user.username}</Card.Text>
           <Tabs className='profile-tabs'>
             <Tab className='profile-tab' eventKey={1} title={`Recipes (${ownRecipes.length})`}>
               <ProfileRecipeList recipes={ownRecipes} />
