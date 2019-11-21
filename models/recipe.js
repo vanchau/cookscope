@@ -30,8 +30,6 @@ const recipeSchema = new mongoose.Schema({
   ratings: [{userId: String, rating: Number}]
 })
 
-recipeSchema.plugin(timestamps);
-
 recipeSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
