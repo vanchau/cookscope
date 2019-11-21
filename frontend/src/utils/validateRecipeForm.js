@@ -4,6 +4,8 @@ const validateRecipeForm = (values) => {
   // title error
   if (!values.title) {
     errors.title = 'Please give your recipe a name.'
+  } else if (values.title && !/^(?=.{1,25}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/i.test(values.title)) {
+    errors.title = 'Please give a shorter name for your recipe'
   }
   // imageFile error
   if (Object.entries(values.imageFile).length === 0 && values.imageFile.constructor === Object) {
