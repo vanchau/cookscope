@@ -4,7 +4,6 @@ import FilterBar from './FilterBar'
 import RecipeList from './RecipeList'
 
 const Home = () => {
-
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedDifficulties, setSelectedDifficulties] = useState([])
   const [selectedTimes, setSelectedTimes] = useState([])

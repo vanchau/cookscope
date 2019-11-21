@@ -16,11 +16,7 @@ const RecipeList = (props) => {
   } = props
 
   const [recipes, setData] 	= useState([])
-
-  let history = useHistory()
-
   useEffect(() => {
-
     const fetchData = async () => {
       const baseUrl = '/api/recipes'
       const result = await axios(baseUrl, {params: {
@@ -38,9 +34,9 @@ const RecipeList = (props) => {
     selectedCategories,
     selectedDifficulties,
     selectedTimes,
-    selectedDiets
+    selectedDiets,
+    recipes
   ])
-
   
   return (
     <div>

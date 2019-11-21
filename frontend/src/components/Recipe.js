@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, {useState, useEffect} from 'react'
-import { useParams, Link, Redirect } from 'react-router-dom'
+import { useParams, Link, Redirect, useHistory } from 'react-router-dom'
 import { Card, Form, Button, NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
@@ -12,7 +12,7 @@ import { postComment, fetchComments, postRating, getRecipe, removeRecipe, getRec
 import RecipeInfo from './RecipeInfo'
 
 const Recipe = () => {
-
+  let history = useHistory()
   const loggedUser = localStorage.getItem('username')
   const userToken = localStorage.getItem('token')
   const userId = localStorage.getItem('id')
@@ -87,6 +87,7 @@ const Recipe = () => {
     const result = await removeRecipe(token, recipeID)
     if (result.ok) {
       setToDeleted(true)
+      history.push('/')
     } else {
       alert('There was a problem. Try again later.')
     }
@@ -103,12 +104,8 @@ const Recipe = () => {
 
   return (
     <React.Fragment>
-      {isDeleted
-        ?
-        <Redirect to='/' />
-        :
-        <div style={{background:'transparent', height:'auto'}}>
-          <div style={{height:'2em', background:'transparent'}}/>
+        <div style={{height:'auto', background:'transparent'}}>
+          <div style={{height:'2em', background:'transparent'}} />
           <Card className='recipe-card'>
             <Card.Body>
               <div className='menu'>
@@ -202,7 +199,7 @@ const Recipe = () => {
               />
             </Card.Body>
           </Card>
-        </div>}
+        </div>
     </React.Fragment>
   )
 }

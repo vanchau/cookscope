@@ -31,6 +31,17 @@
 	cursor: text;
 }
 
+.main-image {
+	padding: 40px;
+	max-width: 100%; 
+	max-height: 100%; 
+	height: auto;
+	border-radius: 45px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
 .recipe-card-title {
 	font-size:2em;
 }
@@ -108,9 +119,10 @@
 	margin-left: 0em;
 	margin-top: -0.5em;
 	margin-bottom: 1em;
-	color:rgb(94, 94, 94);
+	color:gray;
 	font-size: 0.6em;
 }
+
 
 .single-rating {
 	margin-right: 6em;
