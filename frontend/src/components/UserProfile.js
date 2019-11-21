@@ -43,7 +43,7 @@ const UserProfile = () => {
       <div style={{height:'1em', background:'transparent'}}></div>
       <Card className='profile-card' >
         <Card.Body>
-          <img className='profile-card-img rounded-circle' alt='' src={`/assets/profilePictures/${user.profilePicture}`}></img>
+          <img className='profile-card-img rounded-circle' alt='' src={`data:image/jpeg;base64,${user.profilePicture}`}></img>
           <Card.Title className='profile-title'>{user.username}</Card.Title>
           <Card.Text className='profile-username'>{'@'+user.username}</Card.Text>
           <Tabs className='profile-tabs'>

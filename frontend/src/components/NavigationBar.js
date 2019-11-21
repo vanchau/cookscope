@@ -15,7 +15,8 @@ import LoginWindow from './LoginWindow'
 const INITIAL_STATE = {
   username: '',
   email: '',
-  password: ''
+  password: '',
+  profilePicture: '',
 }
 
 const NavigationBar = () => {
@@ -32,6 +33,7 @@ const NavigationBar = () => {
   const {
     handleSubmit,
     handleChange,
+    setImageFile,
     handleClose,
     handleLogOut,
     isLoggedIn,
@@ -129,6 +131,7 @@ const NavigationBar = () => {
           <SignUpWindow
             show={showSignUp}
             handleChange={handleChange}
+            setImageFile={setImageFile}
             goToLogin={goToLogin}
             errors={errors}
             handleSubmit={handleSubmit}

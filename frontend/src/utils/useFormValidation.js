@@ -15,6 +15,7 @@ function useFormValidation(initialState, validate) {
     if (isSubmitting) {
       const noErrors = Object.keys(errors).length === 0
       if (noErrors && isSigningUp) {
+        console.log(values)
         signup(values)
           .then(result => {
             localStorage.setItem('token', result.token)
@@ -60,6 +61,14 @@ function useFormValidation(initialState, validate) {
       .catch(error =>alert(error))
   }
 
+  const setImageFile = (file) => {
+    setValues({
+      ...values,
+      profilePicture: file
+    })
+  }
+
+
   // reset fields to initial values
   const handleClose = () => {
     setErrors({})
@@ -84,6 +93,7 @@ function useFormValidation(initialState, validate) {
   return {
     handleSubmit,
     handleChange,
+    setImageFile,
     handleClose,
     handleLogOut,
     isLoggedIn,

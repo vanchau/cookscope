@@ -6,12 +6,26 @@ import '../css/SignUpWindow.css'
 const SignUpWindow = (props) => {
 
   // eslint-disable-next-line react/prop-types
-  const { show, handleChange, handleSubmit, handleClose, goToLogin, errors } = props
+  const { show, handleChange, setImageFile, handleSubmit, handleClose, goToLogin, errors } = props
   const [termsUnderstood, setToTermsUnderstood] = useState(false)
+  const [imagePreviewUrl, setImagePreviewUrl] = useState('')
 
   const check = () => {
     setToTermsUnderstood(!termsUnderstood)
   }
+
+  const handleImageChange = (e) => {
+    const reader = new FileReader()
+    const file = e.target.files[0]
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result)
+      setImageFile(reader.result.split(',')[1]) // base64
+      //setImageFile(file)
+    }
+    reader.readAsDataURL(file)
+  }
+
+
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -33,6 +47,19 @@ const SignUpWindow = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control type='password' name='password' placeholder='Enter password' onChange={handleChange} autoComplete='on' />
           </Form.Group>
+          <div>
+              <label htmlFor='file-upload' className='custom-file-upload'>
+                Upload photo
+              </label>
+              <input
+                id='file-upload'
+                name='imageUrl'
+                type='file'
+                accept={'image/*'}
+                onChange={handleImageChange}
+              />
+          </div>
+          {imagePreviewUrl && <img style={{ marginTop: '20px', width: '50%' }} alt='loading' src={imagePreviewUrl} />}
           <div key={'default-checkbox'} className='mb-3'>
             <Form.Check
               type={'checkbox'}
@@ -46,6 +73,7 @@ const SignUpWindow = (props) => {
               }
             />
           </div>
+          
           {Object.keys(errors).length !== 0 && <p className='error-text'>{errors[Object.keys(errors)[0]]}</p>}
         </Form>
         <div className='submit-area'>
