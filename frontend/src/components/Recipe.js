@@ -6,6 +6,7 @@ import StarRating from './StarRating'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { postRating, getRecipe, getRecipeRating, getOwnRating, getIsBookmarked, postBookmark } from './api'
+import RecipeInfo from './RecipeInfo'
 
 const Recipe = () => {
 
@@ -83,7 +84,8 @@ const Recipe = () => {
           </div>
           <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
           {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
-          <Card.Title className='recipe-lesser-title'>
+          <RecipeInfo recipe={recipe}/>
+          <Card.Title>
             <br/>Ingredients<br/>
           </Card.Title>
           {recipe.ingredients.map(ingredient =>

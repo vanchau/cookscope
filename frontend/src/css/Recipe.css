@@ -34,8 +34,9 @@
 
 .recipe-card-img {
 	height: 30em;
+	margin-top: 1em;
 	margin-bottom: 1.5em;
-	object-fit: contain;
+	object-fit: cover;
 }
 
 .card-author {
