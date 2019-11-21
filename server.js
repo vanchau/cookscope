@@ -32,7 +32,6 @@ fetchAll()
 
 Recipe.watch().on('change', async data => {
     fetchAll()
-    console.log("got")
 })
 
 app.post('/api/recipes', auth, async (req, res) => {
@@ -59,7 +58,6 @@ app.post('/api/recipes', auth, async (req, res) => {
 })
 
 app.get('/api/recipes', async (request, response) => {
-    //const recipes = await Recipe.find()
     const searchWords = request.query.searchWords
     const selectedCategories = request.query.selectedCategories
     const selectedDifficulties = request.query.selectedDifficulties
@@ -130,7 +128,6 @@ app.get('/api/recipes', async (request, response) => {
 })
 
 app.get('/api/recipes/:id', async (req, res) => {
-    //const recipe = await Recipe.findById(req.params.id)
     const recipe = recipes.find(recipe => recipe.id === req.params.id)
     res.json(recipe.toJSON())
 })
@@ -173,7 +170,6 @@ app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
     try {
         const rating = req.body
         let recipe = recipes.find(recipe => recipe.id === req.params.id)
-        //const recipe = await Recipe.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) })
         recipe.ratings = recipe.ratings.filter(rating => rating.userId !== req.params.userId)
         recipe.ratings.push(rating)
         await Recipe.findByIdAndUpdate(req.params.id, recipe, {new: true})
@@ -184,7 +180,6 @@ app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
 
 app.get('/api/recipes/:id/rating', async (req, res) => {
     try {
-        //const recipe = await Recipe.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) })
         const recipe = recipes.find(recipe => recipe.id === req.params.id)
         const arr = recipe.ratings.map(rating => rating.rating)
         const rating = Math.round(arr.reduce((acc, curr) => acc + curr, 0) / recipe.ratings.length * 10) / 10
@@ -196,7 +191,6 @@ app.get('/api/recipes/:id/rating', async (req, res) => {
 
 app.get('/api/recipes/:id/rating/:userId', async (req, res) => {
     try {
-        //const recipe = await Recipe.findOne({ "_id": mongoose.Types.ObjectId(req.params.id) })
         const recipe = recipes.find(recipe => recipe.id === req.params.id)
         const rating = (recipe.ratings.find(rating => rating.userId === req.params.userId)).rating
         res.json({rating})
@@ -255,24 +249,19 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
 
 app.get('/api/users/:username/recipes', async (req, res) => {
     const username = req.params.username
-    //const recipes = await Recipe.find()
-    //const ownRecipes = recipes.filter(recipe => recipe.author === username)
     const ownRecipes = recipes.filter(recipe => recipe.author === username)
     res.json(ownRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
     const username = req.params.username
-    //const recipes = await Recipe.find()
     const userInfo = await User.findOne({ username: username })
-    //const bookmarkedRecipes = recipes.filter(recipe => userInfo.bookmarks.includes(recipe.id))
     const bookmarkedRecipes = recipes.filter(recipe => userInfo.bookmarks.includes(recipe.id))
     res.json(bookmarkedRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.put('/api/users/:username/:isBookmarked/:recipeID', async (req, res) => {
     const user = await User.findOne({username: req.params.username})
-    //const recipes = await Recipe.find()
     let bookmarks = recipes.filter(recipe => user.bookmarks.includes(recipe.id)).map(recipe => recipe.id)
     if (req.params.isBookmarked === 'true') {
         bookmarks = bookmarks.filter(bookmark => bookmark !== req.params.recipeID)
@@ -286,7 +275,6 @@ app.put('/api/users/:username/:isBookmarked/:recipeID', async (req, res) => {
 
 app.get('/api/users/:username/bookmarked/:recipeID', async (req, res) => {
     const user = await User.findOne({username: req.params.username})
-   // const recipes = await Recipe.find()
     let bookmarks = recipes.filter(recipe => user.bookmarks.includes(recipe.id)).map(recipe => recipe.id)
     const isBookmarked = bookmarks.includes(req.params.recipeID)
     res.json({isBookmarked})
