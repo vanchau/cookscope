@@ -1,12 +1,16 @@
 import React from 'react'
+import '../css/Spinner.css'
 
 const Spinner = () => {
 	return (
-	<div class="d-flex justify-content-center">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-  </div>
+	<div className='spinner-background'>
+		<div className='spinner-filler'/>
+		<div className="spinner-box">
+				<div className="spinner-border" role="status">
+					<span className="sr-only">Loading...</span>
+				</div>
+		</div>
+	</div>	
 	)
 }
 

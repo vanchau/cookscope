@@ -1,0 +1,20 @@
+.spinner-background {
+	background-image: url('../assets/patterns/subtle_white_feathers.png');
+	height: 55em;
+}
+
+.spinner-box {
+	display: flex;
+	justify-content: center;
+	height: 6em;
+	margin-top:0em;
+}
+
+.sr-only {
+	margin-top: 30em;
+}
+
+.spinner-filler {
+	background-image: url('../assets/patterns/subtle_white_feathers.png');
+	height: 8em;
+}
