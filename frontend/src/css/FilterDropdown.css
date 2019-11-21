@@ -1,8 +1,8 @@
-.dropdown-toggle {
+.dropdown-toggle-filter {
   box-shadow: none;
   margin-left:4em;
   margin-right:4em;
-  background-image: url('../assets/patterns/subtle_white_feathers.png');
+  /* background-image: url('../assets/patterns/subtle_white_feathers.png'); */
   border: none;
   color: black;
 }

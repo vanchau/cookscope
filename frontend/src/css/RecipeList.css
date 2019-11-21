@@ -37,11 +37,6 @@
 	color: #3C3C3C;
 }
 
-.card-title:hover {
-	cursor: pointer;
-	text-decoration: underline;
-}
-
 .card-text {
 	color: #3C3C3C;
 }

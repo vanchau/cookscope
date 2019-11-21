@@ -1,13 +1,40 @@
+.comment {
+	padding: 1rem;
+	background-color: #fafafa;
+}
 
-.main-image {
-	padding: 40px;
-	max-width: 100%; 
-	max-height: 100%; 
-	height: auto;
-	border-radius: 45px;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+.comment-author {
+	color: #007bff;
+	font-size: 1rem;
+	vertical-align: middle;
+}
+
+.comment-body {
+	color: #898989 !important;
+	font-size: 0.8rem;
+}
+
+.comment-button {
+	color: #007bff;
+	border: 0;
+}
+
+.comment-button:hover {
+	color: #3C3C3C;
+	text-decoration: underline;
+}
+
+.comment-date {
+	padding-left: 0.6rem;
+	font-size: 0.6rem;
+}
+
+.comment-header {
+	margin-bottom: 0.4rem;
+}
+
+.recipe-text {
+	cursor: text;
 }
 
 .recipe-card-title {
@@ -32,6 +59,11 @@
   cursor: default;
 }
 
+.image-and-icons {
+	width: 70%;
+	margin-bottom: 2rem;
+}
+
 .recipe-card-img {
 	height: 30em;
 	margin-top: 1em;
@@ -53,6 +85,16 @@
 
 .author:hover {
 	color:#7d6226;
+}
+
+.menu {
+	float: right;
+}
+
+.menu-icon {
+	margin-bottom: 0.5rem 0 1rem 0;
+	width: 1.4em;
+	height: 1.4em;
 }
 
 .inline {
@@ -87,4 +129,13 @@
 	align-self: right;
 	margin-left:36.5em;
 	cursor: pointer;
+}
+
+.sub-title {
+	cursor: text;
+}
+
+.sub-title:hover {
+	text-decoration: none;
+	cursor: text;
 }

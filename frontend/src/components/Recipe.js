@@ -1,40 +1,64 @@
+/* eslint-disable no-console */
 import React, {useState, useEffect} from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import { useParams, Link, Redirect } from 'react-router-dom'
+import { Card, Form, Button, NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
+import { FiMenu } from 'react-icons/fi'
+
+import ReportWindow from './ReportWindow'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
-import { OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
-import { postRating, getRecipe, getRecipeRating, getOwnRating, getIsBookmarked, postBookmark } from './api'
+import { postComment, fetchComments, postRating, getRecipe, removeRecipe, getRecipeRating, getOwnRating, getIsBookmarked, postBookmark } from '../api'
 import RecipeInfo from './RecipeInfo'
 
 const Recipe = () => {
 
   const loggedUser = localStorage.getItem('username')
+  const userToken = localStorage.getItem('token')
   const userId = localStorage.getItem('id')
   const { recipeID } = useParams()
-  const [recipe, setRecipe] = useState({ ingredients: [], instructions: [], ratings: [] })
+  const [recipe, setRecipe] = useState({ imageFile: '', author: '', ingredients: [], instructions: [], ratings: [] })
   const [recipeRating, setRecipeRating] = useState(0)
   const [ownRating, setOwnRating] = useState(0)
   const [ratingCount, setRatingCount] = useState(0)
   const [isBookmarked, setIsBookmarked] = useState(false)
+  const [isLoggedIn, setLoggedIn] = useState(false)
+  const [comment, insertComment] = useState({ comment: '' })
+  const [comments, setComments] = useState([])
+  const [isAuthor, setIsAuthor] = useState(false)
+  const [showReportWindow, setShowReportWindow] = useState(false)
+  const [isDeleted, setToDeleted] = useState(false)
 
   useEffect(() => {
-    const fetchData = () => {
-      getRecipe(recipeID).then((result) => {
-        setRecipe(result)
-        setRatingCount(result.ratings.length)
-      })
-      getRecipeRating(recipeID).then((result) => {
-        setRecipeRating(result.rating)
-      })
-      getOwnRating(recipeID, userId).then((result) => {
-        setOwnRating(result.rating)
-      })
-      getIsBookmarked(recipeID, loggedUser).then((result) => {
-        setIsBookmarked(result.isBookmarked)
-      })
+    insertComment({ comment: '' })
+    const fetchData = async () => {
+      try {
+        const recipeData = await getRecipe(recipeID)
+        const ratingData = await getRecipeRating(recipeID)
+        const ownRatingData = await getOwnRating(recipeID, userId)
+        const bookmarkData = await getIsBookmarked(recipeID, loggedUser)
+        const commentData = await fetchComments(recipeID)
+
+        setRecipe(recipeData)
+        setRatingCount(recipeData.ratings.length)
+        setRecipeRating(ratingData.rating)
+        setOwnRating(ownRatingData.rating)
+        setIsBookmarked(bookmarkData.isBookmarked)
+        setComments(commentData)
+
+        if (userId === recipeData.authorID) {
+          setIsAuthor(true)
+        }
+        if (userToken) {
+          setLoggedIn(true)
+        } else {
+          setLoggedIn(false)
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
+
     fetchData()
   }, [recipeID, ownRating, userId])
 
@@ -50,62 +74,139 @@ const Recipe = () => {
   }
 
 
+  useEffect(() => {
+
+  }, [showReportWindow])
+
+  const handleCommentChange = (event) => {
+    insertComment({ comment: event.target.value })
+  }
+
+  const deleteRecipe = async () => {
+    const token = localStorage.getItem('token')
+    const result = await removeRecipe(token, recipeID)
+    if (result.ok) {
+      setToDeleted(true)
+    } else {
+      alert('There was a problem. Try again later.')
+    }
+  }
+
+  const submitComment = async () => {
+    const token = localStorage.getItem('token')
+    await postComment(token, recipeID, comment)
+
+    insertComment({ comment: '' })
+    fetchComments(recipeID)
+    setComments(comments)
+  }
+
   return (
     <React.Fragment>
-      <div style={{height:'1em', background:'transparent'}}></div>
-      <Card className='recipe-card'>
-        <Card.Body>
-            {(loggedUser && isBookmarked) && <FaBookmark size={35} className='bookmark' onClick={handleClick}/>}
-            {(loggedUser && !isBookmarked) && <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/>}
-            {!loggedUser && <OverlayTrigger
-                  placement={'right'}
-                  overlay={<Tooltip id={'tooltip'}>You must log in to bookmark recipe.</Tooltip>}>
-                  <div>
-                  <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/> 
-                  </div>
-                </OverlayTrigger>
-            }    
-            <Card.Title className='recipe-card-title' style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
-          <Card.Text>
-						by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
-          </Card.Text>
-          <div className='row recipe-star-ratings'>
-              <div className='single-rating'>
-                <StarRating starEditing={false} starHalves={true} rating={recipeRating} submitRating={submitRating}/> 
-                <div className='rating-by'>{ratingCount} ratings</div>
-              </div>
-              {
-                loggedUser &&
+      {isDeleted
+        ?
+        <Redirect to='/' />
+        :
+        <div style={{height:'1em', background:'transparent'}}>
+          <Card className='recipe-card'>
+            <Card.Body>
+              <NavDropdown className='menu' title={<FiMenu className='menu-icon'/>} >
+                <NavDropdown.Item onClick={() => setShowReportWindow(true)} style={{ color: 'red' }} >Report</NavDropdown.Item>
+                {!isAuthor && <NavDropdown.Item>Follow {recipe.author}</NavDropdown.Item>}
+                {isAuthor && <NavDropdown.Item onClick={deleteRecipe}>Delete recipe</NavDropdown.Item>}
+              </NavDropdown>
+              {(loggedUser && isBookmarked) && <FaBookmark size={35} className='bookmark' onClick={handleClick}/>}
+              {(loggedUser && !isBookmarked) && <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/>}
+              {!loggedUser && <OverlayTrigger
+                placement={'right'}
+                overlay={<Tooltip id={'tooltip'}>You must log in to bookmark recipe.</Tooltip>}>
+                <div>
+                  <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/>
+                </div>
+              </OverlayTrigger>
+              }
+              <Card.Title className='recipe-card-title' style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
+              <Card.Text>
+                by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
+              </Card.Text>
+              <div className='row recipe-star-ratings'>
                 <div className='single-rating'>
-                  <StarRating starEditing={true} starHalves={false} rating={ownRating} submitRating={submitRating}/> 
+                  <StarRating starEditing={false} starHalves={true} rating={recipeRating} submitRating={submitRating}/>
+                  <div className='rating-by'>{ratingCount} ratings</div>
+                </div>
+                {
+                  loggedUser &&
+                <div className='single-rating'>
+                  <StarRating starEditing={true} starHalves={false} rating={ownRating} submitRating={submitRating}/>
                   <div className='rating-by'>You</div>
                 </div>
+                }
+              </div>
+              <br />{recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
+              <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
+              <br/>
+
+              <RecipeInfo recipe={recipe}/>
+              <Card.Title>
+                <br/>Ingredients<br/>
+              </Card.Title>
+              {recipe.ingredients.map(ingredient => <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)}
+              <Card.Title className='recipe-lesser-title'>
+                <br/>Steps<br/>
+              </Card.Title>
+              {recipe.instructions.map((instruction, i) => (
+                <Card.Text key={instruction.id}>
+                  {i + 1}{`. ${instruction.instruction}`}<br/>
+                </Card.Text>
+              ))}
+
+              <hr style={{ margin: '3em 0 1em 0'}} />
+
+              <Card.Title className='sub-title' >
+                Comments ({comments.length})
+              </Card.Title>
+
+              {isLoggedIn &&
+                <Form style={{ margin: '1rem 0' }} onSubmit={submitComment}>
+                  <Form.Control
+                    as='textarea'
+                    rows='2'
+                    onChange={handleCommentChange}
+                    name='comment'
+                    placeholder='Leave a comment'
+                  />
+                  <div className='text-right'>
+                    <Button variant='primary' type='submit' style={{ marginTop: '1em' }} >Post</Button>
+                  </div>
+                </Form>
               }
-          </div>
-          <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
-          {recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
-          <RecipeInfo recipe={recipe}/>
-          <Card.Title>
-            <br/>Ingredients<br/>
-          </Card.Title>
-          {recipe.ingredients.map(ingredient =>
-            <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)
-          }
-          <Card.Title className='recipe-lesser-title'>
-            <br/>Steps<br/>
-          </Card.Title>
-          {recipe.instructions.map((instruction, i) => (
-            <Card.Text key={instruction.id}>
-              {i + 1}{`. ${instruction.instruction}`}<br/>
-            </Card.Text>
-          ))}
-        </Card.Body>
-      </Card>
+
+              {comments.map((comment, i) => (
+                <Card key={`comment-${i}`} style={{ width: '80%', margin: '1rem 0' }}>
+                  <Card.Body className='comment'>
+                    <p className='comment-header' >
+                      <Link className='comment-author' to={`/user/${comment.poster}`}>
+                        {comment.poster}
+                      </Link>
+                      <span className='comment-date' >{comment.date}</span></p>
+                    <Card.Text className='comment-body recipe-text' >{comment.comment}</Card.Text>
+                  </Card.Body>
+                </Card>
+              ))}
+
+              <ReportWindow
+                show={showReportWindow}
+                handleClose={() => setShowReportWindow(false)}
+                recipeID={recipeID}
+                reporterID={localStorage.getItem('id')}
+              />
+            </Card.Body>
+          </Card>
+        </div>}
     </React.Fragment>
   )
 }
 
 export default Recipe
-
 
 

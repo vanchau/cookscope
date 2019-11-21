@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import '../css/FilterBar.css'
@@ -18,17 +19,17 @@ const FilterBar = (props) => {
 
   const difficulties = ['Easy', 'Medium', 'Challenging']
   const times = [
-                'Under 15 minutes',
-                'Under 30 minutes',
-                'Under 45 minutes', 
-                'Under 1 hour'
-                ]
+    'Under 15 minutes',
+    'Under 30 minutes',
+    'Under 45 minutes',
+    'Under 1 hour'
+  ]
   const diets = [
-                'Vegetarian',
-                'Vegan',
-                'Dairy-free',
-                'Gluten-free'
-                ]
+    'Vegetarian',
+    'Vegan',
+    'Dairy-free',
+    'Gluten-free'
+  ]
 
 
   return (
@@ -37,10 +38,10 @@ const FilterBar = (props) => {
       <div className='filter-container fixed-top'>
         <Navbar className='filterbar fixed-top'>
           <Nav>
-          <FilterDropdown title='Categories' items={categories.categories} selectedItems={selectedCategories} setSelectedItems={setSelectedCategories} />  
-          <FilterDropdown title='Difficulty' items={difficulties} selectedItems={selectedDifficulties} setSelectedItems={setSelectedDifficulties} />
-          <FilterDropdown title='Time' items={times} selectedItems={selectedTimes} setSelectedItems={setSelectedTimes} />
-          <FilterDropdown title='Special Diet' items={diets} selectedItems={selectedDiets} setSelectedItems={setSelectedDiets} />
+            <FilterDropdown title='Categories' items={categories.categories} selectedItems={selectedCategories} setSelectedItems={setSelectedCategories} />
+            <FilterDropdown title='Difficulty' items={difficulties} selectedItems={selectedDifficulties} setSelectedItems={setSelectedDifficulties} />
+            <FilterDropdown title='Time' items={times} selectedItems={selectedTimes} setSelectedItems={setSelectedTimes} />
+            <FilterDropdown title='Special Diet' items={diets} selectedItems={selectedDiets} setSelectedItems={setSelectedDiets} />
           </Nav>
         </Navbar>
       </div>

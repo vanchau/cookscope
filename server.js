@@ -6,6 +6,9 @@ const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const morgan = require('morgan');
+const mongoose = require('mongoose')
+const moment = require('moment');
+
 app.use(express.static('build'))
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(bodyParser.urlencoded({limit: '1mb', extended: true}));
@@ -15,27 +18,15 @@ app.use(morgan('dev'));
 
 const Recipe = require('./models/recipe')
 const User = require('./models/user')
+const Comment = require('./models/comment')
 const auth = require('./middleware/auth')
-
-let recipes = []
-
-const fetchAll = async () => {
-    recipes = await Recipe.find({})
-    recipes.reverse()
-}
-
-fetchAll()
-
-Recipe.watch().on('change', async data => {
-    fetchAll()
-})
 
 app.post('/api/recipes', auth, async (req, res) => {
     const body = req.body
     const user = req.user.toObject()
     const recipe = new Recipe({
         author: user.username,
-        authorID: user._id,
+        authorID: mongoose.Types.ObjectId(user._id),
         title: body.title,
         description: body.description,
         imageFile: body.imageFile,
@@ -53,9 +44,8 @@ app.post('/api/recipes', auth, async (req, res) => {
     res.json(savedRecipe.toJSON())
 })
 
-
 app.get('/api/recipes', async (request, response) => {
-
+    const recipes = await Recipe.find()
     const searchWords = request.query.searchWords
     const selectedCategories = request.query.selectedCategories
     const selectedDifficulties = request.query.selectedDifficulties
@@ -125,16 +115,49 @@ app.get('/api/recipes', async (request, response) => {
     response.json(filteredRecipes.map(recipe => recipe.toJSON()))
 })
 
-app.get('/api/recipes/:id', (request, response) => {
-    //Recipe.findById(request.params.id).then(recipe => {
-    //  response.json(recipe.toJSON())
-    //})
-    response.json(recipes.find(recipe => recipe.id === request.params.id))
+app.get('/api/recipes/:id', async (req, res) => {
+    const recipe = await Recipe.findById(req.params.id)
+    res.json(recipe.toJSON())
+})
+
+app.get('/api/recipes/:id/comments', async (req, res) => {
+    const comments = await Comment.find({ recipeID: req.params.id }).sort({ _id: -1 })
+    res.json(comments.map(comment => comment.toJSON()))
+})
+
+app.post('/api/recipes/:id/comment', auth, async (req, res) => {
+    try {
+        const text = req.body
+        const user = req.user.toObject()
+        const parsedComment = {
+            recipeID: mongoose.Types.ObjectId(req.params.id),
+            poster: user.username,
+            posterID: mongoose.Types.ObjectId(user._id),
+            comment: text.comment,
+            date: moment().subtract(10, 'days').calendar()
+        }
+        const comment = new Comment(parsedComment)
+        await comment.save()
+        res.status(201).send({ comment })
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/api/recipes/:recipeID/remove', auth, async (req, res) => {
+   try {
+    const deleteRecipe = await Recipe.deleteOne({ "_id" : mongoose.Types.ObjectId(req.params.recipeID)})
+        res.status(201).send(deleteRecipe)
+   } catch (error) {
+        res.status(400).send(error)
+   }
+
 })
 
 app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
     try {
         const rating = req.body
+        const recipes = await Recipe.find()
         let recipe = recipes.find(recipe => recipe.id === req.params.id)
         recipe.ratings = recipe.ratings.filter(rating => rating.userId !== req.params.userId)
         recipe.ratings.push(rating)
@@ -144,8 +167,9 @@ app.put('/api/recipes/:id/rating/:userId', async (req, res) => {
     }
 })
 
-app.get('/api/recipes/:id/rating', (req, res) => {
+app.get('/api/recipes/:id/rating', async (req, res) => {
     try {
+        const recipes = await Recipe.find()
         const recipe = recipes.find(recipe => recipe.id === req.params.id)
         const arr = recipe.ratings.map(rating => rating.rating)
         const rating = Math.round(arr.reduce((acc, curr) => acc + curr, 0) / recipe.ratings.length * 10) / 10
@@ -155,8 +179,9 @@ app.get('/api/recipes/:id/rating', (req, res) => {
     }
 })
 
-app.get('/api/recipes/:id/rating/:userId', (req, res) => {
+app.get('/api/recipes/:id/rating/:userId', async (req, res) => {
     try {
+        const recipes = await Recipe.find()
         const recipe = recipes.find(recipe => recipe.id === req.params.id)
         const rating = (recipe.ratings.find(rating => rating.userId === req.params.userId)).rating
         res.json({rating})
@@ -215,25 +240,22 @@ app.post('/api/users/me/logout', auth, async (req, res) => {
 
 app.get('/api/users/:username/recipes', async (req, res) => {
     const username = req.params.username
-    // const recipes = await Recipe.find({ author: username })
-    //res.json(recipes.map(recipe => recipe.toJSON()))
+    const recipes = await Recipe.find()
     const ownRecipes = recipes.filter(recipe => recipe.author === username)
     res.json(ownRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.get('/api/users/:username/bookmarked-recipes', auth, async (req, res) => {
-    //const bookmarks = req.user.toObject().bookmarks
     const username = req.params.username
+    const recipes = await Recipe.find()
     const userInfo = await User.findOne({ username: username })
-    // const recipes = await Recipe.find().where('_id').in(userInfo.bookmarks)
-    // res.json(recipes.map(recipe => recipe.toJSON()))
     const bookmarkedRecipes = recipes.filter(recipe => userInfo.bookmarks.includes(recipe.id))
     res.json(bookmarkedRecipes.map(recipe => recipe.toJSON()))
 })
 
 app.put('/api/users/:username/:isBookmarked/:recipeID', async (req, res) => {
     const user = await User.findOne({username: req.params.username})
-    //console.log("user before", user)
+    const recipes = await Recipe.find()
     let bookmarks = recipes.filter(recipe => user.bookmarks.includes(recipe.id)).map(recipe => recipe.id)
     if (req.params.isBookmarked === 'true') {
         bookmarks = bookmarks.filter(bookmark => bookmark !== req.params.recipeID)
@@ -247,13 +269,13 @@ app.put('/api/users/:username/:isBookmarked/:recipeID', async (req, res) => {
 
 app.get('/api/users/:username/bookmarked/:recipeID', async (req, res) => {
     const user = await User.findOne({username: req.params.username})
+    const recipes = await Recipe.find()
     let bookmarks = recipes.filter(recipe => user.bookmarks.includes(recipe.id)).map(recipe => recipe.id)
     const isBookmarked = bookmarks.includes(req.params.recipeID)
     res.json({isBookmarked})
 })
 
 app.get('/api/users/:username/following', async (req, res) => {
-    //const following = req.user.toObject().following
     const username = req.params.username
     const userInfo = await User.findOne({ username: username })
     const users = await User.findProfilesByIds(userInfo.following)

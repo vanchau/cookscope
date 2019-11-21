@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import ReactStars from 'react-stars'
 import '../css/StarRating.css'

@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { withRouter, useHistory } from 'react-router-dom'
 import '../css/FollowedList.css'
 
 const FollowedList = (props) => {
-  // eslint-disable-next-line react/prop-types
   const { following } = props
   let history = useHistory()
 

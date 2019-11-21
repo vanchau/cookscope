@@ -46,6 +46,39 @@ export const getRecipes = async (username) => {
   }
 }
 
+export const getRecipe = async (recipeID) => {
+  try {
+    const result = await axios.get(`/api/recipes/${recipeID}`)
+    return result.data
+  } catch(error) {
+    return error
+  }
+}
+
+export const fetchComments = async (recipeID) => {
+  try {
+    const result = await axios.get(`/api/recipes/${recipeID}/comments`)
+    return result.data
+  } catch (error) {
+    return error
+  }
+}
+
+export const postComment = async (token, recipeID, comment) => {
+  try {
+    const result = await axios.post(`/api/recipes/${recipeID}/comment`, JSON.stringify(comment), {
+      headers: {
+        'Authorization': token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    return result.data
+  } catch(error) {
+    return error
+  }
+}
+
 export const getBookmarkedRecipes = async (token, username) => {
   try {
     const result = await axios.get(`/api/users/${username}/bookmarked-recipes`, {
@@ -75,7 +108,20 @@ export const postRecipe = async (token, recipe) => {
         'Authorization': token
       }
     })
-    return result
+    return result.data
+  } catch (error) {
+    return error
+  }
+}
+
+export const removeRecipe = async (token, recipeID) => {
+  try {
+    const result = await axios.get(`/api/recipes/${recipeID}/remove`, {
+      headers: {
+        'Authorization': token
+      }
+    })
+    return result.data
   } catch (error) {
     return error
   }
@@ -88,7 +134,7 @@ export const logout = async (token) => {
         'Authorization': token
       }
     })
-    return result
+    return result.data
   } catch(error) {
     return error
   }
@@ -99,15 +145,6 @@ export const postRating = async (rating, id, userId) => {
     const result = await axios.put(`/api/recipes/${id}/rating/${userId}`, rating)
     return result
   } catch (error) {
-    return error
-  }
-}
-
-export const getRecipe = async (recipeID) => {
-  try {
-    const result = await axios.get(`/api/recipes/${recipeID}`)
-    return result.data
-  } catch(error) {
     return error
   }
 }

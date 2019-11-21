@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const timestamps = require('mongoose-timestamp')
+var ObjectId = mongoose.Schema.Types.ObjectId
 
 const url = process.env.MONGODB_URI
 
@@ -15,7 +16,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const recipeSchema = new mongoose.Schema({
   author: String,
-  authorID: String,
+  authorID: ObjectId,
   title: String,
   description: String,
   imageFile: String,
