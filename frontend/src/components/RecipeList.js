@@ -34,10 +34,9 @@ const RecipeList = (props) => {
     selectedCategories,
     selectedDifficulties,
     selectedTimes,
-    selectedDiets,
-    recipes
+    selectedDiets
   ])
-  
+
   return (
     <div>
       {searchWords.length > 0 ? <h2>&quot;{searchWords.join(' ')}&quot;: {recipes.length} recipes found</h2> : <></>}
