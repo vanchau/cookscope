@@ -21,6 +21,7 @@ let recipes = []
 
 const fetchAll = async () => {
     recipes = await Recipe.find({})
+    recipes.reverse()
 }
 
 fetchAll()
