@@ -10,6 +10,16 @@
 	display: block;
 }
 
+.recipe-card-title {
+	font-size:2em;
+	margin-top: -1.2em;
+}
+
+.recipe-lesser-title {
+	margin-top: 2em;
+	margin-bottom: 1em;
+}
+
 .recipe-card {
 	background-color:white;
 	padding: 3em 4em;
@@ -53,6 +63,7 @@
 }
 
 .recipe-star-ratings {
+	margin-top: 1.5em;
 	margin-left: 0em;
 }
 
@@ -66,4 +77,12 @@
 
 .single-rating {
 	margin-right: 6em;
+}
+
+.bookmark {
+	color: lightgray;
+	margin-top:1em;
+	margin-bottom: 0em;
+	align-self: right;
+	margin-left:36.5em;
 }

@@ -17,7 +17,7 @@ const StarRating = (props) => {
 
   return (
     <form className='row star-rating'>
-      <ReactStars className='stars' color2='#FBB117' color1='LightGrey' edit={starEditing} half={starHalves} count={5} value={rating} onChange={handleStarClick}/>
+      <ReactStars className='stars' size={18} color2='#FBB117' color1='LightGrey' edit={starEditing} half={starHalves} count={5} value={rating} onChange={handleStarClick}/>
       <div className='rating'>{rating}</div>
     </form>
   )

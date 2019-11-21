@@ -6,6 +6,10 @@
 	margin: 1em;
 }
 
+.card-text{
+	margin-bottom: 0.5em;
+}
+
 .recipe-list-card:hover {
 	transform: scale(1.02);
 	cursor: default;
