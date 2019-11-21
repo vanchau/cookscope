@@ -1,11 +1,15 @@
 .rating {
-	margin-left: 1em;
-	margin-top: 0.35em;
+	margin-top: 0.2em;
+	margin-left: 0.4em;
+	margin-right: 0.7em;
 	color:rgb(105, 105, 105);
 	font-size: 0.8em;
 }
 
 .star-rating {
 	margin-left: 0em;
-	margin-bottom: 0.3em;
+}
+
+.stars {
+	margin-bottom: 0.2em;
 }
