@@ -1,42 +1,53 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, Link } from 'react-router-dom'
-import axios from 'axios'
 import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
+import { postRating, getRecipe, getRecipeRating, getOwnRating, getIsBookmarked, postBookmark } from './api'
 
-
-const Recipe = (props) => {
-
-  const [isBookmarked, setIsBookmarked] = useState(true)
+const Recipe = () => {
 
   const loggedUser = localStorage.getItem('username')
-  const userToken = localStorage.getItem('token')
   const userId = localStorage.getItem('id')
-
-  const {
-    setRating,
-    rating
-  } = props
-
-  const voters = 123
-
-  const handleClick = () => {
-    isBookmarked ? setIsBookmarked(false) : setIsBookmarked(true)
-  }
-
   const { recipeID } = useParams()
-  const [recipe, setRecipe] = useState({ ingredients: [], instructions: [] })
+  const [recipe, setRecipe] = useState({ ingredients: [], instructions: [], ratings: [] })
+  const [recipeRating, setRecipeRating] = useState(0)
+  const [ownRating, setOwnRating] = useState(0)
+  const [ratingCount, setRatingCount] = useState(0)
+  const [isBookmarked, setIsBookmarked] = useState(false)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`/api/recipes/${recipeID}`)
-      setRecipe(result.data)
+    const fetchData = () => {
+      getRecipe(recipeID).then((result) => {
+        setRecipe(result)
+        setRatingCount(result.ratings.length)
+      })
+      getRecipeRating(recipeID).then((result) => {
+        setRecipeRating(result.rating)
+      })
+      getOwnRating(recipeID, userId).then((result) => {
+        setOwnRating(result.rating)
+      })
+      getIsBookmarked(recipeID, loggedUser).then((result) => {
+        setIsBookmarked(result.isBookmarked)
+      })
     }
     fetchData()
-  }, [recipeID])
+  }, [recipeID, ownRating, userId])
+
+  const submitRating = (value) => {
+    const rating = {userId: userId, rating: value}
+    postRating(rating, recipeID, userId)
+    setOwnRating(value)
+  }
+
+  const handleClick = () => {
+    postBookmark(recipeID, loggedUser, isBookmarked)
+    setIsBookmarked(!isBookmarked)
+  }
+
 
   return (
     <React.Fragment>
@@ -59,13 +70,13 @@ const Recipe = (props) => {
           </Card.Text>
           <div className='row recipe-star-ratings'>
               <div className='single-rating'>
-                <StarRating starEditing={false} starHalves={true} rating={rating+0.5} setRating={setRating}/> 
-                <div className='rating-by'>{voters} ratings</div>
+                <StarRating starEditing={false} starHalves={true} rating={recipeRating} submitRating={submitRating}/> 
+                <div className='rating-by'>{ratingCount} ratings</div>
               </div>
               {
                 loggedUser &&
                 <div className='single-rating'>
-                  <StarRating starEditing={true} starHalves={false} rating={rating} setRating={setRating}/> 
+                  <StarRating starEditing={true} starHalves={false} rating={ownRating} submitRating={submitRating}/> 
                   <div className='rating-by'>You</div>
                 </div>
               }

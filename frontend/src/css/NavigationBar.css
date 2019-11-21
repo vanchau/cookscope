@@ -1,3 +1,15 @@
+.btn-navbar-button {
+	background-color:rgb(164, 190, 19);
+	color: white;
+	margin: auto 1em;
+}
+
+.btn-navbar-button:hover {
+	background-color: rgb(175, 207, 30);
+	color: white;
+	margin: auto 1em;
+}
+
 .btn-outline-create-recipe-button {
 	background-color:rgb(164, 190, 19);
 	color: white;
@@ -62,7 +74,7 @@
 
 .form-control {
 	box-shadow: none;
-	width: 400px !important;
+	width: 800px !important;
 	border: solid rgb(233, 233, 233) 1px;
 }
 
@@ -81,6 +93,17 @@
 	border-bottom: solid rgb(20, 20, 20) 6px;
 }
 
+.search-form {
+	display: inline-flex;
+	width: 30em;
+}
+
+.main-search {
+	height: 2.5em;
+	width: 100em !important;
+	padding: auto;
+	margin: auto 1em;
+}
 .profile-icon {
 	width: 1.6em;
 	height: 1.6em;

@@ -8,12 +8,11 @@ import useFormValidation from '../utils/useRecipeFormValidation'
 import validateRecipeForm from '../utils/validateRecipeForm'
 import categories from '../assets/categories.json'
 
-// The structure of the recipe data set
 const INITIAL_STATE = {
   title: '',
   description: '',
   imageFile: {},
-  difficulty: 'Beginner',
+  difficulty: 'Easy',
   hours: 0,
   minutes: 0,
   servings: 0,
@@ -146,32 +145,32 @@ const CreateRecipe = () => {
               <div key={'inline-radio'}>
                 <Form.Check
                   inline
-                  label='Beginner'
+                  label='Easy'
                   name='difficulty'
-                  value={'Beginner'}
+                  value={'Easy'}
                   type={'radio'}
                   id={'inline-radio-1'}
-                  checked={values.difficulty === 'Beginner'}
+                  checked={values.difficulty === 'Easy'}
                   onChange={handleChange}
                 />
                 <Form.Check
                   inline
-                  label='Amateur'
+                  label='Medium'
                   name='difficulty'
-                  value={'Amateur'}
+                  value={'Medium'}
                   type={'radio'}
                   id={'inline-radio-2'}
-                  checked={values.difficulty === 'Amateur'}
+                  checked={values.difficulty === 'Medium'}
                   onChange={handleChange}
                 />
                 <Form.Check
                   inline
-                  label='Master Chef'
+                  label='Challenging'
                   name='difficulty'
-                  value={'Master Chef'}
+                  value={'Challenging'}
                   type={'radio'}
                   id={'inline-radio-3'}
-                  checked={values.difficulty === 'Master Chef'}
+                  checked={values.difficulty === 'Challenging'}
                   onChange={handleChange}
                 />
               </div>
@@ -181,7 +180,7 @@ const CreateRecipe = () => {
               <Form.Label style={{ fontWeight: 'bold' }}>Select categories: </Form.Label>
               <br></br>
               <div key={'inline-checkbox'}>
-                {Object.values(categories).map((category, i) => (
+                {categories.categories.map((category, i) => (
                   <Form.Check
                     inline name='categories'
                     onChange={handleChange}

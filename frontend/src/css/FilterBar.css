@@ -4,7 +4,7 @@
   display: block;
   align-content: center;
   background-image: url('../assets/patterns/subtle_white_feathers.png');
-  border-top: solid 6px black;
+  border-top: solid 0px black;
   border-bottom: solid 6px black;
 }
 
