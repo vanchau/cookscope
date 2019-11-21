@@ -111,7 +111,6 @@ const Recipe = () => {
               <div className='menu'>
               <NavDropdown title={<FiMenu className='menu-icon'/>} >
                 <NavDropdown.Item onClick={() => setShowReportWindow(true)} style={{ color: 'red' }} >Report</NavDropdown.Item>
-                {!isAuthor && <NavDropdown.Item>Follow {recipe.author}</NavDropdown.Item>}
                 {isAuthor && <NavDropdown.Item onClick={deleteRecipe}>Delete recipe</NavDropdown.Item>}
               </NavDropdown>
               {(loggedUser && isBookmarked) && <FaBookmark size={28} className='bookmark' onClick={handleClick}/>}

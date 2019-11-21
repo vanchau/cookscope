@@ -1,0 +1,33 @@
+.profile-recipe-list-card {
+	background-color:white ;
+	height: 22em;
+	width: 30em;
+	padding: 1em;
+	margin: 2em auto;
+}
+
+.recipe-list-card:hover {
+	transform: scale(1.02);
+	cursor: default;
+}
+
+.profile-recipe-list-card-img {
+	height: 10em;
+	margin-bottom: 1em;
+	object-fit: cover;
+}
+
+.profile-recipe-list-card-img:hover {
+	cursor: pointer;
+}
+
+.profile-recipe-info-container {
+	display: flex;
+	justify-content: space-between;
+	color: gray;
+}
+
+.profile-info-text {
+	margin-top:0.3em;
+	font-size: 0.7em;
+}
