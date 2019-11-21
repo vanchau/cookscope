@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { FaRegHeart, FaHeart } from 'react-icons/fa'
+import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 
 
 const Recipe = (props) => {
@@ -43,13 +43,13 @@ const Recipe = (props) => {
       <div style={{height:'1em', background:'transparent'}}></div>
       <Card className='recipe-card'>
         <Card.Body>
-            {(loggedUser && isBookmarked) && <FaHeart size={35} className='bookmark' onClick={handleClick}/>}
-            {(loggedUser && !isBookmarked) && <FaRegHeart size={35} className='bookmark' onClick={handleClick}/>}
+            {(loggedUser && isBookmarked) && <FaBookmark size={35} className='bookmark' onClick={handleClick}/>}
+            {(loggedUser && !isBookmarked) && <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/>}
             {!loggedUser && <OverlayTrigger
                   placement={'right'}
                   overlay={<Tooltip id={'tooltip'}>You must log in to bookmark recipe.</Tooltip>}>
                   <div>
-                  <FaRegHeart size={35} className='bookmark' onClick={handleClick}/> 
+                  <FaRegBookmark size={35} className='bookmark' onClick={handleClick}/> 
                   </div>
                 </OverlayTrigger>
             }    
