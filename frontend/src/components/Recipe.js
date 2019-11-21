@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import React, {useState, useEffect} from 'react'
-import { useParams, Link, Redirect, useHistory } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import { Card, Form, Button, NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
-
 import ReportWindow from './ReportWindow'
+import Spinner from './Spinner'
 import '../css/Recipe.css'
 import StarRating from './StarRating'
 import { postComment, fetchComments, postRating, getRecipe, removeRecipe, getRecipeRating, getOwnRating, getIsBookmarked, postBookmark } from '../api'
@@ -27,9 +27,10 @@ const Recipe = () => {
   const [comments, setComments] = useState([])
   const [isAuthor, setIsAuthor] = useState(false)
   const [showReportWindow, setShowReportWindow] = useState(false)
-  const [isDeleted, setToDeleted] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     insertComment({ comment: '' })
     const fetchData = async () => {
       try {
@@ -45,7 +46,7 @@ const Recipe = () => {
         setOwnRating(ownRatingData.rating)
         setIsBookmarked(bookmarkData.isBookmarked)
         setComments(commentData)
-
+        setIsLoading(false)
         if (userId === recipeData.authorID) {
           setIsAuthor(true)
         }
@@ -58,7 +59,6 @@ const Recipe = () => {
         console.log(error)
       }
     }
-
     fetchData()
   }, [recipeID, ownRating, userId])
 
@@ -86,7 +86,6 @@ const Recipe = () => {
     const token = localStorage.getItem('token')
     const result = await removeRecipe(token, recipeID)
     if (result.ok) {
-      setToDeleted(true)
       history.push('/')
     } else {
       alert('There was a problem. Try again later.')
@@ -104,7 +103,12 @@ const Recipe = () => {
 
   return (
     <React.Fragment>
-        <div style={{height:'auto', background:'transparent'}}>
+        {isLoading ? 
+        (
+          <Spinner/>
+        ) :
+        (
+          <div style={{height:'auto', background:'transparent'}}> 
           <div style={{height:'2em', background:'transparent'}} />
           <Card className='recipe-card'>
             <Card.Body>
@@ -200,6 +204,7 @@ const Recipe = () => {
             </Card.Body>
           </Card>
         </div>
+          )}
     </React.Fragment>
   )
 }
