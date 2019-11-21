@@ -2,7 +2,6 @@
   box-shadow: none;
   margin-left:4em;
   margin-right:4em;
-  /* background-image: url('../assets/patterns/subtle_white_feathers.png'); */
   border: none;
   color: black;
 }
@@ -35,3 +34,13 @@
 .dropdown-checkbox {
   margin-right: 0.5em;
 }
+
+.dropdown-menu {
+  max-height: 75vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+ 
+::-webkit-scrollbar { 
+  display: none; 
+} 

@@ -1,35 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { Card } from 'react-bootstrap'
-import { withRouter, useHistory } from 'react-router-dom'
 import '../css/ProfileRecipeList.css'
+import ProfileRecipeCard from './ProfileRecipeCard'
 
 
 const ProfileRecipeList = (props) => {
   const { recipes } = props
-  let history = useHistory()
 
   return (
-    <React.Fragment>
+    <div className='recipe-list-container'>
       {recipes.map(recipe => (
-        <Card
-          className='profile-recipe-list-card'
-          key={recipe.id}
-          onClick={() => history.push(`/recipe/${recipe.id}`)}
-        >
-          <Card.Body>
-            <Card.Img
-              className='profile-recipe-list-card-img'
-              src={`data:image/jpeg;base64,${recipe.imageFile}`} />
-            <Card.Title>{recipe.title}</Card.Title>
-            <Card.Text>
-										by <a className='card-author' href='#action' >{recipe.author}</a>
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        <ProfileRecipeCard recipe={recipe} />
       ))}
-    </React.Fragment>
+    </div>
   )
 }
 
-export default withRouter(ProfileRecipeList)
+export default ProfileRecipeList

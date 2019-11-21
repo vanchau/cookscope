@@ -30,21 +30,16 @@ const Recipe = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setIsLoading(true)
     insertComment({ comment: '' })
     const fetchData = async () => {
       try {
         const recipeData = await getRecipe(recipeID)
         const ratingData = await getRecipeRating(recipeID)
-        const ownRatingData = await getOwnRating(recipeID, userId)
-        const bookmarkData = await getIsBookmarked(recipeID, loggedUser)
         const commentData = await fetchComments(recipeID)
 
         setRecipe(recipeData)
         setRatingCount(recipeData.ratings.length)
         setRecipeRating(ratingData.rating)
-        setOwnRating(ownRatingData.rating)
-        setIsBookmarked(bookmarkData.isBookmarked)
         setComments(commentData)
         setIsLoading(false)
         if (userId === recipeData.authorID) {
@@ -52,6 +47,10 @@ const Recipe = () => {
         }
         if (userToken) {
           setLoggedIn(true)
+          const ownRatingData = await getOwnRating(recipeID, userId)
+          const bookmarkData = await getIsBookmarked(recipeID, loggedUser)
+          setOwnRating(ownRatingData.rating)
+          setIsBookmarked(bookmarkData.isBookmarked)
         } else {
           setLoggedIn(false)
         }
@@ -86,7 +85,8 @@ const Recipe = () => {
     const token = localStorage.getItem('token')
     const result = await removeRecipe(token, recipeID)
     if (result.ok) {
-      history.push('/')
+      await history.push('/')
+      window.location.reload()
     } else {
       alert('There was a problem. Try again later.')
     }
@@ -115,7 +115,6 @@ const Recipe = () => {
               <div className='menu'>
               <NavDropdown title={<FiMenu className='menu-icon'/>} >
                 <NavDropdown.Item onClick={() => setShowReportWindow(true)} style={{ color: 'red' }} >Report</NavDropdown.Item>
-                {!isAuthor && <NavDropdown.Item>Follow {recipe.author}</NavDropdown.Item>}
                 {isAuthor && <NavDropdown.Item onClick={deleteRecipe}>Delete recipe</NavDropdown.Item>}
               </NavDropdown>
               {(loggedUser && isBookmarked) && <FaBookmark size={28} className='bookmark' onClick={handleClick}/>}
@@ -128,48 +127,48 @@ const Recipe = () => {
                 </div>
               </OverlayTrigger>
               }
-              </div>
-              <Card.Title className='recipe-card-title' style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
-              <Card.Text>
+            </div>
+            <Card.Title className='recipe-card-title' style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
+            <Card.Text>
                 by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
-              </Card.Text>
-              <div className='row recipe-star-ratings'>
-                <div className='single-rating'>
-                  <StarRating starEditing={false} starHalves={true} rating={recipeRating} submitRating={submitRating}/>
-                  <div className='rating-by'>{ratingCount} ratings</div>
-                </div>
-                {
-                  loggedUser &&
+            </Card.Text>
+            <div className='row recipe-star-ratings'>
+              <div className='single-rating'>
+                <StarRating starEditing={false} starHalves={true} rating={recipeRating} submitRating={submitRating}/>
+                <div className='rating-by'>{ratingCount} ratings</div>
+              </div>
+              {
+                loggedUser &&
                 <div className='single-rating'>
                   <StarRating starEditing={true} starHalves={false} rating={ownRating} submitRating={submitRating}/>
                   <div className='rating-by'>You</div>
                 </div>
-                }
-              </div>
-              <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
-              <br/>{recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
-              <br/>
-              <RecipeInfo recipe={recipe}/>
-              <Card.Title>
-                <br/>Ingredients<br/>
-              </Card.Title>
-              {recipe.ingredients.map(ingredient => <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)}
-              <Card.Title className='recipe-lesser-title'>
-                <br/>Steps<br/>
-              </Card.Title>
-              {recipe.instructions.map((instruction, i) => (
-                <Card.Text key={instruction.id}>
-                  {i + 1}{`. ${instruction.instruction}`}<br/>
-                </Card.Text>
-              ))}
+              }
+            </div>
+            <Card.Img className='recipe-card-img' src={`data:image/jpeg;base64,${recipe.imageFile}`} />
+            <br/>{recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
+            <br/>
+            <RecipeInfo recipe={recipe}/>
+            <Card.Title>
+              <br/>Ingredients<br/>
+            </Card.Title>
+            {recipe.ingredients.map(ingredient => <Card.Text key={ingredient.ingredient}>{ingredient.ingredient}</Card.Text>)}
+            <Card.Title className='recipe-lesser-title'>
+              <br/>Steps<br/>
+            </Card.Title>
+            {recipe.instructions.map((instruction, i) => (
+              <Card.Text key={instruction.id}>
+                {i + 1}{`. ${instruction.instruction}`}<br/>
+              </Card.Text>
+            ))}
 
-              <hr style={{ margin: '3em 0 1em 0'}} />
+            <hr style={{ margin: '3em 0 1em 0'}} />
 
-              <Card.Title className='sub-title' >
+            <Card.Title className='sub-title' >
                 Comments ({comments.length})
-              </Card.Title>
+            </Card.Title>
 
-              {isLoggedIn &&
+            {isLoggedIn &&
                 <Form className='comment-container' style={{ margin: '1rem 0' }} onSubmit={submitComment}>
                   <Form.Control
                     as='textarea'

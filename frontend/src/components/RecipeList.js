@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
-import { withRouter, useHistory, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Spinner from './Spinner'
 import axios from 'axios'
 import '../css/RecipeList.css'
@@ -39,10 +39,9 @@ const RecipeList = (props) => {
     selectedCategories,
     selectedDifficulties,
     selectedTimes,
-    selectedDiets,
-    recipes,
+    selectedDiets
   ])
-  
+
   return (
     <React.Fragment>
       {isLoading ?
