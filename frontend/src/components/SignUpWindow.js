@@ -59,7 +59,7 @@ const SignUpWindow = (props) => {
                 onChange={handleImageChange}
               />
           </div>
-          {imagePreviewUrl && <img style={{ marginTop: '20px', width: '50%' }} alt='loading' src={imagePreviewUrl} />}
+          {imagePreviewUrl && <img style={{ marginTop: '20px', width: '100%' }} alt='loading' src={imagePreviewUrl} />}
           <div key={'default-checkbox'} className='mb-3'>
             <Form.Check
               type={'checkbox'}

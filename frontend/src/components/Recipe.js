@@ -59,7 +59,7 @@ const Recipe = () => {
       }
     }
     fetchData()
-  }, [recipeID, ownRating, userId])
+  }, [recipeID, ownRating, userId, loggedUser, userToken])
 
   const submitRating = (value) => {
     const rating = {userId: userId, rating: value}
