@@ -16,7 +16,7 @@ input[type="file"] {
 
 
 .add-button:focus {
-	background-color: rgb(151, 137, 136);
+	background-color: #A39594;
 	box-shadow: none;
 	color:white;
 }
@@ -62,7 +62,6 @@ input[type="file"] {
 	color: #A39594;
 	margin-top: 30px;
 }
-
 .remove-button {
 	background-color: #CEC4C2;
 	border: 0;
@@ -77,13 +76,13 @@ input[type="file"] {
 
 
 .remove-button:focus {
-	background-color: rgb(151, 137, 136);
+	background-color: #A39594;
 	box-shadow: none;
 	color:white;
 }
 
 .submit-button {
-	background-color: #a4be13;
+	background-color: #b7c52c;
 	border: 0;
 	width: 100%;
 	padding: 20px 30px;
@@ -92,13 +91,13 @@ input[type="file"] {
 }
 
 .submit-button:hover {
-	background-color: #7d910e;
+	background-color: #c7d819;
 	color:white;
 }
 
 
 .submit-button:focus {
-	background-color: #8ba017;
+	background-color: #c7d819;
 	box-shadow: none;
 	color:white;
 }

@@ -215,7 +215,7 @@ const TermsOfService = () => (
     </p>
     <h2 id='s12'>12. Contact us</h2>
     <p>To contact us, please email </p>
-    <a href='mailto:help@cookscope.com'>help@cookscope.com</a>
+    <a className='link' href='mailto:help@cookscope.com'>help@cookscope.com</a>
   </div>
 )
 

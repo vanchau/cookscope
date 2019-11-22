@@ -84,13 +84,6 @@
   color:#3C3C3C;
 }
 
-.author {
-	color:#aa8f54;
-}
-
-.author:hover {
-	color:#7d6226;
-}
 
 .menu {
 	margin-right: -0.6em;
@@ -131,7 +124,7 @@
 
 .bookmark {
 	margin-left: 0.8em;
-	color: lightgray;
+	color: #c6c3bc;
 	cursor: pointer;
 }
 
@@ -148,7 +141,7 @@
 	height: 4em;
 	width: 4em;
 	margin-left: 1em;
-	background-color: #a4be13;
+	background-color: #b7c52c;
 	border: 0;
 	color: white;
 }
@@ -157,7 +150,7 @@
 	height: 4em;
 	width: 4em;
 	margin-left: 1em;
-	background-color: #afca15;
+	background-color: #c7d819;
 	border: 0;
 	color: white;
 }
