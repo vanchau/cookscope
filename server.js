@@ -71,9 +71,7 @@ app.get('/api/recipes', async (request, response) => {
     } 
     else {
         const someMatch = recipes.filter(function(recipe){
-            let ingredientArray = recipe.ingredients.map(ingredient => ingredient.ingredient.split(' '))
-            ingredientArray = ingredientArray.flat()
-            console.log(ingredientArray)
+            let ingredientArray = recipe.ingredients.map(ingredient => ingredient.ingredient.split(' ')).flat()
 
             if (searchWords.some(word => recipe.title.toLowerCase().split(" ").includes(word))) return true
             if (searchWords.some(word => recipe.title.toLowerCase().includes(word))) return true
