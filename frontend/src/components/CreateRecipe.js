@@ -260,7 +260,7 @@ const CreateRecipe = () => {
         </Modal.Body>
         <Modal.Footer>
           <LinkContainer to='/'>
-            <Button variant='' onClick={handleClose}>
+            <Button variant='secondary' onClick={handleClose}>
               Go to home page
             </Button>
           </LinkContainer>
