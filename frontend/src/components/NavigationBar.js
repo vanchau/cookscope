@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Nav, NavDropdown, Navbar, Form, Button, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
-import { FiUser } from 'react-icons/fi'
-import { IoMdSettings } from 'react-icons/io'
+import { FiUser, FiMenu } from 'react-icons/fi'
 
 import '../css/NavigationBar.css'
 import logo from '../assets/logo2.png'
@@ -154,7 +153,7 @@ const NavigationBar = () => {
           </Link>
           }
 
-          <NavDropdown className='settings-dropdown' title={<IoMdSettings className='dropdown-icon' />} >
+          <NavDropdown className='settings-dropdown' title={<FiMenu className='dropdown-icon' />} >
             <LinkContainer to='/terms'>
               <NavDropdown.Item>Terms of Service</NavDropdown.Item>
             </LinkContainer>
