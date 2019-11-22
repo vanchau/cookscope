@@ -6,10 +6,19 @@ input[type="file"] {
 	background-color: #CEC4C2;
 	border: 0;
 	margin-bottom: 10px;
+	color:white;
 }
 
 .add-button:hover {
-	background-color: #A39594
+	background-color: #A39594;
+	color:white;
+}
+
+
+.add-button:focus {
+	background-color: rgb(151, 137, 136);
+	box-shadow: none;
+	color:white;
 }
 
 .col {
@@ -57,10 +66,20 @@ input[type="file"] {
 .remove-button {
 	background-color: #CEC4C2;
 	border: 0;
+	color:white;
+	margin-left: 0.5em;
 }
 
 .remove-button:hover {
-	background-color: #A39594
+	background-color: #A39594;
+	color:white;
+}
+
+
+.remove-button:focus {
+	background-color: rgb(151, 137, 136);
+	box-shadow: none;
+	color:white;
 }
 
 .submit-button {
@@ -69,11 +88,21 @@ input[type="file"] {
 	width: 100%;
 	padding: 20px 30px;
 	margin-top: 30px;
+	color:white;
 }
 
 .submit-button:hover {
 	background-color: #7d910e;
+	color:white;
 }
+
+
+.submit-button:focus {
+	background-color: #8ba017;
+	box-shadow: none;
+	color:white;
+}
+
 
 .recipe-title {
 	height: 80px;

@@ -215,12 +215,12 @@ const CreateRecipe = () => {
                     name='ingredients'
                     style={{ flex: '10'}}
                   />
-                  <Button className='remove-button' onClick={() => removeIngredient(ingredient.id)}>Remove</Button>
+                  <Button className='remove-button' variant='none' onClick={() => removeIngredient(ingredient.id)}>Remove</Button>
                 </div>
               ))}
             </Form.Group>
 
-            <Button className='add-button' onClick={addIngredient} >add ingredient</Button>
+            <Button className='add-button' variant='none' onClick={addIngredient} >add ingredient</Button>
 
             <h5 className='recipe-subtitles' >Steps</h5>
             <hr style={{ marginTop: '0' }} />
@@ -237,15 +237,15 @@ const CreateRecipe = () => {
                       onChange={handleChange}
                       style={{ flex: '10'}}
                     />
-                    <Button className='remove-button' onClick={() => removeInstruction(instruction.id)}>Remove</Button>
+                    <Button className='remove-button' variant='none' onClick={() => removeInstruction(instruction.id)}>Remove</Button>
                   </div>
                 </div>
               ))}
             </Form.Group>
 
-            <Button className='add-button' onClick={addInstruction} >add step</Button>
+            <Button className='add-button' variant='none' onClick={addInstruction} >add step</Button>
 
-            <Button variant='primary' type='submit' className='submit-button' >Done!</Button>
+            <Button variant='' type='submit' className='submit-button' >Done!</Button>
             {Object.keys(errors).length !== 0 && <p className='error-text'>{errors[Object.keys(errors)[0]]}</p>}
           </Form>
         </Card.Body>
@@ -260,7 +260,7 @@ const CreateRecipe = () => {
         </Modal.Body>
         <Modal.Footer>
           <LinkContainer to='/'>
-            <Button variant='secondary' onClick={handleClose}>
+            <Button variant='' onClick={handleClose}>
               Go to home page
             </Button>
           </LinkContainer>

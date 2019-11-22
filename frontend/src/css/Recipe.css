@@ -48,6 +48,8 @@
 
 .recipe-lesser-title {
 	margin-bottom: 1em;
+	text-decoration: none;
+	cursor: normal;
 }
 
 .recipe-card {

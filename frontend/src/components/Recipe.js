@@ -128,7 +128,7 @@ const Recipe = () => {
               </OverlayTrigger>
               }
             </div>
-            <Card.Title className='recipe-card-title' style={{ textDecoration: 'none' }} >{recipe.title}</Card.Title>
+            <Card.Title className='recipe-card-title' style={{ textDecoration: 'none', cursor:'default' }} >{recipe.title}</Card.Title>
             <Card.Text>
                 by <Link className='card-author' to={`/user/${recipe.author}`}>{recipe.author}</Link>
             </Card.Text>
@@ -149,7 +149,7 @@ const Recipe = () => {
             <br/>{recipe.description && <Card.Text>{'"' + recipe.description+'"'}</Card.Text>}
             <br/>
             <RecipeInfo recipe={recipe}/>
-            <Card.Title>
+            <Card.Title className='recipe-lesser-title' style={{textDecoration: 'none', cursor:'default'}} >
               <br/>Ingredients<br/>
             </Card.Title>
             {recipe.ingredients.map(ingredient => 
@@ -157,7 +157,7 @@ const Recipe = () => {
                 <Card.Text style={{marginLeft:'1em', marginRight:'2em', width: '4em'}}>{ingredient.amount + ' '}</Card.Text>
                 <Card.Text> {ingredient.ingredient}</Card.Text>
               </div>)}  
-            <Card.Title className='recipe-lesser-title'>
+            <Card.Title className='recipe-lesser-title' style={{textDecoration: 'none', cursor:'default'}}>
               <br/>Steps<br/>
             </Card.Title>
             {recipe.instructions.map((instruction, i) => (
@@ -168,7 +168,7 @@ const Recipe = () => {
 
             <hr style={{ margin: '3em 0 1em 0'}} />
 
-            <Card.Title className='sub-title' >
+            <Card.Title className='sub-title' style={{ textDecoration: 'none', cursor:'default' }} >
                 Comments ({comments.length})
             </Card.Title>
 
