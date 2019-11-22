@@ -62,6 +62,7 @@ const UserProfile = () => {
           </Tabs>
         </Card.Body>
       </Card>
+      <div style={{background:'transparent', height: '20em'}}/>
     </React.Fragment>
   )
 }
