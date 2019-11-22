@@ -6,3 +6,10 @@
 		flex-wrap: wrap;
 		flex-direction: row;
 	}
+
+	.search-results {
+		color: #606060;
+		margin: 1em;
+		font-size: 1.3em;
+		margin-right: 7em;
+	}

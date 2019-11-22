@@ -50,7 +50,7 @@ const RecipeList = (props) => {
       ) :
       (
       <div>
-        {searchWords.length > 0 ? <h2>&quot;{searchWords.join(' ')}&quot;: {recipes.length} recipes found</h2> : <></>}
+        {searchWords.length > 0 ? <div><div className='search-results'>&quot;{searchWords.join(' ')}&quot;: {recipes.length} recipes found</div></div> : <></>}
         <div className='recipe-list-card-columns'>
           {recipes.map(recipe => (
             <RecipeCard recipe={recipe} key={recipe.id}/>
