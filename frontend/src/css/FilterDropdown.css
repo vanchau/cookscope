@@ -35,12 +35,9 @@
   margin-right: 0.5em;
 }
 
-.dropdown-menu {
+.dropdown-menu ::-webkit-scrollbar {
+  display:none;
   max-height: 75vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
- 
-::-webkit-scrollbar { 
-  display: none; 
-} 
