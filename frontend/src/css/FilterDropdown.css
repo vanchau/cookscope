@@ -35,8 +35,11 @@
   margin-right: 0.5em;
 }
 
-.dropdown-menu ::-webkit-scrollbar {
+::-webkit-scrollbar {
   display:none;
+}
+
+.dropdown-menu {
   max-height: 75vh;
   overflow-y: scroll;
   overflow-x: hidden;
