@@ -65,15 +65,19 @@ app.get('/api/recipes', async (request, response) => {
     const selectedDiets = request.query.selectedDiets
 
     let filteredRecipes = []
-    
+
     if (!searchWords) {
         filteredRecipes = recipes
     } 
     else {
         const someMatch = recipes.filter(function(recipe){
+            let ingredientArray = recipe.ingredients.map(ingredient => ingredient.ingredient.split(' '))
+            ingredientArray = ingredientArray.flat()
+            console.log(ingredientArray)
+
             if (searchWords.some(word => recipe.title.toLowerCase().split(" ").includes(word))) return true
             if (searchWords.some(word => recipe.title.toLowerCase().includes(word))) return true
-            if (recipe.ingredients.some(ingredient => searchWords.includes(ingredient.ingredient))) return true
+            if (ingredientArray.some(ingredient => searchWords.includes(ingredient))) return true
             return false
         })
         someMatch.sort(function(a,b){
