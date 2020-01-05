@@ -1,11 +1,30 @@
-
 .recipe-list-card-columns {
-		margin-top: 1.5em;
-		width: 80em;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: row;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.recipe-list-card-column-container {
+	margin: 0em auto;
+	width: 90vw;
+	max-width: 80em;
+}	
+
+@media screen and (max-width: 1020px){
+	.recipe-list-card-column-container {
+		margin: 1.5em auto;
+		width: 40em;
+		max-width: 1000px;
 	}
+}
+@media screen and (max-width: 1300px) and (min-width:1025) {
+	.recipe-list-card-column-container {
+		margin: 1.5em auto;
+		width: 40em;
+		max-width: 1000px;
+	}
+}
 
 	.search-results {
 		color: #606060;
@@ -13,3 +32,5 @@
 		font-size: 1.3em;
 		margin-right: 7em;
 	}
+
+

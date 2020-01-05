@@ -1,3 +1,11 @@
 .global-background {
 	background-image: url('../assets/patterns/subtle_white_feathers.png');
 }
+
+@media screen and (max-width: 1020px) {
+	body, html {
+		width: auto !important;
+		display: inline-block;
+		position: absolute;
+	}
+}

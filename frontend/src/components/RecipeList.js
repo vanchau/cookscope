@@ -49,7 +49,7 @@ const RecipeList = (props) => {
         <Spinner/>
       ) :
       (
-      <div>
+      <div className='recipe-list-card-column-container'>
         {searchWords.length > 0 ? <div><div className='search-results'>&quot;{searchWords.join(' ')}&quot;: {recipes.length} recipes found</div></div> : <></>}
         <div className='recipe-list-card-columns'>
           {recipes.map(recipe => (

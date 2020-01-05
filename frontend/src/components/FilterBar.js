@@ -41,7 +41,7 @@ const FilterBar = (props) => {
             <FilterDropdown title='Categories' items={categories.categories} selectedItems={selectedCategories} setSelectedItems={setSelectedCategories} />
             <FilterDropdown title='Difficulty' items={difficulties} selectedItems={selectedDifficulties} setSelectedItems={setSelectedDifficulties} />
             <FilterDropdown title='Time' items={times} selectedItems={selectedTimes} setSelectedItems={setSelectedTimes} />
-            <FilterDropdown title='Special Diet' items={diets} selectedItems={selectedDiets} setSelectedItems={setSelectedDiets} />
+            <FilterDropdown title='Diet' items={diets} selectedItems={selectedDiets} setSelectedItems={setSelectedDiets} />
           </Nav>
         </Navbar>
       </div>

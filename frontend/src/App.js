@@ -27,7 +27,7 @@ const App = () => {
     <Router>
       <NavigationBar/>
       <div className='global-background'>
-        <Container>
+        <div>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/search=:searchWords' component={Home} />
@@ -39,7 +39,7 @@ const App = () => {
             <Route path='/recipe/:recipeID' component={Recipe} />
             <Route path='/user/:username' component={UserProfile}/>
           </Switch>
-        </Container>
+        </div>
         <div style={{height:'15em', background:'transparent'}}></div>
       </div>
     </Router>

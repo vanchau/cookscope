@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import FilterBar from './FilterBar'
 import RecipeList from './RecipeList'
+import { GiBlockHouse } from 'react-icons/gi'
 
 const Home = () => {
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -16,7 +17,7 @@ const Home = () => {
   }
 
   return (
-    <>
+    <div style={{display: 'flex', padding: 'auto', margin: 'auto'}}>
       <FilterBar
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
@@ -34,7 +35,7 @@ const Home = () => {
         selectedTimes={selectedTimes}
         selectedDiets={selectedDiets}
       />
-    </>
+    </div>
   )
 }
 
